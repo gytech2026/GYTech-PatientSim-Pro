@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 520" width="1600" height="520" role="img" aria-label="GYTech PatientSim Pro repository banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061116"/>
+      <stop offset="0.55" stop-color="#0a171c"/>
+      <stop offset="1" stop-color="#05090b"/>
+    </linearGradient>
+    <linearGradient id="line" x1="900" y1="0" x2="1600" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00d9ff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#00ff66" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="title" x1="280" y1="130" x2="1100" y2="300" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f0fbff"/>
+      <stop offset="1" stop-color="#8cebff"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#18343d" stroke-width="1" opacity="0.38"/>
+    </pattern>
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1600" height="520" fill="url(#bg)"/>
+  <rect width="1600" height="520" fill="url(#grid)" opacity="0.45"/>
+  <circle cx="1430" cy="60" r="260" fill="#00d9ff" opacity="0.035"/>
+  <circle cx="1080" cy="500" r="230" fill="#00ff66" opacity="0.025"/>
+  <g transform="translate(64 88)">
+    <rect width="250" height="250" rx="42" fill="#071116" stroke="#284b56" stroke-width="2"/>
+    <path d="M72 54h70c32 0 58 26 58 58s-26 58-58 58h-34v-30h34c15 0 28-13 28-28s-13-28-28-28H72z" fill="#00d9ff"/>
+    <path d="M24 181h48l18-45 29 81 20-45h75" fill="none" stroke="#00ff66" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" filter="url(#softGlow)"/>
+    <circle cx="204" cy="46" r="8" fill="#00d9ff"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="364" y="137" fill="#73de9e" font-family="Consolas, monospace" font-size="20" font-weight="700" letter-spacing="8">GYTECH · MEDICAL SIMULATION</text>
+    <text x="356" y="234" fill="url(#title)" font-size="78" font-weight="800" letter-spacing="-1">PatientSim Pro</text>
+    <text x="360" y="282" fill="#b7d1da" font-size="26" font-weight="500">Advanced Patient Vital Signs Monitor</text>
+    <text x="360" y="316" fill="#b7d1da" font-size="26" font-weight="500">&amp; Defibrillator Simulator</text>
+    <text x="360" y="366" fill="#708b96" font-family="Consolas, monospace" font-size="17" letter-spacing="1.5">REAL-TIME ECG · MULTIPARAMETER MONITORING · AED · PACING · CPR</text>
+  </g>
+  <g fill="none" stroke="url(#line)" stroke-width="2">
+    <path d="M920 470h92l12-34 20 68 16-34h128l12-24 16 48 14-24h284"/>
+    <path d="M920 500h120l10-22 14 44 12-22h198l12-18 14 36 12-18h290" opacity="0.45"/>
+  </g>
+  <rect x="0" y="486" width="1600" height="34" fill="#04090b" opacity="0.7"/>
+  <text x="64" y="507" fill="#5d7782" font-family="Consolas, monospace" font-size="13">Copyright 2026 GYTech All Right Reserved.</text>
+  <text x="1536" y="507" fill="#5d7782" text-anchor="end" font-family="Consolas, monospace" font-size="13">EDUCATIONAL SIMULATION ONLY</text>
+</svg>

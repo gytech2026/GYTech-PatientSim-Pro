@@ -1,0 +1,263 @@
+/*
+ * GYTech PatientSim Pro
+ * Advanced Patient Vital Signs Monitor & Defibrillator Simulator
+ *
+ * Copyright 2026 GYTech All Right Reserved.
+ *
+ * Educational simulation software only.
+ */
+
+/* =========================================================
+   Alarm banner and alarm management visuals.
+   ========================================================= */
+
+.alarm-banner {
+  flex: 0 0 42px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 13px;
+  border-top: 1px solid rgba(255, 48, 48, 0.45);
+  border-bottom: 1px solid rgba(255, 48, 48, 0.4);
+  background:
+    linear-gradient(90deg, rgba(91, 16, 16, 0.96), rgba(44, 12, 13, 0.96) 55%, rgba(22, 10, 11, 0.96));
+  box-shadow: inset 0 1px 0 rgba(255, 74, 74, 0.18);
+  z-index: 16;
+  animation: alarmBannerIn 0.16s ease-out;
+}
+
+.alarm-banner[data-priority="warning"] {
+  border-color: rgba(255, 176, 32, 0.45);
+  background: linear-gradient(90deg, rgba(80, 54, 9, 0.96), rgba(39, 29, 9, 0.96) 55%, rgba(19, 15, 9, 0.96));
+}
+
+.alarm-banner[data-priority="technical"] {
+  border-color: rgba(91, 192, 235, 0.35);
+  background: linear-gradient(90deg, rgba(17, 50, 66, 0.96), rgba(13, 31, 42, 0.96) 55%, rgba(10, 18, 23, 0.96));
+}
+
+@keyframes alarmBannerIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.alarm-banner.is-silenced .alarm-banner-priority {
+  opacity: 0.65;
+}
+
+.alarm-banner-priority {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 90, 90, 0.4);
+  border-radius: 2px;
+  background: rgba(255, 48, 48, 0.14);
+  color: #ff8080;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  animation: priorityPulse 1.2s ease-in-out infinite;
+}
+
+.alarm-banner[data-priority="warning"] .alarm-banner-priority {
+  border-color: rgba(255, 176, 32, 0.45);
+  background: rgba(255, 176, 32, 0.12);
+  color: #ffc85c;
+  animation: none;
+}
+
+.alarm-banner[data-priority="technical"] .alarm-banner-priority {
+  border-color: rgba(91, 192, 235, 0.4);
+  background: rgba(91, 192, 235, 0.1);
+  color: #8ddaf2;
+  animation: none;
+}
+
+@keyframes priorityPulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(255, 48, 48, 0); }
+  50% { box-shadow: 0 0 18px rgba(255, 48, 48, 0.22); }
+}
+
+.alarm-banner-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.alarm-banner-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #ffb1b1;
+  white-space: nowrap;
+}
+
+.alarm-banner[data-priority="warning"] .alarm-banner-title { color: #ffd68a; }
+.alarm-banner[data-priority="technical"] .alarm-banner-title { color: #aee9f8; }
+
+.alarm-banner-message {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 10px;
+  color: rgba(255, 231, 231, 0.72);
+  white-space: nowrap;
+}
+
+.alarm-banner[data-priority="warning"] .alarm-banner-message { color: rgba(255, 243, 214, 0.7); }
+.alarm-banner[data-priority="technical"] .alarm-banner-message { color: rgba(218, 243, 250, 0.72); }
+
+.alarm-banner-count {
+  padding: 2px 6px;
+  border: 1px solid rgba(255, 160, 160, 0.22);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.05em;
+  color: rgba(255, 205, 205, 0.75);
+  white-space: nowrap;
+}
+
+.alarm-banner-actions {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.alarm-banner-actions .compact-button {
+  border-color: rgba(255, 180, 180, 0.22);
+  color: rgba(255, 225, 225, 0.8);
+  background: rgba(60, 18, 19, 0.5);
+}
+
+.alarm-banner-actions .compact-button:hover {
+  border-color: rgba(255, 160, 160, 0.45);
+  color: #fff;
+}
+
+.alarm-banner[data-priority="warning"] .alarm-banner-actions .compact-button {
+  border-color: rgba(255, 200, 100, 0.22);
+  color: #ffe1a1;
+  background: rgba(63, 45, 8, 0.5);
+}
+
+.alarm-banner[data-priority="technical"] .alarm-banner-actions .compact-button {
+  border-color: rgba(130, 210, 235, 0.22);
+  color: #c6f1fc;
+  background: rgba(14, 42, 54, 0.5);
+}
+
+/* Active alarm list inside modal */
+
+.active-alarm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.active-alarm {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--technical);
+  border-radius: 3px;
+  background: rgba(17, 27, 34, 0.72);
+}
+
+.active-alarm[data-priority="critical"] {
+  border-left-color: var(--critical);
+  background: rgba(60, 17, 18, 0.33);
+}
+
+.active-alarm[data-priority="warning"] {
+  border-left-color: var(--warning);
+  background: rgba(57, 44, 12, 0.22);
+}
+
+.active-alarm-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.active-alarm-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+}
+
+.active-alarm-priority {
+  padding: 1px 4px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  font-size: 6px;
+  letter-spacing: 0.04em;
+}
+
+.active-alarm[data-priority="critical"] .active-alarm-priority { color: var(--critical); }
+.active-alarm[data-priority="warning"] .active-alarm-priority { color: var(--warning); }
+.active-alarm[data-priority="technical"] .active-alarm-priority { color: var(--technical); }
+
+.active-alarm-message {
+  margin-top: 3px;
+  font-size: 9px;
+  color: var(--text-faint);
+}
+
+.active-alarm-meta {
+  margin-top: 3px;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  color: var(--text-faint);
+}
+
+.active-alarm-actions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.active-alarm-acked {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  color: var(--normal);
+}
+
+.empty-inline {
+  padding: 14px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+/* Alarm silence countdown pill */
+.alarm-status-pill.is-silenced::after {
+  content: "SIL";
+  margin-left: 2px;
+  font-size: 6px;
+  opacity: 0.7;
+}
+
+.alarm-banner[data-priority="critical"] {
+  animation: criticalBanner 1.4s ease-in-out infinite;
+}
+
+@keyframes criticalBanner {
+  0%, 100% { box-shadow: inset 0 0 0 rgba(255, 48, 48, 0); }
+  50% { box-shadow: inset 0 0 22px rgba(255, 48, 48, 0.08); }
+}
+
+@media (max-height: 850px) {
+  .alarm-banner { flex-basis: 36px; }
+  .alarm-banner-message { display: none; }
+}

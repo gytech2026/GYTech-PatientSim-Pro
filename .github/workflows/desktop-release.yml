@@ -1,0 +1,212 @@
+name: Desktop Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing authorised release tag, for example v1.0.0"
+        required: false
+        type: string
+      publish_release:
+        description: "Publish a public GitHub Release after all platform builds succeed"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: desktop-release-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: "22"
+
+jobs:
+  windows:
+    name: Windows EXE, MSI and portable ZIP
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate repository
+        run: npm run validate
+
+      - name: Desktop integration tests
+        run: npm run test:desktop
+
+      - name: Build Windows packages
+        run: npm run desktop:build:win
+
+      - name: Generate Windows checksums
+        run: npm run desktop:checksums
+
+      - name: Upload Windows artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-desktop
+          if-no-files-found: error
+          path: |
+            release/*.exe
+            release/*.msi
+            release/*.zip
+            release/SHA256SUMS.txt
+
+  linux:
+    name: Linux AppImage, DEB and RPM
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Linux packaging tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarchive-tools rpm
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate repository
+        run: npm run validate
+
+      - name: Build Linux packages
+        run: npm run desktop:build:linux
+
+      - name: Generate Linux checksums
+        run: npm run desktop:checksums
+
+      - name: Upload Linux artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-desktop
+          if-no-files-found: error
+          path: |
+            release/*.AppImage
+            release/*.deb
+            release/*.rpm
+            release/SHA256SUMS.txt
+
+  macos:
+    name: macOS x64 and ARM64 DMG
+    runs-on: macos-latest
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: "false"
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate repository
+        run: npm run validate
+
+      - name: Build unsigned macOS DMGs
+        run: npm run desktop:build:mac
+
+      - name: Generate macOS checksums
+        run: npm run desktop:checksums
+
+      - name: Upload macOS artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-desktop
+          if-no-files-found: error
+          path: |
+            release/*.dmg
+            release/SHA256SUMS.txt
+
+  publish:
+    name: Publish authorised release
+    needs:
+      - windows
+      - linux
+      - macos
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.publish_release == true)
+    environment: release
+    permissions:
+      contents: write
+    steps:
+      - name: Check out release notes
+        uses: actions/checkout@v4
+
+      - name: Download all platform artefacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+
+      - name: Resolve release tag
+        id: release_tag
+        shell: bash
+        run: |
+          if [ "${GITHUB_EVENT_NAME}" = "workflow_dispatch" ]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+          fi
+          if [[ ! "$TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?$ ]]; then
+            echo "Invalid or missing release tag: $TAG" >&2
+            exit 1
+          fi
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Generate authoritative checksums
+        shell: bash
+        run: |
+          cd release-assets
+          shopt -s nullglob
+          files=(*.exe *.msi *.zip *.AppImage *.deb *.rpm *.dmg)
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "No release artefacts were downloaded." >&2
+            exit 1
+          fi
+          sha256sum "${files[@]}" > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - name: Publish GitHub Release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.release_tag.outputs.tag }}
+        shell: bash
+        run: |
+          NOTES="CHANGELOG.md"
+          if [ -f "docs/RELEASE_NOTES_${TAG}.md" ]; then
+            NOTES="docs/RELEASE_NOTES_${TAG}.md"
+          fi
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" release-assets/* --clobber
+          else
+            gh release create "$TAG" release-assets/* \
+              --title "GYTech PatientSim Pro ${TAG}" \
+              --notes-file "$NOTES" \
+              --verify-tag
+          fi

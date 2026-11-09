@@ -1,0 +1,166 @@
+/*
+ * GYTech PatientSim Pro
+ * Advanced Patient Vital Signs Monitor & Defibrillator Simulator
+ *
+ * Copyright 2026 GYTech All Right Reserved.
+ *
+ * Educational simulation software only.
+ */
+
+/* =========================================================
+   Workstation layout: three-column monitoring surface.
+   ========================================================= */
+
+.workstation {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 248px 354px;
+  gap: 7px;
+  padding: 7px 9px;
+  overflow: hidden;
+}
+
+.monitor-column {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.monitor-chrome {
+  flex: 0 0 31px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 9px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  background: linear-gradient(180deg, rgba(19, 29, 36, 0.95), rgba(10, 16, 21, 0.95));
+}
+
+.monitor-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.monitor-led {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--normal);
+  box-shadow: 0 0 7px rgba(0, 216, 120, 0.6);
+}
+
+.monitor-divider {
+  width: 1px;
+  height: 12px;
+  background: var(--border);
+}
+
+.monitor-context {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 8px;
+  font-weight: 500;
+  color: var(--text-faint);
+}
+
+.monitor-status-cluster {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+.monitor-chip {
+  padding: 2px 5px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.monitor-chip.is-alert {
+  color: var(--critical);
+  border-color: rgba(255, 48, 48, 0.32);
+  background: rgba(255, 48, 48, 0.06);
+}
+
+.monitor-chip.is-warn {
+  color: var(--warning);
+  border-color: rgba(255, 176, 32, 0.32);
+}
+
+.monitor-chip.mono {
+  color: var(--text-dim);
+}
+
+.monitor-actions {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.monitor-action {
+  height: 20px;
+  padding: 0 7px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: var(--text-faint);
+  background: rgba(19, 29, 36, 0.8);
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.06em;
+}
+
+.monitor-action:hover {
+  color: var(--text);
+  border-color: #405662;
+}
+
+.monitor-action.is-active {
+  color: var(--warning);
+  border-color: rgba(255, 176, 32, 0.38);
+  background: rgba(255, 176, 32, 0.08);
+}
+
+/* Vitals rail is styled in monitor.css, defib in defibrillator.css */
+
+@media (max-width: 1500px) {
+  .workstation {
+    grid-template-columns: minmax(0, 1fr) 232px 330px;
+  }
+}
+
+@media (max-width: 1360px) {
+  .workstation {
+    grid-template-columns: minmax(0, 1fr) 220px 310px;
+    gap: 5px;
+    padding: 5px 7px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .workstation {
+    grid-template-columns: minmax(0, 1fr) 214px;
+  }
+  .defib-column {
+    grid-column: 1 / -1;
+    min-height: 360px;
+  }
+}

@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+package-lock.json.bak
+
+# Build / deployment output
+dist/
+release/
+release-upgrade/
+desktop-smoke-result.json
+desktop-*.log
+packaged-*.log
+npm-desktop-install.log
+
+# Test and screenshot artefacts generated locally
+tests/screenshots/
+tests/*.json
+tests/*.txt
+tests/*.log
+tests/.capture-*
+!tests/*.example.json
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# Editor leftovers
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+coverage/

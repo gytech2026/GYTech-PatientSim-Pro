@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-temp-unit="C" data-pressure-unit="mmHg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; media-src 'self' blob:; object-src 'none'; base-uri 'none'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="description" content="GYTech PatientSim Pro — advanced educational patient vital signs monitor and defibrillator simulator. Software simulation only.">
+  <meta name="copyright" content="Copyright 2026 GYTech All Right Reserved.">
+  <meta name="application-name" content="GYTech PatientSim Pro">
+  <title>GYTech PatientSim Pro — Advanced Patient Vital Signs Monitor &amp; Defibrillator Simulator</title>
+  <link rel="icon" type="image/svg+xml" href="assets/icons/gytech-patientsim-mark.svg">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/monitor.css">
+  <link rel="stylesheet" href="css/waveform.css">
+  <link rel="stylesheet" href="css/defibrillator.css">
+  <link rel="stylesheet" href="css/alarms.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-shell" id="appShell">
+    <header class="topbar" id="topbar">
+      <div class="brand-block">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 36 36" width="34" height="34" role="img">
+            <rect x="1" y="1" width="34" height="34" rx="8" fill="#081217" stroke="#29515c"></rect>
+            <path d="M10 11h9a5 5 0 0 1 0 10h-4v-3h4a2 2 0 0 0 0-4h-9z" fill="#00d9ff"></path>
+            <path d="M6 24h6l2-5 3.1 9 2-4H34" fill="none" stroke="#00ff66" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div class="brand-copy">
+          <div class="brand-name">GYTECH</div>
+          <div class="brand-sub"><b>PATIENTSIM PRO</b> · MEDICAL SIMULATION PLATFORM</div>
+        </div>
+        <span class="simulation-flag">SIMULATION ONLY</span>
+      </div>
+
+      <div class="patient-summary">
+        <div class="patient-summary-top">
+          <span class="live-dot" id="patientLiveDot"></span>
+          <span class="patient-name" id="topPatientName">Eleanor Vance</span>
+          <span class="patient-status-chip" id="topPatientStatus">Stable</span>
+        </div>
+        <div class="patient-summary-meta">
+          <span>MRN <b id="topPatientId">PT-1042</b></span>
+          <span><b id="topPatientAge">64</b> y · <span id="topPatientSex">Female</span></span>
+          <span><b id="topPatientRoom">ICU</b> · BED <b id="topPatientBed">12</b></span>
+        </div>
+      </div>
+
+      <div class="topbar-spacer"></div>
+
+      <div class="status-cluster">
+        <div class="status-readout date-readout">
+          <span class="status-label">DATE</span>
+          <span id="topDate">2026-11-09</span>
+        </div>
+        <div class="status-readout clock-readout">
+          <span class="status-label">LOCAL</span>
+          <span id="topClock">00:00:00</span>
+        </div>
+        <div class="status-pill sim-status-pill" id="simStatusPill">
+          <i></i><span id="simStatusText">RUNNING</span>
+        </div>
+        <button type="button" class="icon-button" id="btnPauseSim" title="Pause simulation (P)" aria-label="Pause simulation">
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"></rect><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"></rect></svg>
+          <span id="pauseButtonLabel">PAUSE</span>
+        </button>
+        <div class="status-readout battery-readout">
+          <span class="status-label">BATTERY</span>
+          <span class="battery-value" id="topBattery">92%</span>
+        </div>
+        <div class="status-readout network-readout">
+          <span class="status-label">NETWORK</span>
+          <span class="network-value"><i id="networkDot"></i><span id="networkText">ONLINE</span></span>
+        </div>
+        <button type="button" class="icon-button audio-button" id="btnAudio" title="Toggle audio (M)" aria-label="Toggle audio">
+          <svg viewBox="0 0 18 18" width="16" height="16" aria-hidden="true"><path d="M3 7h3l4-3v10L6 11H3z" fill="currentColor"></path><path id="audioWavePath" d="M12 6.2c1 .8 1 4.8 0 5.6M14.2 4.2c2.2 2 2.2 7.6 0 9.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path></svg>
+          <span id="audioButtonLabel">AUDIO</span>
+        </button>
+        <div class="alarm-status-pill" id="topAlarmState">
+          <i></i><span id="topAlarmText">NO ALARM</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="alarm-banner is-hidden" id="alarmBanner" aria-live="polite">
+      <div class="alarm-banner-priority" id="alarmBannerPriority">CRITICAL</div>
+      <div class="alarm-banner-content">
+        <div class="alarm-banner-title" id="alarmBannerTitle">VENTRICULAR FIBRILLATION</div>
+        <div class="alarm-banner-message" id="alarmBannerMessage">Chaotic ventricular rhythm.</div>
+      </div>
+      <div class="alarm-banner-count" id="alarmBannerCount">1 ACTIVE</div>
+      <div class="alarm-banner-actions">
+        <button type="button" class="compact-button" id="btnSilenceAlarm">SILENCE 120s</button>
+        <button type="button" class="compact-button strong" id="btnAckAlarm">ACKNOWLEDGE</button>
+      </div>
+    </section>
+
+    <main class="workstation" id="workstation">
+      <section class="monitor-column">
+        <div class="monitor-chrome">
+          <div class="monitor-title">
+            <span class="monitor-led"></span>
+            <span>BEDSIDE MONITOR</span>
+            <span class="monitor-divider"></span>
+            <span class="monitor-context" id="monitorContext">Eleanor Vance · ICU 12</span>
+          </div>
+          <div class="monitor-status-cluster">
+            <span class="monitor-chip" id="monitorRhythmChip">NSR</span>
+            <span class="monitor-chip" id="monitorPerfusionChip">PULSE PRESENT</span>
+            <span class="monitor-chip mono" id="monitorSimClock">T+ 00:00</span>
+          </div>
+          <div class="monitor-actions">
+            <button type="button" class="monitor-action" id="btnFreeze" title="Freeze displayed waveforms without stopping the simulation">FREEZE</button>
+            <button type="button" class="monitor-action" id="btnOpen12LeadTop">12-LEAD</button>
+          </div>
+        </div>
+
+        <div class="wave-stack" id="waveStack">
+          <article class="wave-card wave-ecg" data-trace="ecg">
+            <div class="wave-label-block">
+              <span class="wave-tag" id="waveLeadLabel">II</span>
+              <span class="wave-parameter">ECG</span>
+              <span class="wave-unit">mV</span>
+            </div>
+            <div class="wave-canvas-wrap">
+              <canvas id="waveECG" aria-label="Simulated ECG waveform"></canvas>
+              <div class="wave-overlay is-hidden" data-wave-overlay></div>
+            </div>
+            <div class="wave-card-footer">
+              <span data-wave-status>II · 5-LEAD</span>
+              <span id="ecgSweepMeta">25 mm/s · ×1</span>
+            </div>
+          </article>
+
+          <article class="wave-card wave-pleth" data-trace="pleth">
+            <div class="wave-label-block">
+              <span class="wave-tag">SpO₂</span>
+              <span class="wave-parameter">PLETH</span>
+              <span class="wave-unit">%</span>
+            </div>
+            <div class="wave-canvas-wrap">
+              <canvas id="wavePleth" aria-label="Simulated pulse oximetry plethysmogram"></canvas>
+              <div class="wave-overlay is-hidden" data-wave-overlay></div>
+            </div>
+            <div class="wave-card-footer">
+              <span data-wave-status>--</span>
+              <span>PERFUSION</span>
+            </div>
+          </article>
+
+          <article class="wave-card wave-capno" data-trace="capno">
+            <div class="wave-label-block">
+              <span class="wave-tag">EtCO₂</span>
+              <span class="wave-parameter">CAPNO</span>
+              <span class="wave-unit">mmHg</span>
+            </div>
+            <div class="wave-canvas-wrap">
+              <canvas id="waveCapno" aria-label="Simulated capnogram"></canvas>
+              <div class="wave-overlay is-hidden" data-wave-overlay></div>
+            </div>
+            <div class="wave-card-footer">
+              <span data-wave-status>--</span>
+              <span>CO₂</span>
+            </div>
+          </article>
+
+          <article class="wave-card wave-resp" data-trace="resp">
+            <div class="wave-label-block">
+              <span class="wave-tag">RESP</span>
+              <span class="wave-parameter">IMPEDANCE</span>
+              <span class="wave-unit">/min</span>
+            </div>
+            <div class="wave-canvas-wrap">
+              <canvas id="waveResp" aria-label="Simulated respiratory waveform"></canvas>
+              <div class="wave-overlay is-hidden" data-wave-overlay></div>
+            </div>
+            <div class="wave-card-footer">
+              <span data-wave-status>--</span>
+              <span>RESPIRATION</span>
+            </div>
+          </article>
+
+          <article class="wave-card wave-art" data-trace="art">
+            <div class="wave-label-block">
+              <span class="wave-tag">ART</span>
+              <span class="wave-parameter">IBP</span>
+              <span class="wave-unit">mmHg</span>
+            </div>
+            <div class="wave-canvas-wrap">
+              <canvas id="waveART" aria-label="Simulated arterial pressure waveform"></canvas>
+              <div class="wave-overlay is-hidden" data-wave-overlay></div>
+            </div>
+            <div class="wave-card-footer">
+              <span data-wave-status>OFF</span>
+              <span>INVASIVE</span>
+            </div>
+          </article>
+
+          <article class="wave-card wave-cvp" data-trace="cvp">
+            <div class="wave-label-block">
+              <span class="wave-tag">CVP</span>
+              <span class="wave-parameter">CENTRAL</span>
+              <span class="wave-unit">mmHg</span>
+            </div>
+            <div class="wave-canvas-wrap">
+              <canvas id="waveCVP" aria-label="Simulated central venous pressure waveform"></canvas>
+              <div class="wave-overlay is-hidden" data-wave-overlay></div>
+            </div>
+            <div class="wave-card-footer">
+              <span data-wave-status>OFF</span>
+              <span>VENOUS</span>
+            </div>
+          </article>
+
+          <article class="wave-card wave-pa" data-trace="pa">
+            <div class="wave-label-block">
+              <span class="wave-tag">PA</span>
+              <span class="wave-parameter">PULM ART</span>
+              <span class="wave-unit">mmHg</span>
+            </div>
+            <div class="wave-canvas-wrap">
+              <canvas id="wavePA" aria-label="Simulated pulmonary artery pressure waveform"></canvas>
+              <div class="wave-overlay is-hidden" data-wave-overlay></div>
+            </div>
+            <div class="wave-card-footer">
+              <span data-wave-status>OFF</span>
+              <span>PULMONARY</span>
+            </div>
+          </article>
+
+          <article class="wave-card wave-icp" data-trace="icp">
+            <div class="wave-label-block">
+              <span class="wave-tag">ICP</span>
+              <span class="wave-parameter">CRANIAL</span>
+              <span class="wave-unit">mmHg</span>
+            </div>
+            <div class="wave-canvas-wrap">
+              <canvas id="waveICP" aria-label="Simulated intracranial pressure waveform"></canvas>
+              <div class="wave-overlay is-hidden" data-wave-overlay></div>
+            </div>
+            <div class="wave-card-footer">
+              <span data-wave-status>OFF</span>
+              <span>INTRACRANIAL</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <aside class="vitals-rail" id="vitalsRail">
+        <div class="rail-heading">
+          <div><span class="rail-title">VITAL SIGNS</span><span class="rail-subtitle">CONTINUOUS / INTERMITTENT</span></div>
+          <span class="rail-live">LIVE</span>
+        </div>
+
+        <div class="vitals-grid">
+          <article class="vital-card vital-hr" data-vital="hr">
+            <div class="vital-card-head"><span>HR</span><span class="vital-badge" id="hrBadge">ECG</span></div>
+            <div class="vital-value-row"><span class="vital-value" id="vitalHR">--</span><span class="vital-unit">bpm</span></div>
+            <div class="vital-foot"><span>PR <b id="vitalPR">--</b> bpm</span><span class="status-dot" id="vitalHRStatus">--</span></div>
+          </article>
+
+          <article class="vital-card vital-spo2" data-vital="spo2">
+            <div class="vital-card-head"><span>SpO₂</span><span class="vital-badge">PULSE OX</span></div>
+            <div class="vital-value-row"><span class="vital-value" id="vitalSpO2">--</span><span class="vital-unit">%</span></div>
+            <div class="vital-foot"><span id="vitalSpO2Signal">SIGNAL --</span><span class="status-dot" id="vitalSpO2Status">--</span></div>
+          </article>
+
+          <article class="vital-card vital-nibp" data-vital="nibp">
+            <div class="vital-card-head"><span>NIBP</span><span class="vital-badge" id="vitalNibpMode">AUTO</span></div>
+            <div class="vital-value-row nibp-value"><span id="vitalSYS">---</span><span class="vital-slash">/</span><span id="vitalDIA">--</span><span class="vital-unit">mmHg</span></div>
+            <div class="vital-foot"><span id="vitalNibpTime">NO READING</span><span class="status-dot" id="vitalNibpStatus">--</span></div>
+            <div class="vital-progress is-hidden" id="nibpProgress"><span id="nibpProgressBar"></span></div>
+          </article>
+
+          <div class="vital-mini-row pressure-mini-row">
+            <div class="vital-mini"><span class="mini-label">SYS</span><span class="mini-value" id="vitalSysMini">--</span><span class="mini-unit">mmHg</span></div>
+            <div class="vital-mini"><span class="mini-label">DIA</span><span class="mini-value" id="vitalDiaMini">--</span><span class="mini-unit">mmHg</span></div>
+            <div class="vital-mini"><span class="mini-label">MAP</span><span class="mini-value" id="vitalMapMini">--</span><span class="mini-unit">mmHg</span></div>
+          </div>
+
+          <div class="vital-pair-row">
+            <article class="vital-card vital-rr" data-vital="rr">
+              <div class="vital-card-head"><span>RR</span><span class="vital-badge">RESP</span></div>
+              <div class="vital-value-row"><span class="vital-value" id="vitalRR">--</span><span class="vital-unit">/min</span></div>
+              <div class="vital-foot"><span>EtCO₂</span><span class="status-dot" id="vitalRRStatus">--</span></div>
+            </article>
+            <article class="vital-card vital-etco2" data-vital="etco2">
+              <div class="vital-card-head"><span>EtCO₂</span><span class="vital-badge">CAPNO</span></div>
+              <div class="vital-value-row"><span class="vital-value" id="vitalEtCO2">--</span><span class="vital-unit">mmHg</span></div>
+              <div class="vital-foot"><span>END-TIDAL</span><span class="status-dot" id="vitalEtCO2Status">--</span></div>
+            </article>
+          </div>
+
+          <article class="vital-card vital-temp" data-vital="temp">
+            <div class="vital-card-head"><span>TEMP</span><span class="vital-badge" id="vitalTempUnit">°C</span></div>
+            <div class="vital-value-row"><span class="vital-value" id="vitalTemp">--</span><span class="vital-unit" id="vitalTempUnitInline">°C</span></div>
+            <div class="vital-foot"><span>T2 <b id="vitalTemp2">--</b> · Δ <b id="vitalTempDiff">--</b></span><span class="status-dot" id="vitalTempStatus">--</span></div>
+          </article>
+
+          <div class="invasive-strip">
+            <div class="invasive-item"><span>ART</span><b id="miniART">--</b></div>
+            <div class="invasive-item"><span>CVP</span><b id="miniCVP">--</b></div>
+            <div class="invasive-item"><span>PA</span><b id="miniPA">--</b></div>
+            <div class="invasive-item"><span>ICP</span><b id="miniICP">--</b></div>
+            <div class="invasive-item"><span>BIS</span><b id="miniBIS">--</b></div>
+          </div>
+
+          <div class="rail-context">
+            <div class="rail-context-head">
+              <span>RECENT SIMULATION EVENTS</span>
+              <button type="button" class="text-button" id="btnRailHistory">VIEW ALL</button>
+            </div>
+            <ul class="rail-event-list" id="railRecentEvents">
+              <li>No simulation events yet.</li>
+            </ul>
+            <div class="rail-context-row"><span>SCENARIO</span><b id="railScenarioLabel">None active</b></div>
+            <div class="rail-context-row"><span>DIAGNOSIS</span><b id="railDiagnosisLabel">--</b></div>
+          </div>
+        </div>
+
+        <div class="rail-footer">
+          <span><i class="sensor-indicator" id="railSensorSummary"></i> SENSORS</span>
+          <button type="button" class="text-button" id="btnOpenSensorsFromRail">CONFIGURE</button>
+        </div>
+      </aside>
+
+      <aside class="defib-column" id="defibColumn">
+        <div class="defib-header">
+          <div class="defib-brand">
+            <span class="defib-kicker">THERAPY DEVICE</span>
+            <span class="defib-name">DEFIBRILLATOR <b>PRO</b></span>
+          </div>
+          <div class="defib-battery">
+            <span class="defib-battery-label">BATTERY</span>
+            <span id="defibBattery">92%</span>
+          </div>
+        </div>
+
+        <div class="defib-mode-tabs" role="tablist" aria-label="Defibrillator modes">
+          <button type="button" class="defib-mode-tab is-active" data-defib-mode="monitor" role="tab">MONITOR</button>
+          <button type="button" class="defib-mode-tab" data-defib-mode="manual" role="tab">MANUAL</button>
+          <button type="button" class="defib-mode-tab" data-defib-mode="aed" role="tab">AED</button>
+          <button type="button" class="defib-mode-tab" data-defib-mode="sync" role="tab">SYNC</button>
+          <button type="button" class="defib-mode-tab" data-defib-mode="pacing" role="tab">PACING</button>
+        </div>
+
+        <div class="defib-screen">
+          <div class="defib-screen-topline">
+            <span id="defibScreenMode">MONITOR MODE</span>
+            <span id="defibScreenState">MONITORING</span>
+          </div>
+          <div class="defib-ecg-wrap">
+            <canvas id="defibWaveCanvas" aria-label="Defibrillator simulated ECG display"></canvas>
+            <div class="defib-sync-markers" id="defibSyncMarkers" aria-hidden="true"></div>
+            <div class="defib-grid-label">II</div>
+            <div class="defib-hr-readout"><span id="defibHR">--</span><small>bpm</small></div>
+            <div class="defib-screen-overlay" id="defibScreenOverlay"></div>
+          </div>
+          <div class="defib-screen-foot">
+            <span id="defibRhythmDisplay">NORMAL SINUS RHYTHM</span>
+            <span id="defibClassification">PERFUSING</span>
+          </div>
+        </div>
+
+        <div class="defib-status-grid">
+          <div class="defib-status-cell"><span>ENERGY</span><b id="defibEnergyDisplay">120 J</b></div>
+          <div class="defib-status-cell"><span>PADS</span><b id="defibPadsState">CONNECTED</b></div>
+          <div class="defib-status-cell"><span>SYNC</span><b id="defibSyncState">OFF</b></div>
+          <div class="defib-status-cell"><span>STATE</span><b id="defibStateLabel">MONITORING</b></div>
+        </div>
+
+        <div class="charge-meter">
+          <div class="charge-meter-head"><span id="chargeStatusText">READY TO CHARGE</span><span id="chargePercent">0%</span></div>
+          <div class="charge-meter-track"><span id="chargeProgressBar"></span></div>
+        </div>
+
+        <div class="defib-main-controls">
+          <div class="defib-control-label-row">
+            <span>SELECTED ENERGY</span>
+            <span id="defibEnergyHint">MANUAL SETTING</span>
+          </div>
+          <div class="energy-grid" id="energyGrid"></div>
+
+          <div class="defib-action-row">
+            <button type="button" class="defib-button charge-button" id="btnCharge"><span>CHARGE</span><small>SIMULATED</small></button>
+            <button type="button" class="defib-button disarm-button" id="btnDisarm">DISARM</button>
+            <button type="button" class="defib-button shock-button" id="btnShock"><span>SHOCK</span><small>SOFTWARE ONLY</small></button>
+          </div>
+
+          <div class="defib-secondary-row">
+            <button type="button" class="defib-small-button" id="btnPadsToggle">PADS CONNECTED</button>
+            <button type="button" class="defib-small-button" id="btnSyncToggle">SYNC OFF</button>
+          </div>
+        </div>
+
+        <div class="defib-mode-panel" id="defibModeMonitorPanel">
+          <div class="panel-note">
+            <strong>MONITOR MODE</strong>
+            <span>Therapy output disabled. Attach simulated pads and select a therapy mode to begin.</span>
+          </div>
+          <div class="device-readiness-row">
+            <span>DEVICE READINESS</span><b id="deviceReadiness">READY</b>
+          </div>
+          <div class="device-readiness-row">
+            <span>RHYTHM CLASSIFICATION</span><b id="deviceRhythmClass">PERFUSING</b>
+          </div>
+        </div>
+
+        <div class="defib-mode-panel is-hidden" id="defibAedPanel">
+          <div class="aed-instruction" id="aedAnnouncement">Attach simulated pads to begin AED analysis.</div>
+          <div class="aed-analysis-row">
+            <button type="button" class="defib-wide-button" id="btnAedAnalyze">ANALYSE RHYTHM</button>
+            <div class="aed-progress"><span id="aedProgressBar"></span></div>
+          </div>
+          <div class="aed-recommendation is-hidden" id="aedRecommendation">
+            <span id="aedRecommendationLabel">NO SHOCK ADVISED</span>
+            <small id="aedRecommendationDetail">Continue simulated CPR.</small>
+          </div>
+          <label class="aed-safety-check" id="aedSafetyWrap">
+            <input type="checkbox" id="aedSafetyCheck">
+            <span>I confirm this is a software simulation. Simulated patient is clear of the operator.</span>
+          </label>
+          <p class="training-disclaimer">Training-only simulated energy. Not a clinical energy recommendation.</p>
+        </div>
+
+        <div class="defib-mode-panel is-hidden" id="defibSyncPanel">
+          <div class="panel-note">
+            <strong>SYNCHRONIZED CARDIOVERSION</strong>
+            <span>Sync markers must be present on the simulated ECG. Charge is blocked when valid synchronization is absent.</span>
+          </div>
+          <div class="device-readiness-row">
+            <span>SYNC MARKER</span><b id="syncReadyLabel">NOT READY</b>
+          </div>
+          <div class="device-readiness-row">
+            <span>SYNC MODE</span><b id="syncModeLabel">OFF</b>
+          </div>
+        </div>
+
+        <div class="defib-mode-panel is-hidden" id="defibPacingPanel">
+          <div class="panel-heading-row"><strong>TRANSCUTANEOUS PACING</strong><span id="pacingCaptureStatus">IDLE</span></div>
+          <label class="range-label">RATE <output id="pacingRateValue">70</output> ppm
+            <input type="range" id="pacingRate" min="20" max="180" step="5" value="70">
+          </label>
+          <label class="range-label">OUTPUT <output id="pacingOutputValue">0</output> mA
+            <input type="range" id="pacingOutput" min="0" max="200" step="5" value="0">
+          </label>
+          <div class="pacing-status-grid">
+            <div><span>ELECTRICAL CAPTURE</span><b id="pacingElectricalCapture">NO</b></div>
+            <div><span>MECHANICAL CAPTURE</span><b id="pacingMechanicalCapture">NO</b></div>
+          </div>
+          <button type="button" class="defib-wide-button" id="btnPacingStart">START PACING</button>
+          <p class="training-disclaimer">Pacing is simulated independently of defibrillation. Capture is an educational software model.</p>
+        </div>
+
+        <div class="defib-checklist">
+          <div class="defib-checklist-head"><span>THERAPY SAFETY CHECKLIST</span><span>SIMULATED</span></div>
+          <div class="defib-check-row"><span><i class="check-mark" id="checkPadsMark"></i>Simulated pads connected</span><b id="checkPads">--</b></div>
+          <div class="defib-check-row"><span><i class="check-mark" id="checkRhythmMark"></i>Rhythm assessed</span><b id="checkRhythm">--</b></div>
+          <div class="defib-check-row"><span><i class="check-mark" id="checkPulseMark"></i>Pulse state established</span><b id="checkPulse">--</b></div>
+          <div class="defib-check-row"><span><i class="check-mark" id="checkChargeMark"></i>Charge state verified</span><b id="checkCharge">--</b></div>
+          <div class="defib-check-row"><span><i class="check-mark" id="checkSyncMark"></i>Synchronization verified</span><b id="checkSync">--</b></div>
+        </div>
+        <div class="defib-event-bar">
+          <span class="event-led"></span>
+          <span id="defibLastEvent">Device in monitor mode. Simulated therapy inactive.</span>
+        </div>
+        <div class="defib-device-footer">
+          <span>SOFTWARE-ONLY TRAINING DEVICE</span>
+          <button type="button" class="text-button" id="btnDefibSelfTest">SELF-TEST</button>
+        </div>
+      </aside>
+    </main>
+
+    <section class="cpr-strip" id="cprStrip">
+      <div class="cpr-strip-left">
+        <span class="cpr-title">CPR SIMULATION</span>
+        <span class="cpr-status" id="cprStripStatus">IDLE</span>
+      </div>
+      <div class="cpr-strip-metrics">
+        <span>RATE <b id="cprStripRate">110</b> /min</span>
+        <span>DEPTH <b id="cprStripDepth">5.5</b> cm</span>
+        <span>COMPRESSIONS <b id="cprStripCount">0</b></span>
+        <span>VENTILATIONS <b id="cprStripVent">0</b></span>
+        <span>QUALITY <b id="cprStripQuality">--</b></span>
+      </div>
+      <div class="cpr-strip-actions">
+        <button type="button" class="compact-button" id="btnQuickCpr">OPEN CPR PANEL</button>
+        <button type="button" class="compact-button strong" id="btnQuickCprToggle">START CPR</button>
+      </div>
+    </section>
+
+    <footer class="control-dock">
+      <nav class="dock-nav" aria-label="Simulation workstation controls">
+        <button type="button" class="dock-button" id="btnPatients" data-dock="patients"><span class="dock-key">PT</span><span data-i18n="patients">PATIENTS</span></button>
+        <button type="button" class="dock-button" id="btnScenarios" data-dock="scenarios"><span class="dock-key">SC</span><span data-i18n="scenarios">SCENARIOS</span></button>
+        <button type="button" class="dock-button" id="btnInstructor" data-dock="instructor"><span class="dock-key">IN</span><span data-i18n="instructor">INSTRUCTOR</span></button>
+        <button type="button" class="dock-button" id="btnCPR" data-dock="cpr"><span class="dock-key">CP</span><span data-i18n="cpr">CPR</span></button>
+        <button type="button" class="dock-button" id="btnAlarms" data-dock="alarms"><span class="dock-key">AL</span><span data-i18n="alarms">ALARMS</span></button>
+        <button type="button" class="dock-button" id="btnECGSettings" data-dock="ecg"><span class="dock-key">EC</span><span data-i18n="ecg">ECG</span></button>
+        <button type="button" class="dock-button" id="btnSensors" data-dock="sensors"><span class="dock-key">SN</span><span>SENSORS</span></button>
+        <button type="button" class="dock-button" id="btnHistory" data-dock="history"><span class="dock-key">HI</span><span data-i18n="history">HISTORY</span></button>
+        <button type="button" class="dock-button" id="btn12Lead" data-dock="twelve"><span class="dock-key">12</span><span data-i18n="twelveLead">12-LEAD</span></button>
+        <button type="button" class="dock-button" id="btnDeviceSettings" data-dock="settings"><span class="dock-key">ST</span><span data-i18n="settings">SETTINGS</span></button>
+        <button type="button" class="dock-button" id="btnDiagnostics" data-dock="diagnostics"><span class="dock-key">DX</span><span data-i18n="diagnostics">DIAGNOSTICS</span></button>
+      </nav>
+      <div class="dock-meta">
+        <span class="dock-scenario" id="dockScenarioLabel">NO SCENARIO</span>
+        <span class="dock-timer" id="dockTimer">SIM T+ 00:00</span>
+        <span class="dock-copyright" title="Copyright 2026 GYTech All Right Reserved.">Copyright 2026 GYTech All Right Reserved.</span>
+        <button type="button" class="dock-disclaimer" id="btnDisclaimer">EDUCATIONAL USE ONLY</button>
+      </div>
+    </footer>
+  </div>
+
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+
+  <div class="modal-layer" id="modalLayer" hidden>
+    <div class="modal-backdrop" data-close-modal="true"></div>
+
+    <section class="modal modal-large" id="modalPatients" role="dialog" aria-modal="true" aria-labelledby="patientsTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">SIMULATION CONTEXT</span><h2 id="patientsTitle">Patient Management</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body patient-modal-body">
+        <div class="patient-list-panel">
+          <div class="panel-toolbar">
+            <span class="panel-title">SIMULATION PATIENTS</span>
+            <button type="button" class="compact-button strong" id="btnNewPatient">+ NEW</button>
+          </div>
+          <div class="patient-list" id="patientList"></div>
+          <div class="panel-hint">Patient selection resets transient device and scenario state safely.</div>
+        </div>
+        <form class="patient-editor" id="patientForm" novalidate>
+          <input type="hidden" id="patientRecordId">
+          <div class="panel-toolbar">
+            <span class="panel-title" id="patientEditorTitle">EDIT PATIENT</span>
+            <span class="field-note" id="patientEditNote">Changes apply to simulation context.</span>
+          </div>
+          <div class="form-grid">
+            <label class="form-field span-2">Patient name<input type="text" id="patientName" maxlength="80" required autocomplete="off"></label>
+            <label class="form-field">Patient ID<input type="text" id="patientId" maxlength="30" required autocomplete="off"></label>
+            <label class="form-field">Age<input type="number" id="patientAge" min="0" max="120" step="1" required></label>
+            <label class="form-field">Sex<select id="patientSex"><option>Female</option><option>Male</option><option>Other</option></select></label>
+            <label class="form-field">Height (cm)<input type="number" id="patientHeight" min="30" max="250" step="1"></label>
+            <label class="form-field">Weight (kg)<input type="number" id="patientWeight" min="1" max="350" step="0.5"></label>
+            <label class="form-field">Room<input type="text" id="patientRoom" maxlength="20"></label>
+            <label class="form-field">Bed<input type="text" id="patientBed" maxlength="10"></label>
+            <label class="form-field">Status<select id="patientStatus"><option>Stable</option><option>Monitoring</option><option>Critical</option><option>Recovering</option></select></label>
+            <label class="form-field">Admission date<input type="date" id="patientAdmission"></label>
+            <label class="form-field span-2">Medical history<textarea id="patientHistory" rows="2" maxlength="500"></textarea></label>
+            <label class="form-field span-2">Diagnosis / simulation context<textarea id="patientDiagnosis" rows="2" maxlength="500"></textarea></label>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="secondary-button" id="btnDuplicatePatient">DUPLICATE</button>
+            <button type="button" class="secondary-button danger-outline" id="btnDeletePatient">DELETE</button>
+            <button type="button" class="secondary-button" id="btnResetPatientSim">RESET SIM STATE</button>
+            <span class="form-spacer"></span>
+            <button type="submit" class="primary-button" id="btnSavePatient">SAVE PATIENT</button>
+          </div>
+          <div class="form-feedback" id="patientFormFeedback" role="status"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="modal modal-large" id="modalScenarios" role="dialog" aria-modal="true" aria-labelledby="scenariosTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">DETERMINISTIC TRAINING</span><h2 id="scenariosTitle">Clinical Simulation Scenarios</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body scenario-modal-body">
+        <div class="scenario-list-panel">
+          <div class="panel-toolbar">
+            <span class="panel-title">20 SCENARIOS</span>
+            <select id="scenarioCategoryFilter" class="compact-select">
+              <option value="all">All categories</option>
+              <option>Baseline</option><option>Rhythm</option><option>Arrest</option>
+              <option>Respiration</option><option>Circulation</option><option>Deterioration</option><option>Recovery</option>
+            </select>
+          </div>
+          <div class="scenario-list" id="scenarioList"></div>
+        </div>
+        <div class="scenario-detail">
+          <div id="scenarioDetailEmpty" class="empty-state">
+            <div class="empty-icon">SC</div>
+            <h3>Select a simulation scenario</h3>
+            <p>Each scenario defines a deterministic initial physiologic state, waveform patterns, alarm conditions, progression timeline, and teaching outcomes.</p>
+          </div>
+          <div id="scenarioDetailContent" class="is-hidden">
+            <span class="scenario-category" id="scenarioDetailCategory">RHYTHM</span>
+            <h3 id="scenarioDetailName">Scenario</h3>
+            <p class="scenario-description" id="scenarioDetailDescription"></p>
+            <div class="scenario-meta-grid">
+              <div><span>STATUS</span><b id="scenarioDetailStatus">IDLE</b></div>
+              <div><span>ELAPSED</span><b id="scenarioDetailElapsed">00:00</b></div>
+              <div><span>INITIAL RHYTHM</span><b id="scenarioDetailRhythm">NSR</b></div>
+              <div><span>DURATION</span><b id="scenarioDetailDuration">--</b></div>
+            </div>
+            <div class="scenario-section"><h4>SIMULATION INSTRUCTIONS</h4><p id="scenarioDetailInstructions"></p></div>
+            <div class="scenario-section"><h4>INSTRUCTOR NOTES</h4><p id="scenarioDetailNotes"></p></div>
+            <div class="scenario-section"><h4>EXPECTED LEARNING OUTCOMES</h4><ul id="scenarioDetailOutcomes"></ul></div>
+            <div class="scenario-progress"><div class="scenario-progress-track"><span id="scenarioProgressBar"></span></div><small id="scenarioProgressLabel">Not started</small></div>
+            <div class="scenario-controls">
+              <button type="button" class="primary-button" id="btnStartScenario">START SCENARIO</button>
+              <button type="button" class="secondary-button" id="btnPauseScenario">PAUSE</button>
+              <button type="button" class="secondary-button" id="btnResumeScenario">RESUME</button>
+              <button type="button" class="secondary-button" id="btnResetScenario">RESET</button>
+              <button type="button" class="secondary-button danger-outline" id="btnStopScenario">STOP</button>
+            </div>
+            <p class="training-note">Scenario progression is deterministic and simulation-only. No scenario establishes clinical validity.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="modal modal-large" id="modalInstructor" role="dialog" aria-modal="true" aria-labelledby="instructorTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">MANUAL PATIENT CONTROL</span><h2 id="instructorTitle">Instructor Panel</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="instructor-banner">
+          <strong>Manually overridden parameters are clearly marked.</strong>
+          <span>Changes update related measurements and waveform generation through the shared physiology model.</span>
+        </div>
+        <div class="instructor-grid">
+          <section class="control-card">
+            <h3>CARDIAC</h3>
+            <label class="range-label">HEART RATE <output id="instructorHRValue">72</output> bpm
+              <input type="range" id="instructorHR" min="20" max="250" step="1" value="72">
+            </label>
+            <label class="form-field">RHYTHM<select id="instructorRhythm"></select></label>
+            <label class="form-field">PULSE / PERFUSION STATE
+              <select id="instructorPulse"><option value="true">Palpable pulse present</option><option value="false">No palpable pulse</option></select>
+            </label>
+            <label class="range-label">PERFUSION <output id="instructorPerfusionValue">100</output>%
+              <input type="range" id="instructorPerfusion" min="0" max="150" step="1" value="100">
+            </label>
+            <span class="override-badge is-hidden" id="overrideHR">MANUAL OVERRIDE</span>
+          </section>
+          <section class="control-card">
+            <h3>OXYGENATION &amp; VENTILATION</h3>
+            <label class="range-label">SpO₂ <output id="instructorSpO2Value">98</output>%
+              <input type="range" id="instructorSpO2" min="60" max="100" step="1" value="98">
+            </label>
+            <label class="range-label">RESPIRATORY RATE <output id="instructorRRValue">16</output> /min
+              <input type="range" id="instructorRR" min="0" max="60" step="1" value="16">
+            </label>
+            <label class="range-label">EtCO₂ <output id="instructorEtCO2Value">38</output> mmHg
+              <input type="range" id="instructorEtCO2" min="0" max="90" step="1" value="38">
+            </label>
+            <label class="range-label">OXYGENATION STATE <output id="instructorOxygenationValue">98</output>%
+              <input type="range" id="instructorOxygenation" min="0" max="100" step="1" value="98">
+            </label>
+            <label class="range-label">VENTILATION STATE <output id="instructorVentilationValue">100</output>%
+              <input type="range" id="instructorVentilation" min="0" max="200" step="1" value="100">
+            </label>
+          </section>
+          <section class="control-card">
+            <h3>CIRCULATION &amp; TEMPERATURE</h3>
+            <div class="dual-field-row">
+              <label class="form-field">SYS (mmHg)<input type="number" id="instructorBPSys" min="0" max="300" step="1" value="120"></label>
+              <label class="form-field">DIA (mmHg)<input type="number" id="instructorBPDia" min="0" max="200" step="1" value="78"></label>
+            </div>
+            <button type="button" class="secondary-button" id="btnApplyBP">APPLY PRESSURE</button>
+            <label class="range-label">TEMPERATURE <output id="instructorTempValue">36.8</output> °C
+              <input type="range" id="instructorTemp" min="30" max="42" step="0.1" value="36.8">
+            </label>
+            <label class="form-field">CAPNOGRAM PATTERN
+              <select id="instructorCapnoPattern">
+                <option value="normal">Normal</option>
+                <option value="hypoventilation">Hypoventilation</option>
+                <option value="hyperventilation">Hyperventilation</option>
+                <option value="apnea">Apnea</option>
+                <option value="rebreathing">Rebreathing</option>
+                <option value="obstruction">Airway obstruction</option>
+                <option value="disconnected">Disconnected sampling line</option>
+              </select>
+            </label>
+            <label class="form-field">RESPIRATORY PATTERN
+              <select id="instructorRespPattern">
+                <option value="normal">Normal</option><option value="rapid">Rapid</option><option value="shallow">Shallow</option>
+                <option value="deep">Deep</option><option value="apnea">Apnea</option><option value="agonal">Agonal</option><option value="irregular">Irregular</option>
+              </select>
+            </label>
+          </section>
+          <section class="control-card">
+            <h3>RECOVERY &amp; ACTION</h3>
+            <p class="control-help">ROSC is never triggered by a simulated shock. It requires this explicit configured recovery transition and an organised, non-lethal rhythm.</p>
+            <button type="button" class="primary-button" id="btnRosc">TRIGGER CONFIGURED ROSC</button>
+            <button type="button" class="secondary-button" id="btnClearOverrides">CLEAR ALL MANUAL OVERRIDES</button>
+            <button type="button" class="secondary-button danger-outline" id="btnRestoreBaseline">RESTORE PATIENT BASELINE</button>
+            <div class="instructor-status" id="instructorStatus">No manual overrides active.</div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="modal" id="modalCPR" role="dialog" aria-modal="true" aria-labelledby="cprTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">MECHANICAL CIRCULATORY SUPPORT</span><h2 id="cprTitle">CPR Simulation</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="cpr-banner">
+          <div><span id="cprModalStatus">CPR IDLE</span><strong>Simulation only — no physical compression measurement.</strong></div>
+          <div class="cpr-pulse-visual" id="cprPulseVisual"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="cpr-metrics-grid">
+          <div class="cpr-metric"><span>COMPRESSIONS</span><b id="cprCompressionCount">0</b></div>
+          <div class="cpr-metric"><span>VENTILATIONS</span><b id="cprVentilationCount">0</b></div>
+          <div class="cpr-metric"><span>SIM QUALITY</span><b id="cprQuality">--</b></div>
+          <div class="cpr-metric"><span>ELAPSED</span><b id="cprElapsed">00:00</b></div>
+          <div class="cpr-metric"><span>PAUSE TIME</span><b id="cprPauseTime">0s</b></div>
+          <div class="cpr-metric"><span>RATE</span><b id="cprRateDisplay">110 /min</b></div>
+        </div>
+        <div class="cpr-controls-grid">
+          <section class="control-card">
+            <h3>COMPRESSION PARAMETERS</h3>
+            <label class="range-label">COMPRESSION RATE <output id="cprRateValue">110</output> /min
+              <input type="range" id="cprRate" min="60" max="160" step="1" value="110">
+            </label>
+            <label class="range-label">COMPRESSION DEPTH <output id="cprDepthValue">5.5</output> cm
+              <input type="range" id="cprDepth" min="1" max="8" step="0.5" value="5.5">
+            </label>
+            <label class="toggle-row"><input type="checkbox" id="cprMetronome" checked><span>Audible CPR metronome</span></label>
+            <p class="control-help">The software does not measure real compression quality. Quality is a teaching calculation based on the selected rate and depth.</p>
+          </section>
+          <section class="control-card">
+            <h3>CPR ACTIONS</h3>
+            <div class="cpr-action-grid">
+              <button type="button" class="primary-button" id="btnCprToggle">START CPR</button>
+              <button type="button" class="secondary-button" id="btnCprPause">PAUSE COMPRESSIONS</button>
+              <button type="button" class="secondary-button" id="btnCprVentilate">RECORD VENTILATION</button>
+              <button type="button" class="secondary-button" id="btnCprCompression">MANUAL COMPRESSION</button>
+            </div>
+            <div class="cpr-feedback" id="cprFeedback">CPR idle.</div>
+            <div class="cpr-history-block"><h4>RECENT CPR EVENTS</h4><ul id="cprEventList"><li>No CPR events yet.</li></ul></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="modal modal-wide" id="modalAlarms" role="dialog" aria-modal="true" aria-labelledby="alarmsTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">CENTRAL ALARM ENGINE</span><h2 id="alarmsTitle">Alarm Management</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="alarm-top-grid">
+          <section class="control-card">
+            <h3>AUDIO &amp; ANNUNCIATION</h3>
+            <label class="range-label">ALARM VOLUME <output id="alarmVolumeValue">65</output>%
+              <input type="range" id="alarmVolume" min="0" max="100" step="1" value="65">
+            </label>
+            <div class="inline-buttons">
+              <button type="button" class="secondary-button" id="btnAudioTest">TEST AUDIO</button>
+              <button type="button" class="primary-button" id="btnAcknowledgeAll">ACKNOWLEDGE ALL</button>
+              <button type="button" class="secondary-button" id="btnSilenceAll">SILENCE 120s</button>
+            </div>
+            <p class="control-help">Silencing removes audible annunciation only. The underlying condition and visual alarm remain active.</p>
+          </section>
+          <section class="control-card">
+            <h3>ALARM GROUP ENABLE</h3>
+            <div class="toggle-grid" id="alarmGroupToggles"></div>
+          </section>
+        </div>
+        <section class="control-card">
+          <div class="panel-toolbar"><h3>ACTIVE ALARMS</h3><span id="activeAlarmCount" class="panel-count">0 ACTIVE</span></div>
+          <div class="active-alarm-list" id="activeAlarmList"><div class="empty-inline">No active alarms.</div></div>
+        </section>
+        <section class="control-card">
+          <div class="panel-toolbar"><h3>CONFIGURABLE ALARM LIMITS</h3><span class="field-note">Internal units: mmHg / °C. Low must be below high.</span></div>
+          <div class="table-scroll">
+            <table class="data-table alarm-limit-table">
+              <thead><tr><th>Parameter</th><th>Low limit</th><th>High limit</th><th>Enabled</th></tr></thead>
+              <tbody id="alarmLimitRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="modal" id="modalECG" role="dialog" aria-modal="true" aria-labelledby="ecgTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">SIGNAL CONFIGURATION</span><h2 id="ecgTitle">ECG Settings</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="form-grid two-column">
+          <label class="form-field">SIMULATED RHYTHM<select id="ecgRhythmSelect"></select></label>
+          <label class="form-field">LEAD CONFIGURATION<select id="ecgLeadCount"><option value="3">3-lead</option><option value="5" selected>5-lead</option><option value="12">12-lead</option></select></label>
+          <label class="form-field">MONITOR LEAD<select id="ecgLeadSelect"><option>I</option><option selected>II</option><option>III</option><option>aVR</option><option>aVL</option><option>aVF</option><option>V1</option><option>V2</option><option>V3</option><option>V4</option><option>V5</option><option>V6</option></select></label>
+          <label class="form-field">SWEEP SPEED<select id="ecgSweepSelect"><option value="12.5">12.5 mm/s</option><option value="25" selected>25 mm/s</option><option value="50">50 mm/s</option></select></label>
+          <label class="form-field">ECG GAIN<select id="ecgGainSelect"><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="2">×2</option><option value="4">×4</option></select></label>
+          <label class="form-field">SHOW GRID<select id="ecgGridSelect"><option value="true">On</option><option value="false">Off</option></select></label>
+          <label class="range-label span-2">SIGNAL NOISE <output id="ecgNoiseValue">2.5</output>%
+            <input type="range" id="ecgNoise" min="0" max="30" step="0.5" value="2.5">
+          </label>
+          <label class="range-label span-2">MOTION ARTIFACT <output id="ecgArtifactValue">2</output>%
+            <input type="range" id="ecgArtifact" min="0" max="100" step="1" value="2">
+          </label>
+          <label class="range-label span-2">BASELINE WANDER <output id="ecgWanderValue">8</output>%
+            <input type="range" id="ecgWander" min="0" max="100" step="1" value="8">
+          </label>
+          <label class="toggle-row span-2"><input type="checkbox" id="ecgLeadOff"><span>Simulate ECG lead-off / disconnected leads</span></label>
+        </div>
+        <div class="modal-note">
+          <strong>Educational model.</strong> Rhythm morphology is generated from parameterised teaching models. It is not a diagnostic ECG and must not be used clinically.
+        </div>
+        <div class="inline-buttons right">
+          <button type="button" class="secondary-button" id="btnOpenTwelveLeadModal">OPEN 12-LEAD VIEW</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="modal modal-wide" id="modalSensors" role="dialog" aria-modal="true" aria-labelledby="sensorsTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">MONITORING CONFIGURATION</span><h2 id="sensorsTitle">Sensors &amp; NIBP</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="sensor-config-grid" id="sensorConfigGrid"></div>
+        <section class="control-card">
+          <h3>SIGNAL QUALITY SIMULATION</h3>
+          <div class="sensor-quality-grid" id="sensorQualityControls"></div>
+          <p class="control-help">Signal quality affects waveform presentation and the availability of derived readings. It does not create valid readings from disconnected sensors.</p>
+        </section>
+        <section class="control-card nibp-control-card">
+          <h3>INTERMITTENT NIBP</h3>
+          <div class="nibp-config-row">
+            <label class="form-field">AUTOMATIC INTERVAL
+              <select id="nibpIntervalSelect">
+                <option value="0">Manual only</option><option value="60">Every 1 minute</option>
+                <option value="120">Every 2 minutes</option><option value="180" selected>Every 3 minutes</option>
+                <option value="300">Every 5 minutes</option><option value="600">Every 10 minutes</option>
+              </select>
+            </label>
+            <button type="button" class="primary-button" id="btnMeasureNIBP">MEASURE NOW</button>
+            <div class="nibp-config-status"><span>CUFF STATUS</span><b id="sensorNibpStatus">READY</b><small id="sensorNibpCountdown">Next measurement in --</small></div>
+          </div>
+          <p class="control-help">NIBP is intentionally intermittent. Values update only at completed measurements; the previous result remains displayed with its measurement time.</p>
+        </section>
+        <div class="modal-note">Disconnecting a monitored sensor activates a technical alarm and replaces its numerical reading with an unavailable state. It never fabricates a valid value.</div>
+      </div>
+    </section>
+
+    <section class="modal" id="modalSettings" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">SYSTEM CONFIGURATION</span><h2 id="settingsTitle">Device Settings</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="form-grid two-column">
+          <label class="form-field">SCREEN THEME<select id="settingTheme"><option value="dark">Clinical dark</option><option value="high-contrast">High contrast</option><option value="night">Night vision</option></select></label>
+          <label class="form-field">LANGUAGE<select id="settingLanguage"><option value="en">English</option><option value="es">Español</option></select></label>
+          <label class="range-label">SCREEN BRIGHTNESS <output id="settingBrightnessValue">100</output>%
+            <input type="range" id="settingBrightness" min="50" max="120" step="1" value="100">
+          </label>
+          <label class="range-label">SIMULATION SPEED <output id="settingSpeedValue">1.0</output>×
+            <input type="range" id="settingSpeed" min="0" max="3" step="1" value="1">
+          </label>
+          <label class="form-field">TEMPERATURE UNITS<select id="settingTempUnit"><option value="C">Celsius (°C)</option><option value="F">Fahrenheit (°F)</option></select></label>
+          <label class="form-field">PRESSURE UNITS<select id="settingPressureUnit"><option value="mmHg">mmHg</option><option value="kPa">kPa</option></select></label>
+          <label class="range-label">ALARM VOLUME <output id="settingAlarmVolumeValue">65</output>%
+            <input type="range" id="settingAlarmVolume" min="0" max="100" step="1" value="65">
+          </label>
+          <label class="range-label">SIMULATED BATTERY <output id="settingBatteryValue">92</output>%
+            <input type="range" id="settingBattery" min="0" max="100" step="1" value="92">
+          </label>
+          <label class="toggle-row"><input type="checkbox" id="settingShowGrid" checked><span>Show waveform grid</span></label>
+          <label class="toggle-row"><input type="checkbox" id="settingAudioAlerts" checked><span>Audio alerts enabled</span></label>
+        </div>
+        <div class="panel-toolbar settings-toolbar">
+          <span class="field-note">Settings persist in localStorage. Transient defibrillator charge and pacing states are never restored on reload.</span>
+          <button type="button" class="secondary-button danger-outline" id="btnResetSettings">RESET TO DEFAULTS</button>
+        </div>
+        <div class="settings-status-grid">
+          <div><span>LAST SAVED</span><b id="lastSavedLabel">—</b></div>
+          <div><span>STORAGE</span><b id="storageStatusLabel">READY</b></div>
+          <div><span>VERSION</span><b id="versionLabel">1.0.0</b></div>
+        </div>
+        <section class="desktop-settings-card" aria-labelledby="desktopSettingsTitle">
+          <div class="panel-toolbar">
+            <h3 id="desktopSettingsTitle">DESKTOP APPLICATION</h3>
+            <span class="field-note" id="desktopModeLabel">Browser edition</span>
+          </div>
+          <div class="desktop-settings-grid">
+            <div class="desktop-control-block">
+              <span class="desktop-label">APPLICATION UPDATE CHECKS</span>
+              <label class="toggle-row"><input type="checkbox" id="settingUpdateChecks" checked><span>Notify me about stable updates</span></label>
+              <div class="inline-buttons">
+                <button type="button" class="secondary-button" id="btnCheckUpdates">CHECK NOW</button>
+                <button type="button" class="secondary-button" id="btnOpenAbout">ABOUT</button>
+              </div>
+              <p class="desktop-help" id="updateStatusText">Desktop update checks are available in the installed application.</p>
+            </div>
+            <div class="desktop-control-block">
+              <span class="desktop-label">LOCAL SIMULATION DATA</span>
+              <p class="desktop-help">Export or import settings, patients, active context, and event history as a local JSON file. Import replaces supported local data after confirmation.</p>
+              <div class="inline-buttons">
+                <button type="button" class="secondary-button" id="btnExportData">EXPORT DATA</button>
+                <button type="button" class="secondary-button" id="btnImportData">IMPORT DATA</button>
+              </div>
+              <input type="file" id="importDataFile" accept="application/json,.json" hidden>
+            </div>
+          </div>
+          <div class="modal-note">Desktop data remains on this computer. No account, cloud sync, telemetry, or patient-data upload is provided.</div>
+        </section>
+      </div>
+    </section>
+
+    <section class="modal modal-wide" id="modalHistory" role="dialog" aria-modal="true" aria-labelledby="historyTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">SIMULATION DATA ONLY</span><h2 id="historyTitle">Event History</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="history-toolbar">
+          <select id="historyCategoryFilter" class="compact-select">
+            <option value="all">All categories</option>
+            <option value="patient">Patient</option><option value="rhythm">Rhythm</option>
+            <option value="vitals">Vital changes</option>
+            <option value="alarm">Alarm</option><option value="sensor">Sensor</option>
+            <option value="measurement">Measurement</option><option value="defibrillator">Defibrillator</option>
+            <option value="pacing">Pacing</option><option value="cpr">CPR</option>
+            <option value="scenario">Scenario</option><option value="recovery">Recovery</option>
+            <option value="ecg">ECG</option><option value="system">System</option>
+            <option value="settings">Settings</option>
+          </select>
+          <input type="search" class="search-input" id="historySearch" placeholder="Search events, patient, type…" autocomplete="off">
+          <button type="button" class="secondary-button" id="btnExportHistory">EXPORT CSV</button>
+          <button type="button" class="secondary-button" id="btnPrintReport">PRINT REPORT</button>
+          <button type="button" class="secondary-button danger-outline" id="btnClearHistory">CLEAR</button>
+        </div>
+        <div class="history-summary" id="historySummary">0 recorded events</div>
+        <div class="table-scroll history-scroll">
+          <table class="data-table history-table">
+            <thead><tr><th>Timestamp</th><th>Category</th><th>Event</th><th>Description</th><th>Values</th><th>Patient</th></tr></thead>
+            <tbody id="historyTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="modal modal-full" id="modalTwelveLead" role="dialog" aria-modal="true" aria-labelledby="twelveLeadTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">EDUCATIONAL LEAD-VECTOR MODEL</span><h2 id="twelveLeadTitle">Simulated 12-Lead ECG</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="twelve-lead-meta">
+          <div><span>PATIENT</span><b id="twelveLeadPatient">--</b></div>
+          <div><span>MRN</span><b id="twelveLeadPatientId">--</b></div>
+          <div><span>HR</span><b id="twelveLeadHR">-- bpm</b></div>
+          <div><span>RHYTHM</span><b id="twelveLeadRhythm">--</b></div>
+          <div><span>TIMESTAMP</span><b id="twelveLeadTimestamp">--</b></div>
+          <div class="twelve-lead-warning">SIMULATED — NOT FOR DIAGNOSIS</div>
+        </div>
+        <div class="lead-toolbar">
+          <label class="inline-select">GAIN
+            <select id="twelveLeadGain"><option value="0.5">×0.5</option><option value="1" selected>×1</option><option value="2">×2</option><option value="4">×4</option></select>
+          </label>
+          <span class="field-note" id="twelveLeadGainLabel">×1.0</span>
+          <span class="field-note">Sweep 25 mm/s · 5-second display per lead</span>
+          <span class="form-spacer"></span>
+          <button type="button" class="secondary-button" id="btnTwelveLeadRefresh">REFRESH</button>
+          <button type="button" class="secondary-button" id="btnTwelveLeadRecord">RECORD PNG</button>
+          <button type="button" class="primary-button" id="btnTwelveLeadPrint">PRINT REPORT</button>
+        </div>
+        <div class="lead-grid" id="leadGrid">
+          <figure class="lead-cell"><figcaption>I</figcaption><canvas id="leadI" aria-label="Simulated ECG lead I"></canvas></figure>
+          <figure class="lead-cell"><figcaption>II</figcaption><canvas id="leadII" aria-label="Simulated ECG lead II"></canvas></figure>
+          <figure class="lead-cell"><figcaption>III</figcaption><canvas id="leadIII" aria-label="Simulated ECG lead III"></canvas></figure>
+          <figure class="lead-cell"><figcaption>aVR</figcaption><canvas id="leadaVR" aria-label="Simulated ECG lead aVR"></canvas></figure>
+          <figure class="lead-cell"><figcaption>aVL</figcaption><canvas id="leadaVL" aria-label="Simulated ECG lead aVL"></canvas></figure>
+          <figure class="lead-cell"><figcaption>aVF</figcaption><canvas id="leadaVF" aria-label="Simulated ECG lead aVF"></canvas></figure>
+          <figure class="lead-cell"><figcaption>V1</figcaption><canvas id="leadV1" aria-label="Simulated ECG lead V1"></canvas></figure>
+          <figure class="lead-cell"><figcaption>V2</figcaption><canvas id="leadV2" aria-label="Simulated ECG lead V2"></canvas></figure>
+          <figure class="lead-cell"><figcaption>V3</figcaption><canvas id="leadV3" aria-label="Simulated ECG lead V3"></canvas></figure>
+          <figure class="lead-cell"><figcaption>V4</figcaption><canvas id="leadV4" aria-label="Simulated ECG lead V4"></canvas></figure>
+          <figure class="lead-cell"><figcaption>V5</figcaption><canvas id="leadV5" aria-label="Simulated ECG lead V5"></canvas></figure>
+          <figure class="lead-cell"><figcaption>V6</figcaption><canvas id="leadV6" aria-label="Simulated ECG lead V6"></canvas></figure>
+        </div>
+        <p class="training-note">Leads are generated from a simplified educational vector model with a shared beat timeline. This output is not a clinically valid 12-lead ECG.</p>
+      </div>
+    </section>
+
+    <section class="modal modal-wide" id="modalDiagnostics" role="dialog" aria-modal="true" aria-labelledby="diagnosticsTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">SOFTWARE &amp; DEVICE STATUS</span><h2 id="diagnosticsTitle">System Diagnostics</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="diagnostics-grid">
+          <section class="control-card">
+            <h3>SYSTEM COMPONENTS</h3>
+            <div class="diagnostics-list" id="diagnosticsComponents"></div>
+          </section>
+          <section class="control-card">
+            <h3>SIMULATED DEVICE</h3>
+            <div class="diagnostics-list" id="diagnosticsDevice"></div>
+            <div class="inline-buttons">
+              <button type="button" class="secondary-button" id="btnRunDiagnostics">RUN SELF-TEST</button>
+              <label class="toggle-row"><input type="checkbox" id="diagnosticsCommError"><span>Simulate network error</span></label>
+            </div>
+          </section>
+        </div>
+        <section class="control-card">
+          <div class="panel-toolbar"><h3>DIAGNOSTIC OUTPUT</h3><span class="field-note">No external device communication</span></div>
+          <pre class="diagnostics-output" id="diagnosticsOutput">Run self-test to inspect the simulated modules and data stores.</pre>
+        </section>
+        <div class="modal-note">This application is an educational simulator. It has no interface to physical monitors, defibrillators, sensors, or hospital networks.</div>
+      </div>
+    </section>
+
+    <section class="modal" id="modalAbout" role="dialog" aria-modal="true" aria-labelledby="aboutTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">PRODUCT INFORMATION</span><h2 id="aboutTitle">About GYTech PatientSim Pro</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="about-hero">
+          <img src="assets/icons/gytech-patientsim-mark.svg" alt="" width="64" height="64">
+          <div>
+            <span class="about-brand">GYTECH</span>
+            <h3>PATIENTSIM PRO</h3>
+            <p>Advanced Patient Vital Signs Monitor &amp; Defibrillator Simulator</p>
+          </div>
+        </div>
+        <div class="about-grid">
+          <div><span>VERSION</span><b id="aboutVersion">1.0.0</b></div>
+          <div><span>PUBLISHER</span><b id="aboutPublisher">GYTech</b></div>
+          <div><span>PLATFORM</span><b id="aboutPlatform">Browser</b></div>
+          <div><span>RUNTIME</span><b id="aboutRuntime">Chromium</b></div>
+          <div><span>UPDATE CHANNEL</span><b id="aboutUpdateStatus">Not checked</b></div>
+          <div><span>LICENSE</span><b id="aboutLicenseStatus">PENDING OWNER APPROVAL</b></div>
+        </div>
+        <div class="about-disclaimer">
+          <strong>EDUCATIONAL SIMULATION ONLY.</strong>
+          <p>This application is not a medical device and must not be used for real patient monitoring, medical diagnosis, treatment, emergency response, or clinical decision-making. All vital signs, ECG waveforms, alarms, AED, defibrillation, cardioversion, and pacing actions are simulated. The application delivers no electrical output and must not connect to or control real medical equipment.</p>
+        </div>
+        <div class="about-meta">
+          <p id="aboutCopyright">Copyright © 2026 GYTech. All Rights Reserved.</p>
+          <p id="aboutDataPath">Local data: browser storage</p>
+          <p id="aboutLogPath">Application logs: not available in browser mode</p>
+        </div>
+        <div class="inline-buttons right">
+          <button type="button" class="secondary-button" id="btnAboutOpenLogs" hidden>OPEN LOGS</button>
+          <button type="button" class="secondary-button" id="btnAboutCheckUpdates">CHECK FOR UPDATES</button>
+          <button type="button" class="primary-button" data-close-modal="true">CLOSE</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="modal" id="modalUpdate" role="dialog" aria-modal="true" aria-labelledby="updateTitle" hidden>
+      <header class="modal-header">
+        <div><span class="modal-kicker">USER-CONTROLLED UPDATE</span><h2 id="updateTitle">Application Update</h2></div>
+        <button type="button" class="modal-close" data-close-modal="true" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body">
+        <div class="update-available">
+          <span class="modal-kicker">NEW STABLE RELEASE</span>
+          <h3 id="updateHeading">A New Version Is Available</h3>
+          <p id="updateSummary">A newer stable version of GYTech PatientSim Pro is available.</p>
+          <div class="update-versions">
+            <div><span>INSTALLED VERSION</span><b id="updateInstalledVersion">1.0.0</b></div>
+            <div><span>LATEST VERSION</span><b id="updateLatestVersion">—</b></div>
+          </div>
+          <div class="update-notes" id="updateNotes">Release notes are available on the official GitHub Release page.</div>
+        </div>
+        <div class="modal-note"><strong>No automatic installation.</strong> Downloading opens the official release page in your browser. You decide whether to download and install. The application never executes a downloaded file or silently replaces itself.</div>
+        <div class="update-dialog-status" id="updateDialogStatus" role="status"></div>
+        <div class="update-actions">
+          <button type="button" class="primary-button" id="btnUpdateDownload">DOWNLOAD UPDATE</button>
+          <button type="button" class="secondary-button" id="btnUpdateReleaseNotes">VIEW RELEASE NOTES</button>
+          <button type="button" class="secondary-button" id="btnUpdateRemind">REMIND ME LATER</button>
+          <button type="button" class="secondary-button" id="btnUpdateDismiss">DISMISS</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="confirm-layer" id="confirmLayer" hidden>
+    <div class="confirm-card" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle" aria-describedby="confirmMessage">
+      <span class="modal-kicker">CONFIRM ACTION</span>
+      <h3 id="confirmTitle">Confirm</h3>
+      <p id="confirmMessage"></p>
+      <div class="confirm-actions">
+        <button type="button" class="secondary-button" id="confirmCancel">CANCEL</button>
+        <button type="button" class="primary-button danger" id="confirmOk">CONFIRM</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

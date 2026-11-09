@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" width="640" height="640" role="img" aria-label="GYTech PatientSim Pro logo">
+  <defs>
+    <linearGradient id="panel" x1="60" y1="20" x2="580" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#142329"/>
+      <stop offset="1" stop-color="#050b0e"/>
+    </linearGradient>
+    <linearGradient id="pulse" x1="110" y1="120" x2="530" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00d9ff"/>
+      <stop offset="0.55" stop-color="#00ff66"/>
+      <stop offset="1" stop-color="#ffd740"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="640" height="640" rx="76" fill="url(#panel)" stroke="#2b4d58" stroke-width="4"/>
+  <path d="M120 142h174c70 0 126 56 126 126s-56 126-126 126h-74v-64h74c34 0 62-28 62-62s-28-62-62-62H120z" fill="url(#pulse)" opacity="0.96"/>
+  <path d="M72 440h98l40-104 64 178 46-98h168" fill="none" stroke="url(#pulse)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <circle cx="521" cy="116" r="15" fill="#00d9ff"/>
+  <text x="80" y="560" fill="#e9f8fd" font-family="Segoe UI, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="5">GYTECH</text>
+  <text x="82" y="592" fill="#6d8995" font-family="Consolas, monospace" font-size="18" letter-spacing="5">PATIENTSIM PRO</text>
+</svg>

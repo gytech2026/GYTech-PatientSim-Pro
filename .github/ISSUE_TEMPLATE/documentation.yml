@@ -1,0 +1,34 @@
+name: Documentation issue
+description: Report an error, broken link, missing document, or inaccurate claim.
+title: "[Docs]: "
+labels: ["documentation", "needs-triage"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: Document or section
+      placeholder: "README.md → Installation"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Documentation problem
+      description: What is wrong, ambiguous, missing, or unverified?
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: Suggested correction
+    validations:
+      required: true
+  - type: checkboxes
+    id: accuracy
+    attributes:
+      label: Accuracy check
+      options:
+        - label: I have not included real patient data or credentials.
+          required: true
+        - label: I understand documentation corrections do not imply clinical validation.
+          required: true

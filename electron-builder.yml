@@ -1,0 +1,108 @@
+appId: com.gytech.patientsimpro
+productName: GYTech PatientSim Pro
+copyright: Copyright © 2026 GYTech. All Rights Reserved.
+artifactName: ${productName}-${version}-${arch}.${ext}
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - index.html
+  - package.json
+  - css/**/*
+  - js/**/*
+  - desktop/*.cjs
+  - desktop/update-config.json
+  - assets/icons/**/*
+  - build/icon.png
+
+extraFiles:
+  - from: build/PORTABLE-README.txt
+    to: PORTABLE-README.txt
+
+asar: true
+npmRebuild: false
+compression: normal
+
+win:
+  icon: build/icon.ico
+  legalTrademarks: GYTech PatientSim Pro
+  requestedExecutionLevel: asInvoker
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: msi
+      arch:
+        - x64
+    - target: zip
+      arch:
+        - x64
+
+nsis:
+  artifactName: GYTech-PatientSim-Pro-Setup-v${version}.${ext}
+  oneClick: false
+  perMachine: false
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: GYTech PatientSim Pro
+  uninstallDisplayName: GYTech PatientSim Pro
+  deleteAppDataOnUninstall: false
+  runAfterFinish: true
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+
+msi:
+  artifactName: GYTech-PatientSim-Pro-x64-v${version}.${ext}
+  oneClick: false
+  perMachine: false
+  upgradeCode: "{04227E65-D441-46F3-98D8-6F48B3E94590}"
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: GYTech PatientSim Pro
+  runAfterFinish: true
+
+linux:
+  icon: build/icons
+  category: Education
+  executableName: gytech-patientsim-pro
+  artifactName: GYTech-PatientSim-Pro-Linux-${arch}.${ext}
+  maintainer: GYTech
+  vendor: GYTech
+  synopsis: Educational patient monitor and defibrillator simulator
+  description: Advanced Patient Vital Signs Monitor & Defibrillator Simulator. Educational simulation only; not a medical device.
+  target:
+    - target: AppImage
+      arch:
+        - x64
+    - target: deb
+      arch:
+        - x64
+    - target: rpm
+      arch:
+        - x64
+
+mac:
+  icon: build/icon.icns
+  category: public.app-category.education
+  identity: null
+  hardenedRuntime: false
+  gatekeeperAssess: false
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+  artifactName: GYTech-PatientSim-Pro-macOS-${arch}.${ext}
+  extendInfo:
+    NSHumanReadableCopyright: Copyright © 2026 GYTech. All Rights Reserved.
+    LSApplicationCategoryType: public.app-category.education
+
+dmg:
+  title: GYTech PatientSim Pro
+
+publish: null

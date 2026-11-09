@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 640" width="1280" height="640" role="img" aria-label="GYTech PatientSim Pro social preview">
+  <defs>
+    <linearGradient id="socialBg" x1="0" y1="0" x2="1280" y2="640" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#061419"/>
+      <stop offset="0.62" stop-color="#05090b"/>
+      <stop offset="1" stop-color="#071014"/>
+    </linearGradient>
+    <linearGradient id="socialLine" x1="0" y1="0" x2="1280" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00d9ff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#00d9ff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#00ff66" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="socialPulse" x1="100" y1="300" x2="1180" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#00d9ff"/>
+      <stop offset="0.6" stop-color="#00ff66"/>
+      <stop offset="1" stop-color="#ffd740"/>
+    </linearGradient>
+    <pattern id="socialGrid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 L 0 0 0 48" fill="none" stroke="#25505b" stroke-width="1" opacity="0.18"/>
+    </pattern>
+    <filter id="socialGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1280" height="640" fill="url(#socialBg)"/>
+  <rect width="1280" height="640" fill="url(#socialGrid)"/>
+  <circle cx="1120" cy="100" r="260" fill="#00d9ff" opacity="0.035"/>
+  <circle cx="200" cy="570" r="210" fill="#00ff66" opacity="0.028"/>
+  <g transform="translate(72 64)">
+    <rect width="168" height="168" rx="34" fill="#071116" stroke="#2b5662" stroke-width="2"/>
+    <path d="M48 41h57c23 0 41 18 41 41s-18 41-41 41H82V99h23c10 0 18-8 18-17s-8-17-18-17H48z" fill="#00d9ff"/>
+    <path d="M18 126h35l12-31 21 56 14-31h54" fill="none" stroke="url(#socialPulse)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" filter="url(#socialGlow)"/>
+    <circle cx="141" cy="35" r="6" fill="#00d9ff"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="72" y="294" fill="#5fe09b" font-family="Consolas, monospace" font-size="17" font-weight="700" letter-spacing="5">GYTECH · MEDICAL SIMULATION</text>
+    <text x="68" y="391" fill="#f2fcff" font-size="76" font-weight="800" letter-spacing="-2">PatientSim <tspan fill="#73e9ff">Pro</tspan></text>
+    <text x="72" y="441" fill="#aac7d1" font-size="25">Advanced Patient Vital Signs Monitor</text>
+    <text x="72" y="475" fill="#aac7d1" font-size="25">&amp; Defibrillator Simulator</text>
+  </g>
+  <g>
+    <rect x="72" y="512" width="143" height="34" rx="3" fill="#08191f" stroke="#2b5260"/>
+    <text x="84" y="534" fill="#8bc7d5" font-family="Consolas, monospace" font-size="11" letter-spacing="1">REAL-TIME ECG</text>
+    <rect x="225" y="512" width="242" height="34" rx="3" fill="#08191f" stroke="#2b5260"/>
+    <text x="237" y="534" fill="#8bc7d5" font-family="Consolas, monospace" font-size="11" letter-spacing="1">MULTIPARAMETER MONITORING</text>
+    <rect x="477" y="512" width="62" height="34" rx="3" fill="#08191f" stroke="#2b5260"/>
+    <text x="489" y="534" fill="#8bc7d5" font-family="Consolas, monospace" font-size="11" letter-spacing="1">AED</text>
+    <rect x="549" y="512" width="182" height="34" rx="3" fill="#08191f" stroke="#2b5260"/>
+    <text x="561" y="534" fill="#8bc7d5" font-family="Consolas, monospace" font-size="11" letter-spacing="1">SYNC CARDIOVERSION</text>
+    <rect x="741" y="512" width="94" height="34" rx="3" fill="#08191f" stroke="#2b5260"/>
+    <text x="753" y="534" fill="#8bc7d5" font-family="Consolas, monospace" font-size="11" letter-spacing="1">PACING</text>
+    <rect x="845" y="512" width="66" height="34" rx="3" fill="#08191f" stroke="#2b5260"/>
+    <text x="857" y="534" fill="#8bc7d5" font-family="Consolas, monospace" font-size="11" letter-spacing="1">CPR</text>
+  </g>
+  <path d="M0 580h1280" stroke="url(#socialLine)" stroke-width="2"/>
+  <text x="72" y="612" fill="#5e7d88" font-family="Consolas, monospace" font-size="12">Copyright 2026 GYTech All Right Reserved.</text>
+  <text x="1208" y="612" fill="#d8a84b" text-anchor="end" font-family="Consolas, monospace" font-size="12">EDUCATIONAL SIMULATION ONLY · NOT A MEDICAL DEVICE</text>
+</svg>

@@ -1,0 +1,208 @@
+/*
+ * GYTech PatientSim Pro
+ * Advanced Patient Vital Signs Monitor & Defibrillator Simulator
+ *
+ * Copyright 2026 GYTech All Right Reserved.
+ *
+ * Educational simulation software only.
+ */
+
+/* =========================================================
+   Real-time waveform cards.
+   ========================================================= */
+
+.wave-stack {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.wave-card {
+  position: relative;
+  flex: 1 1 0;
+  min-height: 50px;
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr) 13px;
+  overflow: hidden;
+  border: 1px solid var(--border-soft);
+  border-left: 2px solid var(--wave-color, #00ff66);
+  border-radius: 2px;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.014), transparent 45%),
+    #071013;
+  transition: opacity 0.2s ease;
+}
+
+.wave-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 3px);
+  opacity: 0.38;
+}
+
+.wave-card.is-offline {
+  border-left-color: #33434d;
+}
+
+.wave-card.wave-ecg {
+  flex-grow: 1.45;
+  --wave-color: var(--ecg);
+}
+
+.wave-card.wave-pleth {
+  --wave-color: var(--spo2);
+}
+
+.wave-card.wave-capno {
+  --wave-color: var(--etco2);
+}
+
+.wave-card.wave-resp {
+  --wave-color: var(--resp);
+}
+
+.wave-card.wave-art {
+  --wave-color: var(--nibp);
+}
+
+.wave-card.wave-cvp {
+  --wave-color: var(--temp);
+}
+
+.wave-card.wave-pa {
+  --wave-color: var(--etco2);
+}
+
+.wave-card.wave-icp {
+  --wave-color: var(--warning);
+}
+
+.wave-label-block {
+  grid-row: 1 / 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 4px 5px;
+  border-right: 1px solid var(--border-soft);
+  background: rgba(16, 24, 30, 0.6);
+  z-index: 3;
+}
+
+.wave-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--wave-color);
+}
+
+.wave-parameter {
+  font-family: var(--font-mono);
+  font-size: 5.5px;
+  letter-spacing: 0.06em;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+.wave-unit {
+  font-family: var(--font-mono);
+  font-size: 5.5px;
+  color: var(--text-faint);
+}
+
+.wave-canvas-wrap {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.wave-canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.wave-card-footer {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 6px;
+  border-top: 1px solid rgba(39, 50, 61, 0.45);
+  background: rgba(9, 15, 19, 0.75);
+  font-family: var(--font-mono);
+  font-size: 6px;
+  letter-spacing: 0.04em;
+  color: var(--text-faint);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.wave-card-footer span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.wave-card-footer [data-tone="ok"] { color: var(--normal); }
+.wave-card-footer [data-tone="warn"] { color: var(--warning); }
+.wave-card-footer [data-tone="off"] { color: var(--text-faint); }
+
+.wave-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 4px;
+  background: repeating-linear-gradient(90deg, rgba(9, 17, 21, 0.5) 0 10px, rgba(9, 17, 21, 0.15) 10px 20px);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+  color: #627b86;
+  text-shadow: 0 1px 3px #000;
+}
+
+.wave-overlay[data-tone="off"] {
+  color: #6c818a;
+}
+
+.wave-overlay[data-tone="warn"] {
+  color: var(--warning);
+  background: rgba(22, 19, 9, 0.34);
+}
+
+.wave-overlay[data-tone="critical"] {
+  color: var(--critical);
+}
+
+.wave-card.is-offline canvas {
+  opacity: 0.48;
+}
+
+@media (max-height: 850px) {
+  .wave-card {
+    min-height: 44px;
+    grid-template-columns: 44px minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) 11px;
+  }
+  .wave-tag { font-size: 9px; }
+  .wave-parameter { font-size: 5px; }
+  .wave-card-footer { font-size: 5.5px; }
+  .wave-stack { gap: 3px; }
+}

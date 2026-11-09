@@ -1,0 +1,86 @@
+name: Bug report
+description: Report a reproducible defect in GYTech PatientSim Pro.
+title: "[Bug]: "
+labels: ["bug", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve GYTech PatientSim Pro. Do not include real patient data, credentials, or unpatched vulnerability details in a public issue. Security issues must use the private process in SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: Application version
+      description: Version shown in Diagnostics/Settings or the repository release.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What is wrong? Keep it concise and specific.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include exact controls, scenario, rhythm, or sensor states.
+      placeholder: |
+        1. Open a browser at ...
+        2. Select ...
+        3. Click ...
+        4. Observe ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: "Chrome 132 / Firefox ..."
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating system
+      placeholder: "Windows 11 / Ubuntu 24.04 / macOS ..."
+    validations:
+      required: true
+  - type: textarea
+    id: console
+    attributes:
+      label: Console errors
+      description: Paste relevant browser console output. Remove any secrets or personal data.
+      render: shell
+    validations:
+      required: false
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshots or recording
+      description: Drag in a screenshot or recording if helpful. Use fictional patient data only.
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety and privacy acknowledgement
+      options:
+        - label: I have not included real patient data, credentials, or unpatched security details.
+          required: true
+        - label: I understand this project is an educational simulator, not a medical device.
+          required: true

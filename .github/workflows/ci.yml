@@ -1,0 +1,86 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Repository validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install declared dependencies
+        run: npm ci
+      - name: Validate repository structure and links
+        run: npm run validate
+      - name: Basic secret scan
+        run: npm run check:secrets
+
+  browser-tests:
+    name: Chromium simulation tests
+    runs-on: ubuntu-latest
+    needs: validate
+    timeout-minutes: 25
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install declared dependencies
+        run: npm ci
+      - name: Install virtual display
+        run: sudo apt-get update && sudo apt-get install -y xvfb
+      - name: Cold-load smoke test
+        run: xvfb-run -a --server-args="-screen 0 1920x1080x24" npm run test:load
+      - name: Required functional tests
+        run: xvfb-run -a --server-args="-screen 0 1920x1080x24" npm run test:interactive
+      - name: Scenario and device invariants
+        run: xvfb-run -a --server-args="-screen 0 1920x1080x24" npm run test:deep
+      - name: UI and responsive tests
+        run: xvfb-run -a --server-args="-screen 0 1920x1080x24" npm run test:ui
+      - name: Desktop integration tests
+        run: xvfb-run -a --server-args="-screen 0 1920x1080x24" npm run test:desktop
+      - name: Upload test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chromium-test-evidence
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            tests/*.json
+            tests/*.txt
+            assets/screenshots/
+
+  status:
+    name: CI result
+    runs-on: ubuntu-latest
+    needs: [validate, browser-tests]
+    if: always()
+    steps:
+      - name: Require all checks
+        if: ${{ needs.validate.result != 'success' || needs.browser-tests.result != 'success' }}
+        run: |
+          echo "One or more CI jobs did not pass."
+          exit 1
+      - name: Report success
+        run: echo "Required validation and Chromium simulation tests passed."

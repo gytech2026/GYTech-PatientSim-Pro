@@ -1,0 +1,60 @@
+{
+  "name": "gytech-patientsim-pro",
+  "productName": "GYTech PatientSim Pro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Advanced Patient Vital Signs Monitor & Defibrillator Simulator. Professional browser-based educational simulation with a native desktop shell.",
+  "main": "desktop/main.cjs",
+  "author": {
+    "name": "GYTech"
+  },
+  "copyright": "Copyright © 2026 GYTech. All Rights Reserved.",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "node serve.js",
+    "serve": "node serve.js",
+    "desktop:dev": "electron .",
+    "desktop:dir": "electron-builder --dir --publish never",
+    "desktop:build:win": "electron-builder --win nsis msi zip --x64 --publish never && node scripts/finalize-desktop-release.mjs",
+    "desktop:build:linux": "electron-builder --linux AppImage deb rpm --x64 --publish never",
+    "desktop:build:mac": "electron-builder --mac dmg --x64 --arm64 --publish never",
+    "desktop:checksums": "node scripts/generate-checksums.mjs",
+    "desktop:smoke": "node scripts/desktop-smoke.mjs",
+    "validate": "node scripts/validate-repository.mjs",
+    "check:secrets": "node scripts/check-secrets.mjs",
+    "test:load": "electron tests/electron-harness.js",
+    "test:interactive": "electron tests/interactive-harness.js",
+    "test:deep": "electron tests/deep-tests.js",
+    "test:ui": "electron tests/ui-harness.js",
+    "test:desktop": "electron tests/desktop-harness.js",
+    "test": "npm run test:load && npm run test:interactive && npm run test:deep && npm run test:ui && npm run test:desktop",
+    "screenshots": "electron tests/capture-screenshots.js",
+    "build:pages": "node scripts/prepare-pages.mjs"
+  },
+  "keywords": [
+    "patient-monitor",
+    "vital-signs",
+    "medical-simulation",
+    "ecg",
+    "ecg-monitor",
+    "defibrillator",
+    "aed-simulator",
+    "cardioversion",
+    "healthcare-technology",
+    "medical-education",
+    "javascript",
+    "html",
+    "css",
+    "simulation",
+    "gytech",
+    "electron",
+    "desktop"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "electron": "34.1.1",
+    "electron-builder": "26.18.1"
+  }
+}

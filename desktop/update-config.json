@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "repository": "",
+  "repositoryNote": "Owner must set this to the official GitHub repository in owner/repository form before publishing a release. An empty value disables live update checks; no fictional repository is configured.",
+  "checkIntervalHours": 6,
+  "remindLaterHours": 24,
+  "releaseNotesMaxLength": 2400
+}

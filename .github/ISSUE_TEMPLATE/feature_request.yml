@@ -1,0 +1,52 @@
+name: Feature request
+description: Propose an educational feature or improvement.
+title: "[Feature]: "
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: input
+    id: feature-name
+    attributes:
+      label: Feature name
+      placeholder: "e.g., rhythm trend review"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem being addressed
+      description: What educational or usability gap does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: benefits
+    attributes:
+      label: Benefits
+      description: Who benefits, and how?
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Relevant screenshots or references
+      description: Use genuine GYTech screenshots and label external references. Do not post real patient data.
+    validations:
+      required: false
+  - type: textarea
+    id: safety
+    attributes:
+      label: Medical simulation safety considerations
+      description: Explain whether this could be mistaken for clinical functionality and how disclaimers/interlocks should be preserved.
+    validations:
+      required: true

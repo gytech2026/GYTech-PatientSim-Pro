@@ -1,0 +1,48 @@
+# LICENSE STATUS: PENDING OWNER APPROVAL
+
+**This file is a licensing status notice, not a grant of an open-source license.**
+
+Copyright 2026 GYTech All Right Reserved.
+
+GYTech PatientSim Pro is currently made available in this repository for review,
+evaluation, and release preparation. No open-source or source-available license
+has been approved or granted by the copyright owner as of this notice.
+
+Unless and until GYTech publishes an approved license, all rights are reserved.
+No permission is granted to copy, modify, distribute, sublicense, publish,
+commercially exploit, or create derivative works from the source code,
+documentation, branding, screenshots, or other original project materials,
+except where applicable law requires otherwise.
+
+This notice does not alter or restrict any rights that may apply to third-party
+software, tools, or materials identified in `THIRD_PARTY_NOTICES.md`. GYTech
+does not claim ownership of third-party materials.
+
+## Proposed candidate — not effective
+
+GYTech is evaluating the Apache License, Version 2.0 as a possible future
+license because it includes an express patent grant and is a common choice for
+collaborative software projects. A clearly marked, non-effective proposal is
+provided at:
+
+- [`legal/LICENSE-APACHE-2.0-PROPOSED.txt`](legal/LICENSE-APACHE-2.0-PROPOSED.txt)
+
+That draft has **no legal effect**. It must not be treated as the project's
+license. The owner must approve a license and replace this file with the
+canonical, completed license text before the repository is described as
+open source.
+
+## Publication status
+
+- Licensing status: **PENDING OWNER APPROVAL**
+- Open-source status: **Not yet open source**
+- Source availability: Public repository visibility does not itself grant a license.
+- Commercial use: Not permitted under this pending notice unless separately authorized in writing.
+- Modification/distribution: Not permitted under this pending notice unless separately authorized in writing.
+
+See [`LICENSE-FAQ.md`](LICENSE-FAQ.md), [`NOTICE`](NOTICE), and
+[`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) for further information.
+
+---
+
+Copyright 2026 GYTech All Right Reserved.

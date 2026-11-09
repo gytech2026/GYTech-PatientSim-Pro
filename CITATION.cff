@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you reference GYTech PatientSim Pro in educational or research material, cite this software metadata. Licensing is pending owner approval; see LICENSE."
+title: "GYTech PatientSim Pro: Advanced Patient Vital Signs Monitor & Defibrillator Simulator"
+type: software
+version: 1.0.0
+authors:
+  - name: "GYTech"
+abstract: "A browser-based educational patient vital signs monitor and defibrillator simulator with real-time waveforms, multiparameter monitoring, alarms, AED, manual defibrillation, synchronized cardioversion, pacing, CPR, and simulation scenarios. The software is not a medical device and is not clinically validated."
+keywords:
+  - patient monitoring
+  - medical simulation
+  - electrocardiography
+  - defibrillator
+  - AED
+  - cardiopulmonary resuscitation
+  - medical education
+  - JavaScript

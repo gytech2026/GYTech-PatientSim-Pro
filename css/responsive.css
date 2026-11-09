@@ -1,0 +1,194 @@
+/*
+ * GYTech PatientSim Pro
+ * Advanced Patient Vital Signs Monitor & Defibrillator Simulator
+ *
+ * Copyright 2026 GYTech All Right Reserved.
+ *
+ * Educational simulation software only.
+ */
+
+/* =========================================================
+   Responsive adaptation for 1920, 1600, 1366, 1280 and tablets.
+   ========================================================= */
+
+@media (max-width: 1660px) {
+  .simulation-flag { display: none; }
+  .brand-block { min-width: 224px; }
+  .status-cluster { gap: 8px; }
+  .patient-summary { max-width: 285px; }
+}
+
+@media (max-width: 1500px) {
+  .brand-sub { letter-spacing: 0.08em; }
+  .patient-summary { min-width: 205px; }
+  .dock-button { min-width: 70px; }
+  .cpr-strip-metrics { gap: 4px 12px; }
+}
+
+@media (max-width: 1240px) {
+  .date-readout { display: none; }
+}
+
+@media (max-width: 1360px) {
+  .topbar { gap: 10px; padding: 0 10px; }
+  .brand-block { min-width: 190px; }
+  .brand-name { font-size: 17px; }
+  .brand-sub { display: none; }
+  .brand-mark svg { width: 29px; height: 29px; }
+  .patient-summary { min-width: 184px; max-width: 215px; padding-left: 10px; }
+  .patient-name { font-size: 12px; }
+  .patient-status-chip { display: none; }
+  .status-cluster { gap: 6px; }
+  .icon-button span { display: none; }
+  .icon-button { padding: 0 6px; }
+  .clock-readout > span:last-child { font-size: 12px; }
+  .sim-status-pill { padding: 0 6px; }
+  .alarm-status-pill { padding: 0 7px; }
+  .cpr-strip-left { min-width: 170px; }
+  .cpr-strip { gap: 8px; padding: 0 9px; }
+  .cpr-strip-actions .compact-button:first-child { display: none; }
+  .dock-meta { gap: 8px; }
+  .dock-scenario { max-width: 140px; }
+  .dock-disclaimer { display: none; }
+  .dock-copyright { display: none; }
+}
+
+@media (max-width: 1180px) {
+  body { overflow: hidden; }
+  .app-shell { height: 100vh; }
+  .workstation {
+    grid-template-columns: minmax(0, 1fr) 220px;
+    grid-template-rows: minmax(500px, 1fr) auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-items: stretch;
+  }
+  .monitor-column { min-height: 500px; }
+  .vitals-rail { min-height: 500px; }
+  .defib-column {
+    grid-column: 1 / -1;
+    min-height: 330px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto auto;
+    align-items: start;
+    gap: 5px 9px;
+    overflow: visible;
+  }
+  .defib-header,
+  .defib-mode-tabs { grid-column: 1 / -1; }
+  .defib-screen { grid-column: 1 / -1; }
+  .defib-status-grid { grid-column: 1; }
+  .charge-meter { grid-column: 2; align-self: end; }
+  .defib-main-controls { grid-column: 1 / -1; }
+  .defib-mode-panel { grid-column: 1 / -1; }
+  .defib-event-bar, .defib-device-footer { grid-column: 1 / -1; }
+  .defib-ecg-wrap { height: 100px; }
+}
+
+@media (max-width: 960px) {
+  .topbar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .topbar::-webkit-scrollbar { display: none; }
+  .brand-block { flex: 0 0 auto; }
+  .patient-summary { min-width: 160px; }
+  .workstation {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+  .monitor-column { min-height: 520px; }
+  .vitals-rail { min-height: 440px; max-height: 520px; }
+  .defib-column { grid-column: 1; }
+  .cpr-strip { flex-wrap: wrap; height: auto; min-height: 36px; padding: 4px 9px; flex-basis: auto; }
+  .cpr-strip-metrics { order: 3; flex-basis: 100%; }
+  .control-dock { overflow-x: auto; }
+  .dock-meta { flex: 0 0 auto; }
+  .toast-stack { bottom: 92px; }
+}
+
+@media (max-width: 780px) {
+  .brand-block { min-width: auto; }
+  .brand-sub { display: none; }
+  .patient-summary { display: none; }
+  .topbar-spacer { display: none; }
+  .status-cluster { margin-left: auto; }
+  .status-pill.sim-status-pill span { display: none; }
+  .battery-readout { display: none; }
+  .workstation { padding: 4px; gap: 4px; }
+  .monitor-column { min-height: 480px; }
+  .defib-column {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .defib-main-controls { width: 100%; }
+  .monitor-title .monitor-context,
+  .monitor-divider,
+  .monitor-status-cluster .monitor-chip:last-child { display: none; }
+  .monitor-actions #btnOpen12LeadTop { display: none; }
+  .vitals-rail { max-height: none; }
+  .vitals-grid { display: grid; grid-template-columns: 1fr 1fr; align-content: start; }
+  .vital-mini-row, .invasive-strip, .vital-pair-row { grid-column: span 2; }
+  .vital-temp { grid-column: span 2; }
+  .vital-card { min-height: 70px; }
+  .cpr-strip-left { min-width: 0; }
+  .cpr-strip-actions { margin-left: auto; }
+  .dock-meta { display: none; }
+  .dock-button { min-width: 66px; }
+  .alarm-banner { flex-wrap: wrap; height: auto; min-height: 36px; padding: 5px 8px; }
+  .alarm-banner-content { flex: 1 1 60%; }
+  .alarm-banner-actions { flex-basis: 100%; justify-content: flex-end; }
+  .alarm-banner-message { display: none; }
+  .modal { width: calc(100vw - 16px); }
+  .modal.modal-large, .modal.modal-wide, .modal.modal-full { width: calc(100vw - 16px); }
+}
+
+@media (max-height: 760px) and (min-width: 961px) {
+  .topbar { --topbar-height: 48px; flex-basis: 48px; }
+  :root { --topbar-height: 48px; --dock-height: 48px; --cpr-height: 32px; }
+  .brand-sub { display: none; }
+  .status-readout .status-label { display: none; }
+  .patient-summary-meta { margin-top: 2px; }
+  .workstation { padding: 4px 6px; gap: 5px; }
+  .monitor-chrome { flex-basis: 27px; }
+  .wave-card { min-height: 42px; }
+  .wave-card-footer { display: none; }
+  .wave-card { grid-template-rows: minmax(0, 1fr); }
+  .vitals-grid { gap: 3px; padding: 3px; }
+  .vital-value { font-size: 25px; }
+  .vital-hr .vital-value { font-size: 29px; }
+  .vital-nibp .nibp-value { font-size: 21px; }
+  .vital-pair-row .vital-value { font-size: 19px; }
+  .vital-foot { font-size: 6px; }
+  .invasive-strip { display: none; }
+  .vital-temp .vital-foot { display: none; }
+  .rail-heading { flex-basis: 27px; }
+  .rail-footer { display: none; }
+  .defib-header { min-height: 20px; }
+  .defib-ecg-wrap { height: 61px; }
+  .defib-screen-topline { padding: 2px 5px; }
+  .defib-screen-foot { padding: 2px 5px; }
+  .defib-status-grid { display: none; }
+  .defib-mode-panel { padding: 3px 4px; }
+  .defib-device-footer { display: none; }
+  .defib-event-bar { min-height: 20px; }
+  .defib-button { min-height: 30px; }
+  .energy-button { height: 18px; }
+  .defib-column { gap: 2px; }
+  .cpr-strip-metrics span:nth-child(5) { display: none; }
+  .control-dock { padding: 4px 8px; }
+  .dock-button { min-height: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
