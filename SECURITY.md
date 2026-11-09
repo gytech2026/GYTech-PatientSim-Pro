@@ -11,7 +11,8 @@ official security email address has been supplied or invented.
 
 | Version | Status | Security support |
 |---|---|---|
-| 1.0.x (release candidate) | Preparation / unpublished | Best effort while the repository is under owner review |
+| 1.0.1 (current stable) | Published on GitHub Releases (Windows x64) | Best effort while the project is maintained by the owner |
+| 1.0.0 (prerelease) | Superseded | Not supported; upgrade to 1.0.1 |
 | < 1.0 | Not released | Not supported |
 
 No security certification, audit certification, or regulatory approval is

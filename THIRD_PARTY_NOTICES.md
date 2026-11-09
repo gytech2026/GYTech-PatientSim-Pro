@@ -1,6 +1,6 @@
 # Third-Party Notices and Asset Audit
 
-**Audit status:** reviewed for the 1.0.0 repository preparation.  
+**Audit status:** reviewed for the 1.0.1 repository preparation.  
 **Project:** GYTech PatientSim Pro  
 **Copyright of original project materials:** Copyright © 2026 GYTech. All Rights Reserved.
 

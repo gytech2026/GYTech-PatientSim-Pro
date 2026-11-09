@@ -1,6 +1,6 @@
 # Installation and Execution — GYTech PatientSim Pro
 
-**Version:** 1.0.0  
+**Version:** 1.0.1  
 **Copyright © 2026 GYTech. All Rights Reserved.**
 
 > Educational simulation only. Not a medical device. See
@@ -19,15 +19,15 @@
 | macOS DMG | macOS desktop | DMG mount/copy | **No** — configured for native CI |
 | Browser development | Development, review, GitHub Pages | Local server | Chromium tested |
 
-No public download URL is configured in this repository. The Windows artefacts
-are built locally under `release/`; they are not published until the owner
-approves the repository, contacts, signing, and release.
+Public Windows downloads are published on GitHub Releases:
+<https://github.com/gytech2026/GYTech-PatientSim-Pro/releases/tag/v1.0.1>. Verify
+downloaded files against the SHA-256 digests shown on that release page.
 
 ---
 
 ## 2. Desktop requirements
 
-- **Windows 10/11 x64** for the tested Windows build.
+- **Windows 11 x64** — the tested platform. Windows 10 x64 is **not verified**.
 - The package bundles Electron 34.1.1; end users do **not** need Node.js.
 - No separate WebView2 runtime is required for this Electron build.
 - The builds are unsigned. Windows SmartScreen may warn. No code signing or
@@ -40,7 +40,7 @@ approves the repository, contacts, signing, and release.
 
 ### EXE installer
 
-1. Run `GYTech-PatientSim-Pro-Setup-v1.0.0.exe`.
+1. Run `GYTech-PatientSim-Pro-Setup-v1.0.1.exe`.
 2. Follow the assisted installer.
 3. Select an installation directory if offered.
 4. Choose the optional Desktop shortcut and Start Menu shortcut.
@@ -51,23 +51,24 @@ approves the repository, contacts, signing, and release.
 Use Windows Installer:
 
 ```powershell
-msiexec /i "GYTech-PatientSim-Pro-x64-v1.0.0.msi"
+msiexec /i "GYTech-PatientSim-Pro-x64-v1.0.1.msi"
 ```
 
 Silent deployment for a managed environment (test your own policy first):
 
 ```powershell
-msiexec /i "GYTech-PatientSim-Pro-x64-v1.0.0.msi" /qn /l*v install.log
+msiexec /i "GYTech-PatientSim-Pro-x64-v1.0.1.msi" /qn /l*v install.log
 ```
 
 The MSI installs per-user by default and uses a fixed upgrade code. The current
 release's MSI clean-install and uninstall path was tested. An NSIS 1.0.0 →
-synthetic 1.0.1 upgrade passed locally; no public 1.0.1 exists, and the MSI
-cross-version upgrade was not executed.
+synthetic 1.0.1 upgrade passed locally. The public v1.0.1 release exists, but a
+public 1.0.0 → 1.0.1 upgrade and the MSI cross-version upgrade were not
+separately executed.
 
 ### Portable ZIP
 
-1. Extract the entire `GYTech-PatientSim-Pro-Portable-v1.0.0.zip`.
+1. Extract the entire `GYTech-PatientSim-Pro-Portable-v1.0.1.zip`.
 2. Run `GYTech PatientSim Pro.exe` from the extracted folder.
 3. No installer or administrator rights required.
 4. Local data still lives in `%APPDATA%\GYTech PatientSim Pro`; the profile is
@@ -131,8 +132,8 @@ completed notarisation/stapling process.
 
 ### Download or clone
 
-Use the owner-approved repository URL once published. The URL is intentionally a
-placeholder until GYTech confirms it.
+Use the official repository:
+<https://github.com/gytech2026/GYTech-PatientSim-Pro>.
 
 ### Run
 
@@ -208,9 +209,10 @@ exists, **Download Update** opens
 browser and the user installs manually. The Settings panel also provides a
 **RELEASES** button for manual checks.
 
-No stable GitHub Release has been published yet, so a current check reports that
-no stable release exists rather than offering an update. See
-[docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
+**v1.0.1 is the current stable GitHub Release.** The application reports it when a
+check succeeds, so **Download Update** opens the official release page rather than
+reporting that no release exists. Only newer stable releases than the installed
+version are offered. See [docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
 
 ---
 

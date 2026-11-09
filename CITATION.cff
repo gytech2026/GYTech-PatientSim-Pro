@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you reference GYTech PatientSim Pro in educational or research material, cite this software metadata. The project is licensed under the Apache License, Version 2.0 (SPDX: Apache-2.0); see LICENSE."
 title: "GYTech PatientSim Pro: Advanced Patient Vital Signs Monitor & Defibrillator Simulator"
 type: software
-version: 1.0.0
+version: 1.0.1
 license: "Apache-2.0"
 authors:
   - name: "GYTech"

@@ -13,8 +13,9 @@ does not silently download, execute, or install updates.
 | Update version/metadata validation | **IMPLEMENTED** and **TESTED** with synthetic fixtures |
 | Update notification / error handling | **TESTED** with a synthetic bridge |
 | Official update repository | **CONFIGURED** — `gytech2026/GYTech-PatientSim-Pro` |
-| Live GitHub Release check | **IMPLEMENTED**; no stable release has been published yet, so the app reports "no stable release" |
-| Live update against a real release | **NOT YET TESTED** — no release exists |
+| Current stable GitHub Release | **v1.0.1** (published 2026-11-09) |
+| Live GitHub Release check | **IMPLEMENTED**; the configured API reports v1.0.1 as the latest stable release |
+| Live update flow against the published release | **NOT YET EXERCISED END-TO-END** in this workspace |
 | Automatic download/installation | **DELIBERATELY NOT IMPLEMENTED** for any package format |
 
 The repository is configured in `desktop/update-config.json` as
@@ -122,13 +123,13 @@ The desktop harness used a **synthetic fixture bridge** to verify:
 The synthetic fixture values are test data only and are not presented as an
 official release.
 
-The configured GitHub endpoint currently returns **HTTP 404** for
-`releases/latest` because no release has been published; the official Releases
-page returns **HTTP 200**. The in-app live check has **not** been exercised
-against a real published release. Do not describe the live update channel as
-verified until that is done.
+The configured endpoint returns **v1.0.1** (HTTP 200) for `releases/latest`; the
+older v1.0.0 GitHub Release is marked as a prerelease, so it is correctly ignored
+as a stable update. The in-app live flow has **not** been exercised end-to-end in
+this workspace. Do not describe the live update channel as verified until the
+manual steps below are performed.
 
-## Manual release test after publishing a stable release
+## Manual verification against the published v1.0.1 release
 
 1. Publish a real stable GitHub Release with a semantic version tag.
 2. Ensure the release is not a draft/prerelease and has its notes filled in.

@@ -6,38 +6,15 @@ uses [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) conventions and
 
 Copyright © 2026 GYTech. All Rights Reserved.
 
-> Release dates are intentionally omitted until an approved public release is
-> published. The 1.0.0 entry below describes a repository release candidate, not
-> a published release.
+> Release dates are recorded for published releases. The `1.0.0` entry below
+> describes the original repository release candidate; it was published as a
+> prerelease and is retained for history. `1.0.1` is the first stable release.
 
 ## [Unreleased]
-
-### Fixed
-
-- A second stable-release result (for example an automatic check arriving while
-  the manual update dialog is open) no longer closes the update notification.
-  Notification-style modals now refresh in place instead of toggling closed.
-
-### Changed
-
-- Configured the official GitHub Releases update source
-  (`gytech2026/GYTech-PatientSim-Pro`) in `desktop/update-config.json`. Added a
-  **RELEASES** button, explicit "no stable release published" (HTTP 404)
-  handling, a clearer "automatic updates are unavailable — download manually"
-  notice, and duplicate-check guards in the renderer and main process. No package
-  format performs automatic installation.
-- Relicensed GYTech PatientSim Pro under the **Apache License, Version 2.0**
-  (SPDX: `Apache-2.0`). `LICENSE` now contains the canonical Apache-2.0 text,
-  `package.json` and `CITATION.cff` declare `Apache-2.0`, and README, NOTICE,
-  LICENSE-FAQ, CONTRIBUTING and release documentation were updated. The former
-  "PENDING OWNER APPROVAL" notice and the non-effective Apache-2.0 draft are
-  superseded.
 
 ### Planned
 
 - Confirmed GitHub organization/repository URL and homepage.
-- Publish the first stable GitHub Release so the configured update channel can be
-  exercised end to end.
 - Windows code signing and macOS Developer ID signing/notarisation.
 - Public and MSI cross-version upgrade validation; an NSIS synthetic upgrade passed.
 - Native Linux and macOS build execution and distribution smoke tests.
@@ -47,11 +24,47 @@ Copyright © 2026 GYTech. All Rights Reserved.
 
 ---
 
-## [1.0.0] — UNRELEASED RELEASE CANDIDATE
+## [1.0.1] — 2026-11-09
 
-**Status:** publication blocked pending owner approval of repository identity
-and deployment destination. The license was adopted as Apache-2.0 after this
-release candidate was prepared. No release date has been assigned.
+**Status:** first stable public release. Windows 11 x64 packages published on
+GitHub Releases (Setup EXE, MSI, Portable ZIP). Apache-2.0. No automatic update
+installation.
+
+### Added
+
+- User-controlled update notifications for stable GitHub Releases, including
+  **Download Update**, **View Release Notes**, **Remind Me Later**, **Dismiss**,
+  and a **RELEASES** button for manual downloads.
+- Explicit "no stable release published" (HTTP 404) handling and duplicate-check
+  suppression in the renderer and main process.
+
+### Changed
+
+- Version bumped to **1.0.1** in `package.json`, `package-lock.json`,
+  `js/state.js`, `index.html`, and release documentation.
+- Configured the official GitHub Releases update source
+  (`gytech2026/GYTech-PatientSim-Pro`) in `desktop/update-config.json`.
+- Relicensed GYTech PatientSim Pro under the **Apache License, Version 2.0**
+  (SPDX: `Apache-2.0`). `LICENSE` contains the canonical Apache-2.0 text, and
+  `package.json`, `CITATION.cff`, README, NOTICE, LICENSE-FAQ, CONTRIBUTING and
+  release documentation were updated. The former "PENDING OWNER APPROVAL" notice
+  and the non-effective Apache-2.0 draft are superseded.
+- Added the v1.0.1 release notes and documented the published Windows x64
+  download assets and their SHA-256 digests.
+
+### Fixed
+
+- A second stable-release result (for example an automatic check arriving while
+  the manual update dialog is open) no longer closes the update notification.
+  Notification-style modals now refresh in place instead of toggling closed.
+
+---
+
+## [1.0.0] — 2026-11-09 (prerelease)
+
+**Status:** published as a GitHub **prerelease** on 2026-11-09 and retained for
+history. The Apache-2.0 license was adopted after this candidate was prepared.
+`1.0.1` is the first stable release.
 
 ### Added
 

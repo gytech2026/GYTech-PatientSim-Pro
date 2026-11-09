@@ -1,9 +1,9 @@
 # Release Notes — GYTech PatientSim Pro v1.0.0
 
-> **DRAFT — NOT PUBLISHED.** This release candidate is awaiting owner approval of
-> licensing, repository identity, contacts, code signing, and publication. No
-> release date has been assigned. Do not publish these notes as a final release
-> until the release criteria are met.
+> **HISTORICAL — PUBLISHED AS A PRERELEASE.** This document records the original
+> v1.0.0 release candidate. It was published as a GitHub prerelease on 2026-11-09
+> and is retained for history. The first stable release is v1.0.1; see
+> [RELEASE_NOTES_v1.0.1.md](RELEASE_NOTES_v1.0.1.md).
 
 **Copyright © 2026 GYTech. All Rights Reserved.**
 
@@ -13,8 +13,8 @@
 
 **GYTech PatientSim Pro v1.0.0 — Advanced Patient Vital Signs Monitor & Defibrillator Simulator**
 
-**Channel:** release candidate / publication pending  
-**Release date:** not scheduled  
+**Channel:** prerelease (historical)  
+**Release date:** 2026-11-09  
 **License:** Apache License 2.0 (`Apache-2.0`) — adopted after this release candidate was prepared; see [LICENSE](../LICENSE)  
 **Medical status:** educational simulation only; not a medical device  
 **Primary build verified:** Windows 11 x64 (Electron 34.1.1)
@@ -136,10 +136,12 @@ stable release exists. No package format performs automatic installation. See
 - Windows builds are unsigned; macOS signing/notarisation is not configured.
 - Linux and macOS packages are configured but not built in the current
   Windows-only verification environment.
-- An NSIS 1.0.0→synthetic 1.0.1 upgrade passed locally; no public 1.0.1 release
-  exists and the MSI cross-version upgrade was not tested.
-- The update channel is configured, but no stable release has been published, so
-  the live update flow is unverified; no format auto-installs.
+- An NSIS 1.0.0→synthetic 1.0.1 upgrade passed locally. *(Historical: the public
+  v1.0.1 release was published later; the MSI cross-version upgrade was not
+  tested.)*
+- The update channel is configured. *(Historical: v1.0.1 became the first stable
+  release; the live update flow was not exercised in this workspace.)* No format
+  auto-installs.
 - Browser/desktop localStorage is not secure clinical record storage.
 - GitHub Actions workflows are configured but have not been executed on GitHub.
 - Native clinical alarm-standard compliance is not claimed.

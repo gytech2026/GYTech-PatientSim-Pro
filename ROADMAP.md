@@ -90,15 +90,15 @@ not imply clinical validation or regulatory approval.
 - 🟡 **Screenshot documentation review** — screenshots are genuine captures, but
   the owner must review final presentation before publication.
 - ✅ **Official update repository configuration** — `desktop/update-config.json`
-  now points at `gytech2026/GYTech-PatientSim-Pro`. Live checks run, but no stable
-  release has been published yet.
+  points at `gytech2026/GYTech-PatientSim-Pro`; v1.0.1 is the current stable
+  GitHub Release.
 - 🟡 **Linux and macOS desktop builds** — build configuration is prepared but was
   not executed on the Windows host.
 - 🟡 **Code signing / macOS notarisation** — no certificates or Apple credentials
   are available; unsigned status is documented.
 - 🟡 **Cross-version MSI upgrade / public upgrade validation** — an NSIS
-  1.0.0 → synthetic 1.0.1 upgrade passed locally, but no public later version
-  exists and the MSI cross-version path has not been verified.
+  1.0.0 → 1.0.1 upgrade was exercised with a local build; installing the public
+  v1.0.1 over v1.0.0 and the MSI cross-version path have not been verified.
 - 🟡 **Desktop release workflow execution** — `.github/workflows/desktop-release.yml`
   is configured but has not run on GitHub.
 
@@ -151,13 +151,14 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) and
 - CI browser tests require Electron and a display/virtual display.
 - Windows build only verified on Windows 11 x64; Linux/macOS packages are
   unverified.
-- Update channel is configured for `gytech2026/GYTech-PatientSim-Pro`, but no
-  stable release has been published, so the live flow is unverified.
+- Update channel is configured for `gytech2026/GYTech-PatientSim-Pro` and v1.0.1
+  is published; the live end-to-end update flow has not been exercised in this
+  workspace.
 - Windows binaries are unsigned; macOS builds are unsigned/not notarised.
 
 ---
 
-## Release criteria for v1.0.0
+## Release criteria (v1.0.1 baseline)
 
 - ✅ Apache License 2.0 LICENSE and contribution terms.
 - Confirmed repository identity and metadata, including the official update
@@ -172,8 +173,9 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) and
   warnings if applicable.
 - Owner authorization to publish.
 
-Until all criteria are met, the repository is a **release candidate**, not a
-published release.
+The v1.0.1 stable release satisfies the licensing, repository, and release-note
+criteria. Remaining criteria (CI verification, code signing, native Linux/macOS
+validation, contacts) must be met before a future release is published.
 
 ---
 

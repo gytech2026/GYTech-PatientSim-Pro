@@ -1,6 +1,6 @@
 # Architecture — GYTech PatientSim Pro
 
-**Version:** 1.0.0 repository release candidate  
+**Version:** 1.0.1  
 **Copyright © 2026 GYTech. All Rights Reserved.**
 
 > Educational simulation only. Not a medical device. See

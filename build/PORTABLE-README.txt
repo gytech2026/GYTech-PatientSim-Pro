@@ -1,5 +1,5 @@
 GYTech PatientSim Pro — Portable Edition
-Version 1.0.0
+Version 1.0.1
 Copyright © 2026 GYTech. All Rights Reserved.
 
 HOW TO RUN

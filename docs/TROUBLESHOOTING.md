@@ -29,7 +29,7 @@ administrator permission is required. Portable data is still stored under
 
 ### MSI installer
 
-Use `msiexec /i "GYTech-PatientSim-Pro-x64-v1.0.0.msi"` or double-click the
+Use `msiexec /i "GYTech-PatientSim-Pro-x64-v1.0.1.msi"` or double-click the
 installer. The package installs per-user by default. For managed deployment,
 follow your organisation's Windows Installer policy and test in your own
 environment.
