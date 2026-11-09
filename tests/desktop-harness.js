@@ -154,7 +154,7 @@ async function main() {
   }))()`);
   record('Desktop app name and title', base.title.includes('GYTech PatientSim Pro') && base.appName === 'GYTECH', JSON.stringify(base));
   record('Simulation engine renders in desktop bridge context', base.heartRate === '74' && base.canvasCount >= 8, JSON.stringify(base));
-  record('Desktop app info exposes configured update channel and version', base.aboutVersion === '1.0.0' && base.updateChecksDisabled === false && base.checkButtonDisabled === false, JSON.stringify(base));
+  record('Desktop app info exposes configured update channel and version', base.aboutVersion === '1.0.1' && base.updateChecksDisabled === false && base.checkButtonDisabled === false, JSON.stringify(base));
   record('Configured update channel shows no repository-not-configured warning', !/not been configured/i.test(base.updateStatus) && /stable-releases?|check/i.test(base.updateStatus), base.updateStatus);
 
   await evaluate("document.getElementById('btnOpenReleases').click()");
@@ -173,7 +173,7 @@ async function main() {
     dataPath: document.getElementById('aboutDataPath')?.textContent,
     disclaimer: document.querySelector('.about-disclaimer')?.textContent,
   }))()`);
-  record('About dialog opens with version, publisher and runtime', about.visible && about.version === '1.0.0' && about.publisher === 'GYTech' && /Electron/.test(about.runtime), JSON.stringify(about));
+  record('About dialog opens with version, publisher and runtime', about.visible && about.version === '1.0.1' && about.publisher === 'GYTech' && /Electron/.test(about.runtime), JSON.stringify(about));
   record('About dialog shows Apache-2.0 license and medical disclaimer', about.license === 'Apache-2.0' && /not a medical device/i.test(about.disclaimer), about.license);
   record('About dialog uses standardized copyright', about.copyright === 'Copyright © 2026 GYTech. All Rights Reserved.', about.copyright);
   await evaluate("document.querySelector('#modalAbout [data-close-modal]').click()");
@@ -278,7 +278,7 @@ async function main() {
     theme: document.documentElement.dataset.theme,
     aboutVersion: document.getElementById('aboutVersion')?.textContent?.trim(),
   }))()`);
-  record('Desktop window reload retains local settings and simulation data', restarted.heartRate !== '--' && restarted.aboutVersion === '1.0.0' && restarted.theme === 'high-contrast', JSON.stringify(restarted));
+  record('Desktop window reload retains local settings and simulation data', restarted.heartRate !== '--' && restarted.aboutVersion === '1.0.1' && restarted.theme === 'high-contrast', JSON.stringify(restarted));
 
   await createWindow(port, 'error');
   await evaluate("document.getElementById('btnCheckUpdates').click()");
