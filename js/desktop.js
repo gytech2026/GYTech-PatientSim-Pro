@@ -419,7 +419,7 @@ export class DesktopManager {
     setText(this.element('updateSummary'), result.releaseName || 'A newer stable version is available.');
     setText(this.element('updateNotes'), result.notes || 'Release notes are available on the official GitHub Release page.');
     setText(this.element('updateDialogStatus'), '');
-    this.ui.openModal('update');
+    this.ui.openModal('update', { toggle: false });
   }
 
   async openReleasesPage() {

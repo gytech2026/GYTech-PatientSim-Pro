@@ -194,10 +194,13 @@ function closeModal() {
   for (const button of $$('.dock-button')) button.classList.remove('is-active');
 }
 
-function openModal(name) {
+function openModal(name, options = {}) {
   const modalId = MODAL_MAP[name];
   if (!modalId) return;
   if (ui.activeModal === name) {
+    // Re-showing a notification-style modal must refresh it, not close it.
+    // Dock/About modals keep the historical toggle behaviour.
+    if (options.toggle === false) return;
     closeModal();
     return;
   }

@@ -10,13 +10,16 @@
 > This audit is not legal advice, a clinical validation, a security certification,
 > or a regulatory review. No clinical validity is certified.
 
-> **Post-audit status update (2026-11-09):** the licensing finding AUD-001 has
-> been resolved after this audit. The owner approved the Apache License 2.0, the
-> canonical text is now in `LICENSE`, `package.json` and `CITATION.cff` declare
-> `Apache-2.0`, and the documentation no longer describes the project as
-> "pending". The findings below are preserved as the original audit snapshot;
-> other publication blockers (repository identity, update channel, CI execution,
-> signing, and native platform validation) remain open.
+> **Post-audit status update (2026-11-09):** the licensing finding AUD-001 and the
+> update-channel finding AUD-026 have been addressed after this audit. The owner
+> approved the Apache License 2.0, the canonical text is now in `LICENSE`,
+> `package.json` and `CITATION.cff` declare `Apache-2.0`, and the documentation no
+> longer describes the project as "pending". `desktop/update-config.json` now
+> configures the official repository `gytech2026/GYTech-PatientSim-Pro`; no stable
+> release has been published yet, so the live update flow remains unexercised. The
+> findings below are preserved as the original audit snapshot; other publication
+> blockers (release publication, CI execution, signing, and native platform
+> validation) remain open.
 
 ---
 
@@ -40,8 +43,10 @@ Publication is blocked by owner-level decisions and external validation:
    *(Resolved post-audit: Apache-2.0 was adopted; see the status update above.)*
 2. The official GitHub organization/repository URL and contact channels are
    unconfirmed placeholders.
-3. The official desktop update repository is not configured; live update checks
-   are disabled. Only synthetic update fixtures were tested.
+3. The official desktop update repository is now configured
+   (`gytech2026/GYTech-PatientSim-Pro`, post-audit), but no stable release has been
+   published, so live update checks are not yet verified. *(Resolved post-audit in
+   configuration; live verification pending.)*
 4. Windows binaries are unsigned; macOS signing and notarisation are not
    configured. Linux and macOS packages are configured but not built here.
 5. GitHub Actions workflows have not been executed on GitHub.
@@ -441,9 +446,12 @@ limitations.
   the update source is unconfigured and the check button is disabled.
 - **Recommended correction:** Owner supplies official `OWNER/REPOSITORY`, rebuilds,
   publishes a real stable release, and verifies the live flow on each platform.
-- **Verification status:** **IMPLEMENTED / MOCK-TESTED; LIVE CHANNEL BLOCKED.**
-  Synthetic tests validate notification, download URL, snooze/dismiss, offline
-  error, and unsafe URL rejection.
+- **Verification status:** **CONFIGURED (post-audit).** `desktop/update-config.json`
+  now points at `gytech2026/GYTech-PatientSim-Pro`, and the app handles "no stable
+  release" (HTTP 404) explicitly. Synthetic tests validate notification, download
+  URL, RELEASES button, snooze/dismiss, duplicate-check suppression, offline error,
+  and unsafe URL rejection. A real published release has not been tested, and no
+  format auto-installs.
 
 ### AUD-027 — Windows desktop binaries are unsigned
 
@@ -509,14 +517,16 @@ limitations.
 - **Severity:** MEDIUM
 - **Description:** Tauri was not built because the host has no Rust/MSVC toolchain
   and the tested renderer is Chromium-based. Live update fetch against GitHub was
-  not possible without an official repository. The Electron fallback was built and
-  tested instead.
+  not possible at audit time because the repository was unconfigured. The Electron
+  fallback was built and tested instead. *(The repository is configured post-audit;
+  no stable release has been published yet.)*
 - **Affected files:** `docs/DESKTOP_APPLICATION.md`,
   `docs/CROSS_PLATFORM_BUILD.md`, update tests
 - **Recommended correction:** Treat the documented Electron decision as final for
   this release; configure and test the live GitHub update repository before
   claiming an update channel.
-- **Verification status:** **DOCUMENTED FALLBACK; LIVE UPDATE BLOCKED.**
+- **Verification status:** **DOCUMENTED FALLBACK; UPDATE CHANNEL CONFIGURED
+  (post-audit), LIVE FLOW UNVERIFIED.**
 
 ---
 
@@ -535,7 +545,7 @@ limitations.
 | Install/uninstall | PASS — NSIS and MSI clean install/uninstall |
 | Cross-version upgrade | PARTIAL — NSIS synthetic 1.0.1; MSI/public not executed |
 | Linux/macOS desktop builds | CONFIGURED, NOT BUILT/TESTED |
-| Live GitHub update channel | BLOCKED — repository unconfigured |
+| Live GitHub update channel | CONFIGURED post-audit — no stable release published |
 | Windows code signing | NOT CONFIGURED — unsigned binaries |
 | Screenshot set genuine and valid | PASS — 16 images, 1600×926 |
 | Markdown local links | PASS — repository validator |
@@ -561,7 +571,7 @@ limitations.
 | Windows desktop application | Ready for owner review — built and smoke-tested |
 | Windows installers/portable | EXE, MSI, ZIP built; install/uninstall tested |
 | Linux/macOS desktop | Not ready — native builds unverified |
-| Live update channel | Not ready — official repository unconfigured |
+| Live update channel | Configured; live check unverified until a release exists |
 | Code signing/notarisation | Not ready — no credentials |
 | Source completeness | Ready |
 | Local test status | Ready, Chromium/Electron + desktop integration tested |

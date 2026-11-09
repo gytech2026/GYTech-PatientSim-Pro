@@ -119,7 +119,10 @@ CSP delivery limitations:
 
 ## 8. Desktop updates
 
-- The live update channel is not configured; no repository is invented.
+- The update source is fixed to the public repository
+  `gytech2026/GYTech-PatientSim-Pro`; no other host or server is configurable.
+- No GitHub token, credential, or account is required or stored for public
+  release checks.
 - Update metadata is fetched in the main process only.
 - The endpoint is the official GitHub Releases API for the configured repository.
 - Only stable, non-draft, non-prerelease semantic versions are accepted.

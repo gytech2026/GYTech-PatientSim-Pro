@@ -197,12 +197,19 @@ No GYTech account, cloud sync, or telemetry data is created.
 ## 8. Updating
 
 The desktop app uses **Notify Then Download** only. It never silently installs.
-The official GitHub repository must be configured in
-`desktop/update-config.json` by the owner; this repository currently has no
-official URL, so live checks are **BLOCKED** and no release is fabricated.
+The official update source is the GitHub repository configured in
+`desktop/update-config.json` as `gytech2026/GYTech-PatientSim-Pro`. Update checks
+use `https://api.github.com/repos/gytech2026/GYTech-PatientSim-Pro/releases/latest`
+and require no token for public releases.
 
-When configured, download opens the official GitHub Release page in the system
-browser. The user installs manually. See
+**No package format supports automatic installation.** When a newer stable release
+exists, **Download Update** opens
+`https://github.com/gytech2026/GYTech-PatientSim-Pro/releases` in the system
+browser and the user installs manually. The Settings panel also provides a
+**RELEASES** button for manual checks.
+
+No stable GitHub Release has been published yet, so a current check reports that
+no stable release exists rather than offering an update. See
 [docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
 
 ---
@@ -263,8 +270,14 @@ $env:ELECTRON_RUN_AS_NODE=$null
 
 ### Update check unavailable
 
-- Expected if `desktop/update-config.json` has an empty repository.
+- "No stable release has been published" is expected until a stable GitHub
+  Release exists for `gytech2026/GYTech-PatientSim-Pro`.
+- Rate limiting (HTTP 403/429) and timeouts are reported without blocking the
+  simulator.
 - Network failures are non-blocking; the simulator remains usable offline.
+- Use the **RELEASES** button or
+  <https://github.com/gytech2026/GYTech-PatientSim-Pro/releases> to download
+  manually. No format installs updates automatically.
 
 See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) for more.
 

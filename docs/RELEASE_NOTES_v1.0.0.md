@@ -110,14 +110,14 @@ launched. macOS builds are unsigned and not notarised.
 
 ## Updates
 
-The update channel is **not live** in this repository. `desktop/update-config.json`
-contains an empty repository placeholder because no official GitHub repository URL
-has been confirmed. The UI reports that the update source is not configured and
-does not invent a release.
+`desktop/update-config.json` configures the official repository
+`gytech2026/GYTech-PatientSim-Pro`. The application checks the official GitHub
+Releases API for a stable release and only opens the official release page after
+user action. It never downloads or installs silently.
 
-When configured, the application checks the official GitHub Releases API for a
-stable release and only opens the official release page after user action. It
-never downloads or installs silently. See [UPDATE_SYSTEM.md](UPDATE_SYSTEM.md).
+No stable release has been published yet, so a check currently reports that no
+stable release exists. No package format performs automatic installation. See
+[UPDATE_SYSTEM.md](UPDATE_SYSTEM.md).
 
 ---
 
@@ -138,7 +138,8 @@ never downloads or installs silently. See [UPDATE_SYSTEM.md](UPDATE_SYSTEM.md).
   Windows-only verification environment.
 - An NSIS 1.0.0→synthetic 1.0.1 upgrade passed locally; no public 1.0.1 release
   exists and the MSI cross-version upgrade was not tested.
-- The live update channel is blocked pending the official repository URL.
+- The update channel is configured, but no stable release has been published, so
+  the live update flow is unverified; no format auto-installs.
 - Browser/desktop localStorage is not secure clinical record storage.
 - GitHub Actions workflows are configured but have not been executed on GitHub.
 - Native clinical alarm-standard compliance is not claimed.

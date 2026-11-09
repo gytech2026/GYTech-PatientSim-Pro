@@ -40,11 +40,25 @@ The NSIS uninstaller and MSI remove the application files and shortcuts. Local
 application data is intentionally preserved. Remove
 `%APPDATA%\GYTech PatientSim Pro` manually only after exporting anything you need.
 
+### Update check says no stable release has been published
+
+This is expected until a stable GitHub Release exists for
+`gytech2026/GYTech-PatientSim-Pro`. The update source is configured in
+`desktop/update-config.json`; the application does not fabricate releases. Use the
+**RELEASES** button or
+<https://github.com/gytech2026/GYTech-PatientSim-Pro/releases> to check manually.
+
 ### Update check says the update repository is not configured
 
-This is expected in this repository. The owner must set the official
-`OWNER/REPOSITORY` value in `desktop/update-config.json` and rebuild. No release
-URL is fabricated. See [UPDATE_SYSTEM.md](UPDATE_SYSTEM.md).
+This means `desktop/update-config.json` has an empty or invalid `repository`. A
+normal build ships with `gytech2026/GYTech-PatientSim-Pro`; do not replace it with
+a placeholder. See [UPDATE_SYSTEM.md](UPDATE_SYSTEM.md).
+
+### Automatic update installation is unavailable
+
+By design. No package format (NSIS, MSI, portable ZIP, AppImage, DEB, RPM, DMG)
+performs automatic installation; the project does not bundle `electron-updater`.
+Notification opens the official Releases page and you install manually.
 
 ### Update check fails while offline
 

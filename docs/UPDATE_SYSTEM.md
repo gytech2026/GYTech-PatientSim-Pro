@@ -12,37 +12,48 @@ does not silently download, execute, or install updates.
 | Update UI and preference handling | **IMPLEMENTED** |
 | Update version/metadata validation | **IMPLEMENTED** and **TESTED** with synthetic fixtures |
 | Update notification / error handling | **TESTED** with a synthetic bridge |
-| Live GitHub Release check | **BLOCKED — no official repository configured** |
-| Automatic download/installation | **DELIBERATELY NOT IMPLEMENTED** |
+| Official update repository | **CONFIGURED** — `gytech2026/GYTech-PatientSim-Pro` |
+| Live GitHub Release check | **IMPLEMENTED**; no stable release has been published yet, so the app reports "no stable release" |
+| Live update against a real release | **NOT YET TESTED** — no release exists |
+| Automatic download/installation | **DELIBERATELY NOT IMPLEMENTED** for any package format |
 
-No official GitHub repository URL exists in this repository. Therefore
-`desktop/update-config.json` deliberately contains an empty `repository` value.
-The desktop application shows “official update repository has not been
-configured” and performs no live release check. It does **not** invent versions,
-release URLs, download links, or release notes.
-
-## Configuration
-
-After the owner confirms the official repository, set:
-
-```json
-{
-  "enabled": true,
-  "repository": "OWNER/REPOSITORY",
-  "checkIntervalHours": 6,
-  "remindLaterHours": 24,
-  "releaseNotesMaxLength": 2400
-}
-```
-
-Do not use a fabricated `OWNER/REPOSITORY`. The application derives the endpoint:
+The repository is configured in `desktop/update-config.json` as
+`gytech2026/GYTech-PatientSim-Pro`. The application derives:
 
 ```text
-https://api.github.com/repos/OWNER/REPOSITORY/releases/latest
+https://api.github.com/repos/gytech2026/GYTech-PatientSim-Pro/releases/latest
 ```
 
-Only GitHub's official HTTPS API endpoint is used. There is no configurable
-download host or arbitrary update server.
+and the manual download page:
+
+```text
+https://github.com/gytech2026/GYTech-PatientSim-Pro/releases
+```
+
+Public release metadata is read without a personal access token. No token,
+credential, or GitHub account is required for public release checks.
+
+## Supported update path by package format
+
+The application ships its own release notifier; it does **not** bundle
+`electron-updater`, and the build does not publish `latest.yml`, `latest-mac.yml`,
+or blockmap files. Consequently **no package format performs automatic
+download-and-install**. Every format uses the same manual path: notify, open the
+official Releases page, and let the user download and run the installer.
+
+| Format | Automatic install | Update behaviour |
+|---|---|---|
+| Windows NSIS setup EXE | No | Notify + open official Releases page |
+| Windows MSI | No | Notify + open official Releases page |
+| Windows portable ZIP | No | Notify + open official Releases page |
+| Linux AppImage | No | Notify + open official Releases page |
+| Linux DEB / RPM | No | Notify + open official Releases page |
+| macOS DMG (x64 / arm64) | No | Notify + open official Releases page |
+
+Do not describe any of these formats as self-updating. Adding automatic install
+would require adding an updater dependency, generating signed update metadata per
+platform, and testing upgrade paths for each format — none of which is present or
+tested today.
 
 ## Behaviour
 
@@ -56,7 +67,13 @@ download host or arbitrary update server.
    - tagged with a valid stable semantic version;
    - linked to an official `https://github.com/...` release page.
 5. The installed version is compared to the latest version.
-6. If newer, the in-app dialog shows:
+6. Results are reported as one of:
+   - `update-available` — dialog with installed/latest versions and notes;
+   - `up-to-date` — "You are running the latest stable version";
+   - `no-release` — no stable release published yet (HTTP 404 from GitHub);
+   - `error` — offline, timeout, rate limit, invalid metadata, or HTTP failure;
+   - `disabled` / `unconfigured` — build configuration states.
+7. If newer, the in-app dialog shows:
    - installed version;
    - latest version;
    - release name and a plain-text release-notes excerpt;
@@ -64,7 +81,11 @@ download host or arbitrary update server.
    - **View Release Notes** — opens the official page;
    - **Remind Me Later** — snoozes for the configured hours;
    - **Dismiss** — suppresses that exact version until a later version.
-7. No downloaded binary is executed, and no installer is launched automatically.
+8. The Settings panel always offers **RELEASES**, which opens the configured
+   official Releases page for manual checks and downloads.
+9. No downloaded binary is executed, and no installer is launched automatically.
+10. Concurrent checks are de-duplicated in both the renderer and the main
+    process, so repeated clicks or menu actions cannot overlap GitHub requests.
 
 ## Security properties
 
@@ -81,6 +102,7 @@ download host or arbitrary update server.
 - The user can disable automatic checks in Settings; manual checks remain
   available.
 - Dismiss/snooze state is stored locally. No update telemetry is transmitted.
+- No credentials, tokens, or GitHub account details are exposed to the renderer.
 
 ## Testing performed
 
@@ -88,27 +110,35 @@ The desktop harness used a **synthetic fixture bridge** to verify:
 
 - notification content and installed/latest versions;
 - Download opening the validated GitHub Release URL;
+- the RELEASES button opening the configured official Releases page;
 - Remind Me Later and Dismiss behaviour;
+- overlapping check requests being de-duplicated;
+- a missing release (no published stable release) not producing a false update;
 - error responses not blocking the simulator;
 - up-to-date responses not showing a false update;
 - unsafe HTTP release URLs being rejected;
 - semantic-version comparisons.
 
 The synthetic fixture values are test data only and are not presented as an
-official release. A real GitHub API check could not be executed because the
-official repository is not configured. Do not describe the live update channel
-as verified.
+official release.
 
-## Manual release test after configuring the repository
+The configured GitHub endpoint currently returns **HTTP 404** for
+`releases/latest` because no release has been published; the official Releases
+page returns **HTTP 200**. The in-app live check has **not** been exercised
+against a real published release. Do not describe the live update channel as
+verified until that is done.
+
+## Manual release test after publishing a stable release
 
 1. Publish a real stable GitHub Release with a semantic version tag.
 2. Ensure the release is not a draft/prerelease and has its notes filled in.
 3. Launch the installed desktop application.
-4. Open Settings → Desktop Application → Check Now.
+4. Open Settings → Desktop Application → **CHECK NOW**.
 5. Confirm the dialog shows the real version and release page.
-6. Verify Download opens the official page in the default browser.
-7. Verify no binary is downloaded or executed automatically.
-8. Verify network failure and offline startup by disconnecting the network and
+6. Verify **DOWNLOAD UPDATE** opens the official page in the default browser.
+7. Verify **RELEASES** opens the official Releases page.
+8. Verify no binary is downloaded or executed automatically.
+9. Verify network failure and offline startup by disconnecting the network and
    launching the simulator.
 
 Only after these steps may the update channel be described as live-tested.

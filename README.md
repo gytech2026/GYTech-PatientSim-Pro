@@ -79,7 +79,7 @@ _Bringing Advanced Patient Monitoring and Emergency Response Simulation to the B
 | Linux desktop build | **CONFIGURED** — not built or tested on Windows host |
 | macOS desktop build | **CONFIGURED** — not built or tested on Windows host |
 | Code signing / notarisation | **NOT CONFIGURED / NOT CLAIMED** |
-| Desktop live update channel | **BLOCKED** — official GitHub repository not configured |
+| Desktop live update channel | **CONFIGURED** — `gytech2026/GYTech-PatientSim-Pro`; no stable release published yet |
 | Browser verification | Chromium/Electron local automation completed |
 | Cross-browser verification | Pending |
 | Testing report | [TESTING_REPORT.md](TESTING_REPORT.md) |
@@ -656,18 +656,20 @@ test build was not released. MSI cross-version upgrade was not executed.
 
 The desktop app implements **Notify Then Download** only:
 
-- It can check the official stable GitHub Release channel when the owner
-  configures `desktop/update-config.json`.
+- It checks the official stable GitHub Release channel configured in
+  `desktop/update-config.json` (`gytech2026/GYTech-PatientSim-Pro`).
 - It shows installed and latest versions, a release summary, and buttons for
   **Download Update**, **View Release Notes**, **Remind Me Later**, and
-  **Dismiss**.
+  **Dismiss**. The Settings panel also provides **RELEASES** to open the official
+  Releases page directly.
 - Download opens the official GitHub Release page in the system browser.
 - It never downloads, executes, or installs an update silently.
 - Network failure does not prevent the simulator from launching.
 
-**Current limitation:** the official repository is not configured. The app
-therefore reports that update checks are unavailable and performs no fabricated
-release check. See [docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
+**Current limitation:** the official repository is configured, but no stable
+GitHub Release has been published yet, so a check reports that no stable release
+exists. No package format supports automatic installation; updates are manual.
+See [docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
 
 ### Offline functionality
 
@@ -857,7 +859,7 @@ blocks therapy. Pads removed during charge disarm the device. Full guide:
 | Release engineering | Docs, governance, templates, workflows, screenshots | ✅ Prepared |
 | Desktop packaging | Electron shell, Windows EXE/MSI/portable, icons, About, logs, local data | ✅ Windows built/tested |
 | Cross-platform desktop | Linux AppImage/DEB/RPM and macOS DMG configuration | 🟡 Configured, not built here |
-| User-controlled updates | Notify-then-download UI and validation | ✅ Implemented/mock-tested; live channel pending |
+| User-controlled updates | Notify-then-download against the configured official repository; no automatic installation | ✅ Implemented/tested with fixtures; no stable release published |
 | Code signing / notarisation | Windows signing and Apple Developer ID/notarisation | 🟡 Pending owner credentials |
 | License and publication | Apache-2.0 adopted; repository URL, CI execution, and release still pending | 🟡 Partially complete |
 | R-wave-timed sync and advanced pacing modeling | More realistic timing/capture behavior | ⬜ Planned |
@@ -878,9 +880,10 @@ Full roadmap: [ROADMAP.md](ROADMAP.md).
   for native builds but were not built or launched on this Windows host.
 - **Unsigned builds.** Windows SmartScreen may warn. macOS signing/notarisation
   is not configured.
-- **Live update channel blocked.** The official GitHub repository is not
-  configured, so no real release check is performed. Synthetic fixtures are test
-  data, not a release.
+- **Live update channel configured, not yet exercised against a release.** The
+  official repository is `gytech2026/GYTech-PatientSim-Pro`, but no stable release
+  has been published, so a live check reports "no stable release". Synthetic
+  fixtures are test data, not a release. No format auto-installs.
 - **Cross-version upgrade tested only for NSIS using a synthetic 1.0.1 build.**
   Installing 1.0.1 over 1.0.0 succeeded and reported the new version. No public
   1.0.1 release exists, and an MSI cross-version upgrade was not executed.

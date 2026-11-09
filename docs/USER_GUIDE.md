@@ -248,17 +248,21 @@ In the installed desktop app, **Settings → Desktop Application** provides:
 - **About** — product name, version, publisher, runtime, copyright, license
   status, data/log locations, and the medical disclaimer.
 - **Notify me about stable updates** — enables or disables automatic update
-  checks. Update checks are disabled when the owner has not configured an
-  official repository.
-- **Check Now** — checks the configured official GitHub stable-release channel.
-  The live channel is not configured in this repository.
+  checks. Update checks use the official repository configured by the publisher
+  (`gytech2026/GYTech-PatientSim-Pro`).
+- **Check Now** — checks the official GitHub stable-release channel. If no stable
+  release has been published yet, the app says so instead of inventing one.
+- **Releases** — opens
+  <https://github.com/gytech2026/GYTech-PatientSim-Pro/releases> in your browser
+  for manual downloads.
 - **Export Data / Import Data** — move supported local simulation data as a JSON
   file. Import requires confirmation and replaces supported local data.
 
 Update notifications show installed/latest versions and offer **Download
 Update**, **View Release Notes**, **Remind Me Later**, and **Dismiss**. Download
-opens the official GitHub Release page in your browser. The app never installs an
-update silently.
+opens the official GitHub Release page in your browser. No package format installs
+updates automatically; install manually from the official Releases page. The app
+never installs an update silently.
 
 Desktop data is stored under `%APPDATA%\GYTech PatientSim Pro` on Windows.
 Uninstalling the application does not delete that folder. Use Export Data before

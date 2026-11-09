@@ -81,14 +81,16 @@ The build copies only the runtime app, icon/branding assets, and `.nojekyll` int
 
 The desktop build workflow is
 [`.github/workflows/desktop-release.yml`](../.github/workflows/desktop-release.yml).
-It is configured for native Windows, Ubuntu, and macOS runners but has not been
-executed because no GitHub repository exists.
+It is configured for native Windows, Ubuntu, and macOS runners. The repository now
+exists at `https://github.com/gytech2026/GYTech-PatientSim-Pro`, but the workflow
+has still not been executed on GitHub.
 
 Before an authorised desktop release:
 
-1. Confirm the official repository URL.
-2. In `desktop/update-config.json`, set `repository` to the confirmed
-   `OWNER/REPOSITORY` value. Do not use a placeholder or fabricated URL.
+1. Confirm the official repository URL
+   (`https://github.com/gytech2026/GYTech-PatientSim-Pro`).
+2. `desktop/update-config.json` is set to `gytech2026/GYTech-PatientSim-Pro`; keep
+   it in sync if the repository moves. Do not use a placeholder or fabricated URL.
 3. Decide whether Windows code signing and macOS Developer ID signing/notarisation
    are available. If not, keep the unsigned warnings in the documentation and do
    not claim signing.
@@ -193,7 +195,7 @@ are satisfied; otherwise use a pre-release tag such as `v0.1.0` or `v1.0.0-rc.1`
 |---|---|
 | Permanent license | Apache License 2.0 (`Apache-2.0`) — adopted |
 | GitHub organization/repository URL | Pending |
-| Official update repository | Pending — live update checks blocked |
+| Official update repository | Configured — `gytech2026/GYTech-PatientSim-Pro`; no stable release yet |
 | Official contact channels | Pending |
 | Open-source vs source-available positioning | Open source under Apache-2.0 |
 | Release version/date | Pending |
