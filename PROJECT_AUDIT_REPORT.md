@@ -10,6 +10,17 @@
 > This audit is not legal advice, a clinical validation, a security certification,
 > or a regulatory review. No clinical validity is certified.
 
+> **Post-audit status update (2026-11-09):** the licensing finding AUD-001 and the
+> update-channel finding AUD-026 have been addressed after this audit. The owner
+> approved the Apache License 2.0, the canonical text is now in `LICENSE`,
+> `package.json` and `CITATION.cff` declare `Apache-2.0`, and the documentation no
+> longer describes the project as "pending". `desktop/update-config.json` now
+> configures the official repository `gytech2026/GYTech-PatientSim-Pro`; no stable
+> release has been published yet, so the live update flow remains unexercised. The
+> findings below are preserved as the original audit snapshot; other publication
+> blockers (release publication, CI execution, signing, and native platform
+> validation) remain open.
+
 ---
 
 ## 1. Executive assessment
@@ -29,10 +40,13 @@ also passed. No public binaries have been published.
 Publication is blocked by owner-level decisions and external validation:
 
 1. No license has been approved. The repository is not yet open source.
+   *(Resolved post-audit: Apache-2.0 was adopted; see the status update above.)*
 2. The official GitHub organization/repository URL and contact channels are
    unconfirmed placeholders.
-3. The official desktop update repository is not configured; live update checks
-   are disabled. Only synthetic update fixtures were tested.
+3. The official desktop update repository is now configured
+   (`gytech2026/GYTech-PatientSim-Pro`, post-audit), but no stable release has been
+   published, so live update checks are not yet verified. *(Resolved post-audit in
+   configuration; live verification pending.)*
 4. Windows binaries are unsigned; macOS signing and notarisation are not
    configured. Linux and macOS packages are configured but not built here.
 5. GitHub Actions workflows have not been executed on GitHub.
@@ -62,10 +76,10 @@ limitations.
 - **Recommended correction:** Owner must approve a license and publish canonical
   text. Apache-2.0 is recommended for patent clarity, subject to owner/legal
   approval and medical/reputational review.
-- **Verification status:** **PARTIALLY FIXED / OWNER DECISION PENDING.** A clearly
-  marked pending LICENSE, comparison, and non-effective Apache-2.0 draft now
-  exist. The project is explicitly marked “not yet open source.” No rights were
-  invented.
+- **Verification status:** **FIXED (post-audit).** Apache-2.0 was adopted on
+  2026-11-09; the canonical LICENSE text, SPDX metadata in `package.json` and
+  `CITATION.cff`, and updated documentation now exist. The statements above
+  describe the state at audit time and are preserved as a historical record.
 
 ### AUD-002 — No initialized Git repository, remote, or confirmed GitHub account
 
@@ -317,8 +331,10 @@ limitations.
 - **Recommended correction:** Owner decides license, release version/date,
   publication destination, and whether to make npm-publishable. Update all metadata
   consistently.
-- **Verification status:** **OPEN — OWNER DECISION REQUIRED.** No invented dates,
-  DOI, license, or release claims.
+- **Verification status:** **PARTIALLY RESOLVED (post-audit).** The license was
+  decided (Apache-2.0) and metadata now declares it; release date, repository
+  URL, DOI, and npm publishability remain owner decisions. No dates, DOIs, or
+  release claims were invented.
 
 ### AUD-019 — Language localization is partial
 
@@ -430,9 +446,12 @@ limitations.
   the update source is unconfigured and the check button is disabled.
 - **Recommended correction:** Owner supplies official `OWNER/REPOSITORY`, rebuilds,
   publishes a real stable release, and verifies the live flow on each platform.
-- **Verification status:** **IMPLEMENTED / MOCK-TESTED; LIVE CHANNEL BLOCKED.**
-  Synthetic tests validate notification, download URL, snooze/dismiss, offline
-  error, and unsafe URL rejection.
+- **Verification status:** **CONFIGURED (post-audit).** `desktop/update-config.json`
+  now points at `gytech2026/GYTech-PatientSim-Pro`, and the app handles "no stable
+  release" (HTTP 404) explicitly. Synthetic tests validate notification, download
+  URL, RELEASES button, snooze/dismiss, duplicate-check suppression, offline error,
+  and unsafe URL rejection. A real published release has not been tested, and no
+  format auto-installs.
 
 ### AUD-027 — Windows desktop binaries are unsigned
 
@@ -498,14 +517,16 @@ limitations.
 - **Severity:** MEDIUM
 - **Description:** Tauri was not built because the host has no Rust/MSVC toolchain
   and the tested renderer is Chromium-based. Live update fetch against GitHub was
-  not possible without an official repository. The Electron fallback was built and
-  tested instead.
+  not possible at audit time because the repository was unconfigured. The Electron
+  fallback was built and tested instead. *(The repository is configured post-audit;
+  no stable release has been published yet.)*
 - **Affected files:** `docs/DESKTOP_APPLICATION.md`,
   `docs/CROSS_PLATFORM_BUILD.md`, update tests
 - **Recommended correction:** Treat the documented Electron decision as final for
   this release; configure and test the live GitHub update repository before
   claiming an update channel.
-- **Verification status:** **DOCUMENTED FALLBACK; LIVE UPDATE BLOCKED.**
+- **Verification status:** **DOCUMENTED FALLBACK; UPDATE CHANNEL CONFIGURED
+  (post-audit), LIVE FLOW UNVERIFIED.**
 
 ---
 
@@ -524,7 +545,7 @@ limitations.
 | Install/uninstall | PASS — NSIS and MSI clean install/uninstall |
 | Cross-version upgrade | PARTIAL — NSIS synthetic 1.0.1; MSI/public not executed |
 | Linux/macOS desktop builds | CONFIGURED, NOT BUILT/TESTED |
-| Live GitHub update channel | BLOCKED — repository unconfigured |
+| Live GitHub update channel | CONFIGURED post-audit — no stable release published |
 | Windows code signing | NOT CONFIGURED — unsigned binaries |
 | Screenshot set genuine and valid | PASS — 16 images, 1600×926 |
 | Markdown local links | PASS — repository validator |
@@ -537,7 +558,7 @@ limitations.
 | Acoustic/print/speech | NOT EXECUTED end-to-end |
 | Accessibility | NOT FORMALLY AUDITED |
 | Clinical validation | NOT APPLICABLE / NOT CLAIMED |
-| License approval | PENDING OWNER |
+| License approval | RESOLVED post-audit — Apache-2.0 adopted |
 | Repository publication | NOT PERFORMED |
 
 ---
@@ -550,19 +571,19 @@ limitations.
 | Windows desktop application | Ready for owner review — built and smoke-tested |
 | Windows installers/portable | EXE, MSI, ZIP built; install/uninstall tested |
 | Linux/macOS desktop | Not ready — native builds unverified |
-| Live update channel | Not ready — official repository unconfigured |
+| Live update channel | Configured; live check unverified until a release exists |
 | Code signing/notarisation | Not ready — no credentials |
 | Source completeness | Ready |
 | Local test status | Ready, Chromium/Electron + desktop integration tested |
 | Documentation completeness | Prepared, pending owner review/contact details |
-| Legal licensing | Not ready — owner approval required |
+| Legal licensing | Ready — Apache-2.0 adopted (post-audit) |
 | GitHub publication | Not ready — repository/account/CI validation required |
 | Clinical use | **Not permitted / not validated** |
-| Public open-source claim | **Not ready until LICENSE is approved** |
+| Public open-source claim | Supported — Apache-2.0 LICENSE effective (post-audit) |
 
-**Final recommendation:** proceed with owner review, license decision, contact
-details, repository creation, and GitHub Actions validation. Do not publish a
-release or call the project open source yet.
+**Final recommendation:** proceed with owner review, contact details, repository
+creation, and GitHub Actions validation. The license decision is complete
+(Apache-2.0). Do not publish a release until the remaining criteria are met.
 
 ---
 

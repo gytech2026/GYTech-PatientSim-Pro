@@ -94,7 +94,7 @@ index.html
 | `desktop/main.cjs` | Electron lifecycle/menu/security, static protocol, update API fetch, logs, IPC |
 | `desktop/preload.cjs` | Frozen contextBridge API; no unrestricted Node/IPC exposure |
 | `desktop/update-utils.cjs` | Semantic-version comparison and release-metadata validation |
-| `desktop/update-config.json` | Owner-configured official GitHub repository; currently blank |
+| `desktop/update-config.json` | Official GitHub repository for update checks (`gytech2026/GYTech-PatientSim-Pro`) |
 
 ---
 
@@ -240,8 +240,11 @@ profile.
 - Launch a packaged build with
   `npm run desktop:smoke -- "release\win-unpacked\GYTech PatientSim Pro.exe"`.
 - Clear `ELECTRON_RUN_AS_NODE` before Electron or packaged-app launches.
-- The official update `OWNER/REPOSITORY` is intentionally blank. Do not insert a
-  fake repository. See [docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
+- The official update repository is configured as
+  `gytech2026/GYTech-PatientSim-Pro` in `desktop/update-config.json`. Do not insert
+  a different or fabricated repository. No package format supports automatic
+  installation; the app notifies and opens the official Releases page. See
+  [docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
 - Do not commit `release/`, installers, signing credentials, or generated logs.
 - Electron/Chromium runtime notices must be preserved in packaged output.
 
@@ -265,7 +268,8 @@ profile.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before starting. Keep pull requests focused,
 update documentation and tests, and avoid medical claims beyond the simulator's
-scope. Licensing remains pending owner approval.
+scope. The project is open source under the Apache License 2.0 (`Apache-2.0`);
+contributions are accepted under that license.
 
 ---
 

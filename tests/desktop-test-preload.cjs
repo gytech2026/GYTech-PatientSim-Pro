@@ -22,7 +22,7 @@ const appInfo = {
   version: '1.0.0',
   publisher: 'GYTech',
   copyright: 'Copyright © 2026 GYTech. All Rights Reserved.',
-  licenseStatus: 'PENDING OWNER APPROVAL',
+  licenseStatus: 'Apache-2.0',
   platform: process.platform,
   arch: process.arch,
   packaged: true,
@@ -35,6 +35,7 @@ const appInfo = {
     enabled: true,
     repository: 'fixture-owner/fixture-repo',
     configured: true,
+    releasesUrl: 'https://github.com/fixture-owner/fixture-repo/releases',
     checkIntervalHours: 6,
     remindLaterHours: 24,
   },
@@ -70,6 +71,11 @@ const updateResult = {
     status: 'error',
     currentVersion: '1.0.0',
     message: 'Unable to check for updates while offline or unavailable. You can continue using the simulator.',
+  },
+  'no-release': {
+    status: 'no-release',
+    currentVersion: '1.0.0',
+    message: 'No stable release has been published for GYTech PatientSim Pro yet. You can check the official Releases page manually.',
   },
 }[scenario] || {
   status: 'error',

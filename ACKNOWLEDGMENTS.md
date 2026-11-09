@@ -32,8 +32,8 @@ See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the dependency audit.
 - **Contributor Covenant 2.1** — the project's Code of Conduct is informed by
   this framework but is not claimed as an official adoption or endorsement.
   <https://www.contributor-covenant.org/version/2/1/code_of_conduct/>
-- **Apache License 2.0** — reference for license comparison only; no license has
-  been selected or approved. <https://www.apache.org/licenses/LICENSE-2.0>
+- **Apache License 2.0** — the project's open-source license.
+  <https://www.apache.org/licenses/LICENSE-2.0>
 - **Open Source Initiative** — general definitions and license references.
   <https://opensource.org/>
 

@@ -27,10 +27,11 @@ LOCAL DATA
   intentionally want to remove local settings, patients, and event history.
 
 UPDATES
-- This build checks only for stable releases after the publisher configures the
-  official GitHub repository. Update checks notify you; they never download or
-  install silently.
-- No official update repository is configured in this repository template.
+- This build checks for stable releases from the official GitHub repository
+  (gytech2026/GYTech-PatientSim-Pro). Update checks notify you; they never
+  download or install silently.
+- No automatic installation is available for the portable edition. Download any
+  update manually from https://github.com/gytech2026/GYTech-PatientSim-Pro/releases.
 
 SECURITY
 - The executable is not digitally signed unless the publisher signs a later

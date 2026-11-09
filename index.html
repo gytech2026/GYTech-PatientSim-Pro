@@ -895,6 +895,7 @@
               <label class="toggle-row"><input type="checkbox" id="settingUpdateChecks" checked><span>Notify me about stable updates</span></label>
               <div class="inline-buttons">
                 <button type="button" class="secondary-button" id="btnCheckUpdates">CHECK NOW</button>
+                <button type="button" class="secondary-button" id="btnOpenReleases">RELEASES</button>
                 <button type="button" class="secondary-button" id="btnOpenAbout">ABOUT</button>
               </div>
               <p class="desktop-help" id="updateStatusText">Desktop update checks are available in the installed application.</p>
@@ -1038,7 +1039,7 @@
           <div><span>PLATFORM</span><b id="aboutPlatform">Browser</b></div>
           <div><span>RUNTIME</span><b id="aboutRuntime">Chromium</b></div>
           <div><span>UPDATE CHANNEL</span><b id="aboutUpdateStatus">Not checked</b></div>
-          <div><span>LICENSE</span><b id="aboutLicenseStatus">PENDING OWNER APPROVAL</b></div>
+          <div><span>LICENSE</span><b id="aboutLicenseStatus">Apache-2.0</b></div>
         </div>
         <div class="about-disclaimer">
           <strong>EDUCATIONAL SIMULATION ONLY.</strong>
@@ -1073,7 +1074,7 @@
           </div>
           <div class="update-notes" id="updateNotes">Release notes are available on the official GitHub Release page.</div>
         </div>
-        <div class="modal-note"><strong>No automatic installation.</strong> Downloading opens the official release page in your browser. You decide whether to download and install. The application never executes a downloaded file or silently replaces itself.</div>
+        <div class="modal-note"><strong>Automatic updates are unavailable for this installation.</strong> Download and install manually from the official GitHub Releases page. The DOWNLOAD UPDATE button opens that page in your browser; you decide whether to download and install. The application never executes a downloaded file or silently replaces itself.</div>
         <div class="update-dialog-status" id="updateDialogStatus" role="status"></div>
         <div class="update-actions">
           <button type="button" class="primary-button" id="btnUpdateDownload">DOWNLOAD UPDATE</button>

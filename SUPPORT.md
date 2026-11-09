@@ -48,7 +48,9 @@ invent a GitHub organization, Discussions URL, or support email.
 - Browser/desktop localStorage is not a secure clinical record store.
 - Windows desktop packages are unsigned; macOS packages are unsigned and not
   notarised. Linux/macOS packages were not built on the Windows host.
-- The live update channel is not configured; no official release URL is claimed.
+- The update channel targets the official `gytech2026/GYTech-PatientSim-Pro`
+  repository, but no stable release has been published yet and no format
+  auto-installs updates.
 - No response-time guarantee has been approved.
 
 ## No emergency use

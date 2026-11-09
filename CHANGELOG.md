@@ -12,11 +12,32 @@ Copyright © 2026 GYTech. All Rights Reserved.
 
 ## [Unreleased]
 
+### Fixed
+
+- A second stable-release result (for example an automatic check arriving while
+  the manual update dialog is open) no longer closes the update notification.
+  Notification-style modals now refresh in place instead of toggling closed.
+
+### Changed
+
+- Configured the official GitHub Releases update source
+  (`gytech2026/GYTech-PatientSim-Pro`) in `desktop/update-config.json`. Added a
+  **RELEASES** button, explicit "no stable release published" (HTTP 404)
+  handling, a clearer "automatic updates are unavailable — download manually"
+  notice, and duplicate-check guards in the renderer and main process. No package
+  format performs automatic installation.
+- Relicensed GYTech PatientSim Pro under the **Apache License, Version 2.0**
+  (SPDX: `Apache-2.0`). `LICENSE` now contains the canonical Apache-2.0 text,
+  `package.json` and `CITATION.cff` declare `Apache-2.0`, and README, NOTICE,
+  LICENSE-FAQ, CONTRIBUTING and release documentation were updated. The former
+  "PENDING OWNER APPROVAL" notice and the non-effective Apache-2.0 draft are
+  superseded.
+
 ### Planned
 
-- Owner-approved license and contribution policy.
 - Confirmed GitHub organization/repository URL and homepage.
-- Official GitHub repository configured for live update checks.
+- Publish the first stable GitHub Release so the configured update channel can be
+  exercised end to end.
 - Windows code signing and macOS Developer ID signing/notarisation.
 - Public and MSI cross-version upgrade validation; an NSIS synthetic upgrade passed.
 - Native Linux and macOS build execution and distribution smoke tests.
@@ -28,8 +49,9 @@ Copyright © 2026 GYTech. All Rights Reserved.
 
 ## [1.0.0] — UNRELEASED RELEASE CANDIDATE
 
-**Status:** publication blocked pending owner approval of license, repository
-identity, and deployment destination. No release date has been assigned.
+**Status:** publication blocked pending owner approval of repository identity
+and deployment destination. The license was adopted as Apache-2.0 after this
+release candidate was prepared. No release date has been assigned.
 
 ### Added
 

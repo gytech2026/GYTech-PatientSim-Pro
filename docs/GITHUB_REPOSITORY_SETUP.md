@@ -16,11 +16,11 @@ action has been taken.
 | Repository name | `GYTech-PatientSim-Pro` |
 | Description | A professional browser-based patient vital signs monitor and defibrillator simulator featuring real-time ECG waveforms, physiological simulation, multiparameter monitoring, alarms, AED, manual defibrillation, synchronized cardioversion, pacing, and medical training scenarios. |
 | Homepage | Leave blank until a verified deployment URL exists. Do not invent one. |
-| Visibility | Owner decision; public visibility does not replace an approved license |
+| Visibility | Public; visibility alone grants no rights — the Apache-2.0 [LICENSE](../LICENSE) does |
 | Default branch | `main` |
 | Topics | `patient-monitor`, `vital-signs`, `medical-simulation`, `ecg`, `ecg-monitor`, `defibrillator`, `aed-simulator`, `cardioversion`, `healthcare-technology`, `medical-education`, `javascript`, `html`, `css`, `simulation`, `gytech` |
 | Social preview | `assets/branding/social-preview.png` (upload in repository settings) |
-| License status | **PENDING OWNER APPROVAL** |
+| License status | **Apache License 2.0** (`Apache-2.0`) — effective |
 | Release | Candidate only; do not publish until owner approval and checks pass |
 
 ### Confirmed facts
@@ -48,13 +48,15 @@ The README uses only badges and statements that can be supported from this
 repository:
 
 - Version: 1.0.0 release candidate.
-- License status: pending owner approval.
+- License: Apache License 2.0 (`Apache-2.0`).
 - Documentation: present.
 - Test status: descriptive local results only; no remote CI badge until the
   owner's workflow has actually run successfully.
 
-Do not add “build passing”, coverage, stars, forks, contributors, license, or
+Do not add “build passing”, coverage, stars, forks, contributors, or
 release badges that imply a GitHub repository/CI state that does not yet exist.
+The Apache-2.0 license badge is supported by the committed LICENSE and is
+accurate.
 
 ---
 
@@ -79,14 +81,16 @@ The build copies only the runtime app, icon/branding assets, and `.nojekyll` int
 
 The desktop build workflow is
 [`.github/workflows/desktop-release.yml`](../.github/workflows/desktop-release.yml).
-It is configured for native Windows, Ubuntu, and macOS runners but has not been
-executed because no GitHub repository exists.
+It is configured for native Windows, Ubuntu, and macOS runners. The repository now
+exists at `https://github.com/gytech2026/GYTech-PatientSim-Pro`, but the workflow
+has still not been executed on GitHub.
 
 Before an authorised desktop release:
 
-1. Confirm the official repository URL.
-2. In `desktop/update-config.json`, set `repository` to the confirmed
-   `OWNER/REPOSITORY` value. Do not use a placeholder or fabricated URL.
+1. Confirm the official repository URL
+   (`https://github.com/gytech2026/GYTech-PatientSim-Pro`).
+2. `desktop/update-config.json` is set to `gytech2026/GYTech-PatientSim-Pro`; keep
+   it in sync if the repository moves. Do not use a placeholder or fabricated URL.
 3. Decide whether Windows code signing and macOS Developer ID signing/notarisation
    are available. If not, keep the unsigned warnings in the documentation and do
    not claim signing.
@@ -108,7 +112,7 @@ credentials, contact details, or an official repository URL.
 
 - [ ] Owner confirms the official GitHub account/organization.
 - [ ] Owner approves the final repository name and description.
-- [ ] Owner approves a LICENSE and replaces the pending notice.
+- [x] Owner approves a LICENSE and replaces the pending notice (Apache-2.0 adopted).
 - [ ] Owner provides support/security/conduct contact information.
 - [ ] Owner reviews screenshots and branding.
 - [ ] Owner reviews the medical disclaimer and disclaimers in the UI/About.
@@ -128,8 +132,8 @@ credentials, contact details, or an official repository URL.
 
 ## 6. Exact publishing commands (do not run until approved)
 
-These commands are provided for the owner to run after the destination and
-license are approved:
+These commands are provided for the owner to run after the destination is
+approved:
 
 ```powershell
 git init
@@ -158,7 +162,7 @@ A candidate release note is provided at
 [docs/RELEASE_NOTES_v1.0.0.md](RELEASE_NOTES_v1.0.0.md). It is marked draft and
 must not be published until:
 
-- the license is approved,
+- the license is approved (Apache-2.0, effective),
 - the repository URL is registered,
 - CI and the native desktop release jobs have run successfully,
 - the update repository is configured or live updates remain explicitly disabled,
@@ -189,11 +193,11 @@ are satisfied; otherwise use a pre-release tag such as `v0.1.0` or `v1.0.0-rc.1`
 
 | Decision | Status |
 |---|---|
-| Permanent license | Pending — Apache-2.0 proposed, not effective |
+| Permanent license | Apache License 2.0 (`Apache-2.0`) — adopted |
 | GitHub organization/repository URL | Pending |
-| Official update repository | Pending — live update checks blocked |
+| Official update repository | Configured — `gytech2026/GYTech-PatientSim-Pro`; no stable release yet |
 | Official contact channels | Pending |
-| Open-source vs source-available positioning | Pending |
+| Open-source vs source-available positioning | Open source under Apache-2.0 |
 | Release version/date | Pending |
 | GitHub Pages deployment | Pending |
 | Final screenshot approval | Pending |

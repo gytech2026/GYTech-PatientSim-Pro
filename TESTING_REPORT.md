@@ -20,7 +20,7 @@
 | `tests/interactive-harness.js` | Required functional tests, AED/manual workflows, persistence reload | **21 / 21 PASS** |
 | `tests/deep-tests.js` | All scenarios, all rhythms, pacing, sync, NIBP, scenario progression, CPR/ROSC, alarm escalation | **12 / 12 PASS** |
 | `tests/ui-harness.js` | Visible controls, modals, patient CRUD, alarms, sensors, 12-lead, CPR, responsive layouts | **18 / 18 PASS** |
-| `tests/desktop-harness.js` | About, desktop update UI, offline/error handling, data validation, resize, fullscreen, reload persistence, corrupted settings | **19 / 19 PASS** |
+| `tests/desktop-harness.js` | About, desktop update UI, repeated-notification visibility, offline/error handling, data validation, resize, fullscreen, reload persistence, corrupted settings | **24 / 24 PASS** |
 | `scripts/validate-repository.mjs` | Required files, JS/desktop syntax, HTML IDs, duplicate bindings, desktop security invariants, links, screenshots, branding, CFF fields | See final validation section |
 | `scripts/check-secrets.mjs` | Basic local secret signature scan | See final validation section |
 | `tests/capture-screenshots.js` | Genuine application screenshots and branding renders | **PASS** |
@@ -116,6 +116,12 @@ remote build-passing claim is made.
   `The official update repository has not been configured by the publisher. No
   release information is fabricated.`
 
+> **Post-test status update (2026-11-09):** `desktop/update-config.json` now
+> configures `gytech2026/GYTech-PatientSim-Pro`. The quoted packaged-app message
+> above records the earlier blank configuration. No stable release has been
+> published yet, so a current check reports "no stable release published"; the
+> live flow has not been exercised end to end.
+
 ### Windows artefacts built
 
 | Artefact | Size | SHA-256 |
@@ -155,8 +161,9 @@ unreachable local proxy (`--proxy-server=127.0.0.1:9`). The UI, vital signs,
 waveforms, and smoke checks passed. This demonstrates startup without usable
 network access, but it is **not** a physical network-adapter disconnection test
 (the environment did not have administrative permission to disable the adapter).
-The live update repository is unconfigured, so no external update request was
-made.
+At the time of that run the update repository was unconfigured, so no external
+update request was made. The repository is now configured, but no stable release
+has been published, so the live update path remains untested.
 
 ### Update system test coverage
 
@@ -236,8 +243,9 @@ These items must not be described as verified:
 14. **Windows code signing** — no certificate is configured; binaries are
     unsigned.
 15. **macOS signing/notarisation** — not configured or verified.
-16. **Live update channel** — official GitHub repository is unconfigured; only
-    synthetic update fixtures were tested.
+16. **Live update channel** — configured for `gytech2026/GYTech-PatientSim-Pro`,
+    but no stable release has been published; only synthetic update fixtures and
+    the "no stable release" (HTTP 404) path were tested.
 17. **Physical network disconnect** — offline-like startup was tested with an
     unreachable proxy; the adapter could not be disabled without administrator
     rights.
@@ -302,9 +310,10 @@ notarisation, live GitHub updates, and the full assisted installer UI remain
 unverified.
 
 The project is **not** ready for a clinically positioned release and is **not yet
-a published open-source release** because the license, repository identity,
-official update repository, and contacts require owner approval. GitHub Actions
-remain unexecuted.
+a published open-source release**. It is licensed under the Apache License 2.0,
+and the update repository is configured, but no stable release has been published,
+so the live update flow is unverified. Repository contacts and release
+authorization remain pending. GitHub Actions remain unexecuted.
 
 No clinical validity is certified.
 

@@ -78,8 +78,8 @@ not imply clinical validation or regulatory approval.
 
 ## In progress / release blockers 🟡
 
-- 🟡 **Owner license approval** — LICENSE remains pending; project must not be
-  described as open source yet.
+- ✅ **Owner license approval** — Apache-2.0 adopted; the repository LICENSE is
+  the canonical Apache License 2.0 text.
 - 🟡 **Official GitHub repository URL and owner identity** — placeholders must be
   replaced before publication.
 - 🟡 **Security/conduct contact details** — placeholders must be confirmed.
@@ -89,9 +89,9 @@ not imply clinical validation or regulatory approval.
   Safari are not yet in the automated matrix.
 - 🟡 **Screenshot documentation review** — screenshots are genuine captures, but
   the owner must review final presentation before publication.
-- 🟡 **Official update repository configuration** — `desktop/update-config.json`
-  intentionally has a blank repository. Live update checks are blocked until the
-  owner confirms the official GitHub repository.
+- ✅ **Official update repository configuration** — `desktop/update-config.json`
+  now points at `gytech2026/GYTech-PatientSim-Pro`. Live checks run, but no stable
+  release has been published yet.
 - 🟡 **Linux and macOS desktop builds** — build configuration is prepared but was
   not executed on the Windows host.
 - 🟡 **Code signing / macOS notarisation** — no certificates or Apple credentials
@@ -151,14 +151,15 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) and
 - CI browser tests require Electron and a display/virtual display.
 - Windows build only verified on Windows 11 x64; Linux/macOS packages are
   unverified.
-- Update channel is not configured and live release checks are blocked.
+- Update channel is configured for `gytech2026/GYTech-PatientSim-Pro`, but no
+  stable release has been published, so the live flow is unverified.
 - Windows binaries are unsigned; macOS builds are unsigned/not notarised.
 
 ---
 
 ## Release criteria for v1.0.0
 
-- Owner-approved LICENSE and contribution terms.
+- ✅ Apache License 2.0 LICENSE and contribution terms.
 - Confirmed repository identity and metadata, including the official update
   repository.
 - Green GitHub Actions on the owner's repository, including native Linux and macOS

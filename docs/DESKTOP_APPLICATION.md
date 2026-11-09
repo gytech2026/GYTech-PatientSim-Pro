@@ -106,8 +106,8 @@ shortcut or an empty WebView.
 | Publisher / company | GYTech |
 | Version | 1.0.0 (read from `package.json`; no invented version) |
 | Copyright | Copyright © 2026 GYTech. All Rights Reserved. |
-| License | **PENDING OWNER APPROVAL** — see [LICENSE](../LICENSE) |
-| Update channel | GitHub Releases, **owner configuration required** |
+| License | **Apache License 2.0** (`Apache-2.0`) — see [LICENSE](../LICENSE) |
+| Update channel | GitHub Releases — `gytech2026/GYTech-PatientSim-Pro` (notify then manual download; no automatic installation) |
 
 ---
 
@@ -182,9 +182,10 @@ preferences or arbitrary localStorage keys.
 ## 6. Update system
 
 The application implements **Notify Then Download** only. It never silently
-downloads or installs an update. The publisher must first configure the official
-GitHub repository in `desktop/update-config.json`; the current repository leaves
-that value blank and does not fabricate a release URL.
+downloads or installs an update. The update source is
+`gytech2026/GYTech-PatientSim-Pro`, configured in `desktop/update-config.json`.
+The application queries the official GitHub Releases API and opens only the
+validated official release page. No format performs automatic installation.
 
 See [UPDATE_SYSTEM.md](UPDATE_SYSTEM.md).
 
@@ -194,8 +195,8 @@ See [UPDATE_SYSTEM.md](UPDATE_SYSTEM.md).
 
 The simulation UI, waveforms, alarms, AED/manual defibrillation/pacing simulation,
 scenarios, local settings, and local data tools all operate from bundled local
-assets. The update checker is the only optional network feature and is disabled
-until an official repository is configured. Update failure never blocks startup.
+assets. The update checker is the only optional network feature and runs against
+the configured official repository. Update failure never blocks startup.
 
 See [TESTING_REPORT](../TESTING_REPORT.md) for the executed offline-like test and
 its limitation.

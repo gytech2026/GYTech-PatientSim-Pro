@@ -222,6 +222,7 @@ export class DesktopManager {
     bind('btnAboutCheckUpdates', 'click', () => this.checkForUpdates({ manual: true }));
     bind('btnAboutOpenLogs', 'click', () => this.openLogs());
     bind('btnCheckUpdates', 'click', () => this.checkForUpdates({ manual: true }));
+    bind('btnOpenReleases', 'click', () => this.openReleasesPage());
     bind('settingUpdateChecks', 'change', (event) => {
       this.prefs.enabled = Boolean(event.target.checked);
       this.savePrefs();
@@ -260,6 +261,8 @@ export class DesktopManager {
       const button = this.element(id);
       if (button) button.disabled = !configured;
     }
+    const releasesButton = this.element('btnOpenReleases');
+    if (releasesButton) releasesButton.disabled = !this.bridge || !this.updateConfig?.releasesUrl;
     const logsButton = this.element('btnAboutOpenLogs');
     if (logsButton) logsButton.hidden = !this.bridge;
 
@@ -286,7 +289,7 @@ export class DesktopManager {
     setText(this.element('aboutRuntime'), info
       ? `Electron ${info.electronVersion} · Chromium ${info.chromeVersion}`
       : `Browser · ${navigator.userAgent.includes('Firefox') ? 'Firefox' : 'Chromium-based'}`);
-    setText(this.element('aboutLicenseStatus'), info?.licenseStatus || 'PENDING OWNER APPROVAL');
+    setText(this.element('aboutLicenseStatus'), info?.licenseStatus || 'Apache-2.0');
     setText(this.element('aboutCopyright'), APP_COPYRIGHT_STANDARD);
     setText(this.element('aboutDataPath'), info?.userDataPath
       ? `Local data: ${info.userDataPath}`
@@ -333,7 +336,10 @@ export class DesktopManager {
   }
 
   async checkForUpdates({ manual = false, automatic = false } = {}) {
-    if (this.checking) return null;
+    if (this.checking) {
+      if (manual) this.ui.toast('An update check is already in progress.', 'info');
+      return null;
+    }
     if (!this.bridge) {
       if (manual) this.ui.toast('Update checks are available in the installed desktop application.', 'warning');
       return null;
@@ -383,6 +389,14 @@ export class DesktopManager {
       } else if (result.status === 'unconfigured') {
         this.setStatus(result.message || 'The official update repository has not been configured.', 'warning');
         if (manual) this.ui.toast('The official update repository has not been configured.', 'warning');
+      } else if (result.status === 'disabled') {
+        this.setStatus(result.message || 'Update checks are disabled by this build configuration.', 'warning');
+        if (manual) this.ui.toast(result.message || 'Update checks are disabled.', 'warning');
+      } else if (result.status === 'no-release') {
+        this.currentUpdate = null;
+        this.setStatus(result.message || 'No stable release has been published yet.', 'info');
+        setText(this.element('aboutUpdateStatus'), 'No published release yet');
+        if (manual) this.ui.toast('No stable release has been published yet.', 'info');
       } else {
         this.setStatus(result.message || 'The update service is unavailable. You can continue using the simulator.', 'warning');
         if (manual) this.ui.toast(result.message || 'Update check unavailable.', 'warning');
@@ -405,7 +419,26 @@ export class DesktopManager {
     setText(this.element('updateSummary'), result.releaseName || 'A newer stable version is available.');
     setText(this.element('updateNotes'), result.notes || 'Release notes are available on the official GitHub Release page.');
     setText(this.element('updateDialogStatus'), '');
-    this.ui.openModal('update');
+    this.ui.openModal('update', { toggle: false });
+  }
+
+  async openReleasesPage() {
+    const url = this.updateConfig?.releasesUrl;
+    if (!url || !isGitHubReleaseUrl(url)) {
+      this.setStatus('The official Releases page is not available in this build.', 'warning');
+      if (this.ui?.toast) this.ui.toast('No official Releases page is configured.', 'warning');
+      return;
+    }
+    if (!this.bridge?.openExternal) {
+      if (this.ui?.toast) this.ui.toast('Opening the Releases page is available in the installed desktop application.', 'warning');
+      return;
+    }
+    const response = await this.bridge.openExternal(url);
+    if (response?.ok) {
+      this.ui.toast('Official GitHub Releases page opened in your browser.', 'info');
+    } else {
+      this.ui.toast(response?.message || 'The Releases page could not be opened.', 'warning');
+    }
   }
 
   async openReleasePage(kind) {

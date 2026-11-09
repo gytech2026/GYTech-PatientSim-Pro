@@ -9,14 +9,14 @@
 _Bringing Advanced Patient Monitoring and Emergency Response Simulation to the Browser._
 
 [![Version](https://img.shields.io/badge/version-1.0.0%20release%20candidate-00d9ff?style=flat-square)](#repository-status)
-[![License status](https://img.shields.io/badge/license-PENDING%20OWNER%20APPROVAL-orange?style=flat-square)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)](LICENSE)
 [![Documentation](https://img.shields.io/badge/documentation-complete-00d878?style=flat-square)](docs/ARCHITECTURE.md)
 [![Platform](https://img.shields.io/badge/platform-browser-5bc0eb?style=flat-square)](#technology-stack)
 [![Simulation only](https://img.shields.io/badge/use-educational%20simulation%20only-ffb020?style=flat-square)](#medical-disclaimer)
 
 **Copyright 2026 GYTech All Right Reserved.**
 
-**License status: PENDING OWNER APPROVAL — this repository is not yet published as open source.**
+**GYTech PatientSim Pro is an open-source project distributed under the Apache License 2.0 (SPDX: `Apache-2.0`).**
 
 </div>
 
@@ -70,8 +70,8 @@ _Bringing Advanced Patient Monitoring and Emergency Response Simulation to the B
 | Recommended repository | `GYTech-PatientSim-Pro` |
 | GitHub organization URL | **Pending owner confirmation** |
 | Homepage | **No verified deployment URL yet** |
-| License | **PENDING OWNER APPROVAL** — see [LICENSE](LICENSE) |
-| Open-source status | **Not yet open source** |
+| License | **Apache License 2.0** (`Apache-2.0`) — see [LICENSE](LICENSE) |
+| Open-source status | **Open source** under the Apache License 2.0 |
 | Release | Prepared, **not published** |
 | GitHub Actions | Configured, **not yet run on GitHub** |
 | Desktop framework | **Electron 34.1.1** (documented Tauri fallback decision) |
@@ -79,7 +79,7 @@ _Bringing Advanced Patient Monitoring and Emergency Response Simulation to the B
 | Linux desktop build | **CONFIGURED** — not built or tested on Windows host |
 | macOS desktop build | **CONFIGURED** — not built or tested on Windows host |
 | Code signing / notarisation | **NOT CONFIGURED / NOT CLAIMED** |
-| Desktop live update channel | **BLOCKED** — official GitHub repository not configured |
+| Desktop live update channel | **CONFIGURED** — `gytech2026/GYTech-PatientSim-Pro`; no stable release published yet |
 | Browser verification | Chromium/Electron local automation completed |
 | Cross-browser verification | Pending |
 | Testing report | [TESTING_REPORT.md](TESTING_REPORT.md) |
@@ -612,7 +612,7 @@ Only the Windows artefacts listed below were actually produced and launched.
 
 > **No public download URL or GitHub Release currently exists.** These files are
 > produced locally by the build and are not published. The owner must approve the
-> license, repository URL, contacts, signing, and release before any public
+> repository URL, contacts, signing, and release before any public
 > download link is added.
 
 Locally built Windows artefacts, when present, are in `release/`:
@@ -656,18 +656,20 @@ test build was not released. MSI cross-version upgrade was not executed.
 
 The desktop app implements **Notify Then Download** only:
 
-- It can check the official stable GitHub Release channel when the owner
-  configures `desktop/update-config.json`.
+- It checks the official stable GitHub Release channel configured in
+  `desktop/update-config.json` (`gytech2026/GYTech-PatientSim-Pro`).
 - It shows installed and latest versions, a release summary, and buttons for
   **Download Update**, **View Release Notes**, **Remind Me Later**, and
-  **Dismiss**.
+  **Dismiss**. The Settings panel also provides **RELEASES** to open the official
+  Releases page directly.
 - Download opens the official GitHub Release page in the system browser.
 - It never downloads, executes, or installs an update silently.
 - Network failure does not prevent the simulator from launching.
 
-**Current limitation:** the official repository is not configured. The app
-therefore reports that update checks are unavailable and performs no fabricated
-release check. See [docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
+**Current limitation:** the official repository is configured, but no stable
+GitHub Release has been published yet, so a check reports that no stable release
+exists. No package format supports automatic installation; updates are manual.
+See [docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
 
 ### Offline functionality
 
@@ -857,9 +859,9 @@ blocks therapy. Pads removed during charge disarm the device. Full guide:
 | Release engineering | Docs, governance, templates, workflows, screenshots | ✅ Prepared |
 | Desktop packaging | Electron shell, Windows EXE/MSI/portable, icons, About, logs, local data | ✅ Windows built/tested |
 | Cross-platform desktop | Linux AppImage/DEB/RPM and macOS DMG configuration | 🟡 Configured, not built here |
-| User-controlled updates | Notify-then-download UI and validation | ✅ Implemented/mock-tested; live channel pending |
+| User-controlled updates | Notify-then-download against the configured official repository; no automatic installation | ✅ Implemented/tested with fixtures; no stable release published |
 | Code signing / notarisation | Windows signing and Apple Developer ID/notarisation | 🟡 Pending owner credentials |
-| License and publication | Owner approval, repository URL, CI execution | 🟡 Pending owner |
+| License and publication | Apache-2.0 adopted; repository URL, CI execution, and release still pending | 🟡 Partially complete |
 | R-wave-timed sync and advanced pacing modeling | More realistic timing/capture behavior | ⬜ Planned |
 | Cross-browser automated matrix | Firefox/Safari verification | ⬜ Planned |
 | Full localization | Beyond core navigation labels | ⬜ Planned |
@@ -878,9 +880,10 @@ Full roadmap: [ROADMAP.md](ROADMAP.md).
   for native builds but were not built or launched on this Windows host.
 - **Unsigned builds.** Windows SmartScreen may warn. macOS signing/notarisation
   is not configured.
-- **Live update channel blocked.** The official GitHub repository is not
-  configured, so no real release check is performed. Synthetic fixtures are test
-  data, not a release.
+- **Live update channel configured, not yet exercised against a release.** The
+  official repository is `gytech2026/GYTech-PatientSim-Pro`, but no stable release
+  has been published, so a live check reports "no stable release". Synthetic
+  fixtures are test data, not a release. No format auto-installs.
 - **Cross-version upgrade tested only for NSIS using a synthetic 1.0.1 build.**
   Installing 1.0.1 over 1.0.0 succeeded and reported the new version. No public
   1.0.1 release exists, and an MSI cross-version upgrade was not executed.
@@ -938,7 +941,7 @@ findings.
 
 Contribution guide: [CONTRIBUTING.md](CONTRIBUTING.md)  
 Code of conduct: [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)  
-License/contribution status: **PENDING OWNER APPROVAL**
+License: **Apache License 2.0** (`Apache-2.0`) — see [LICENSE](LICENSE)
 
 Contributions must preserve the educational, software-only safety boundaries and
 must not introduce unsupported clinical claims, unlicensed assets, real patient
@@ -960,19 +963,26 @@ must be run on the owner's GitHub repository before a build-status claim is made
 
 ## License
 
-**Status: PENDING OWNER APPROVAL. This repository is not yet open source.**
+**GYTech PatientSim Pro is an open-source project distributed under the Apache
+License 2.0.** SPDX identifier: `Apache-2.0`.
 
-- Current notice: [LICENSE](LICENSE)
-- License comparison and explanation: [LICENSE-FAQ.md](LICENSE-FAQ.md)
-- Non-effective Apache-2.0 candidate draft:
+- Full license text: [LICENSE](LICENSE)
+- Attribution notices: [NOTICE](NOTICE)
+- Practical explanation and obligations: [LICENSE-FAQ.md](LICENSE-FAQ.md)
+- Superseded draft retained for history:
   [legal/LICENSE-APACHE-2.0-PROPOSED.txt](legal/LICENSE-APACHE-2.0-PROPOSED.txt)
 
-Apache License 2.0 is the recommended candidate for owner review because of its
-explicit patent grant, but **no license is effective until the owner approves
-and publishes canonical license text.** Do not describe the project as
-OSI-approved open source before then.
+The Apache License 2.0 permits commercial use, modification, distribution, and
+private use, and includes an express patent grant. Redistribution must include a
+copy of the license, retain copyright, patent, trademark, and attribution notices,
+state significant changes to modified files, and preserve the [NOTICE](NOTICE)
+attribution. See [LICENSE-FAQ.md](LICENSE-FAQ.md) for the practical summary.
 
-The exact mandatory notice is:
+The license grants copyright and patent permissions only. It does **not** grant
+trademark or branding rights, does **not** constitute medical-device approval or
+clinical validation, and does **not** remove the medical disclaimer below.
+
+The exact mandatory copyright notice is:
 
 > **Copyright 2026 GYTech All Right Reserved.**
 
@@ -1012,5 +1022,5 @@ See [ACKNOWLEDGMENTS.md](ACKNOWLEDGMENTS.md) and
 **Copyright 2026 GYTech All Right Reserved.**
 
 GYTech PatientSim Pro.  
-All rights reserved except for permissions expressly granted under the applicable
-approved LICENSE, once published.
+All rights reserved except for permissions expressly granted under the Apache
+License, Version 2.0 (see [LICENSE](LICENSE)).

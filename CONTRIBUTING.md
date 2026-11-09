@@ -6,9 +6,11 @@ boundaries, software quality, and honest documentation.
 
 **Copyright 2026 GYTech All Right Reserved.**
 
-> Licensing status is **PENDING OWNER APPROVAL**. Contributions cannot be
-> accepted into a publicly licensed release until the owner approves a license
-> and contribution terms. See [LICENSE](LICENSE) and [LICENSE-FAQ.md](LICENSE-FAQ.md).
+> GYTech PatientSim Pro is open source under the **Apache License 2.0**
+> (`Apache-2.0`). By submitting a contribution you agree that it is licensed
+> under the same license, as described in
+> [Section 14](#14-licensing-and-copyright-requirements). See [LICENSE](LICENSE)
+> and [LICENSE-FAQ.md](LICENSE-FAQ.md).
 
 ---
 
@@ -224,13 +226,20 @@ Reviewers should check:
 ## 14. Licensing and copyright requirements
 
 By submitting a contribution, you confirm that you have the right to submit it
-and that it does not knowingly include incompatible third-party material. Until
-the owner publishes an approved contribution policy, do not assume that a pull
-request will be merged or that a particular license applies.
+and that it does not knowingly include incompatible third-party material. Unless
+you explicitly state otherwise, contributions intentionally submitted for
+inclusion in this project are licensed under the Apache License 2.0, per Section
+5 of [LICENSE](LICENSE) ("inbound = outbound"). You retain copyright in your
+contribution and grant the project and its recipients the rights granted by that
+license.
 
-Do not sign or claim a Contributor License Agreement that GYTech has not
-published. If a future CLA or DCO policy is adopted, it will be published in the
-repository.
+A merged pull request does not guarantee inclusion in a release and does not
+transfer copyright.
+
+The project does not currently require a Contributor License Agreement or a
+Developer Certificate of Origin sign-off. Do not sign or claim a CLA that GYTech
+has not published. If a CLA or DCO policy is adopted later, it will be published
+in this repository.
 
 ## 15. Medical simulation safety requirements
 
