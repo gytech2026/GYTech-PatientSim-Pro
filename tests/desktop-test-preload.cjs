@@ -19,7 +19,7 @@ const appInfo = {
   name: 'GYTech PatientSim Pro',
   productName: 'GYTech PatientSim Pro',
   description: 'Advanced Patient Vital Signs Monitor & Defibrillator Simulator',
-  version: '1.0.0',
+  version: '1.0.1',
   publisher: 'GYTech',
   copyright: 'Copyright © 2026 GYTech. All Rights Reserved.',
   licenseStatus: 'Apache-2.0',

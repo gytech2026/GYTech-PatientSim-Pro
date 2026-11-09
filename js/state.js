@@ -12,7 +12,7 @@ export const ACTIVE_PATIENT_KEY = 'gytech.patientsim.active-patient.v1';
 export const HISTORY_KEY = 'gytech.patientsim.history.v1';
 
 export const APP_NAME = 'GYTech PatientSim Pro';
-export const APP_VERSION = '1.0.0';
+export const APP_VERSION = '1.0.1';
 export const APP_COPYRIGHT = 'Copyright 2026 GYTech All Right Reserved.';
 export const APP_COPYRIGHT_STANDARD = 'Copyright © 2026 GYTech. All Rights Reserved.';
 export const PROJECT_TITLE = 'Advanced Patient Vital Signs Monitor & Defibrillator Simulator';

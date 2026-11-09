@@ -1,7 +1,7 @@
 {
   "name": "gytech-patientsim-pro",
   "productName": "GYTech PatientSim Pro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Advanced Patient Vital Signs Monitor & Defibrillator Simulator. Professional browser-based educational simulation with a native desktop shell.",
   "main": "desktop/main.cjs",
