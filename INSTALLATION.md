@@ -21,7 +21,7 @@
 
 No public download URL is configured in this repository. The Windows artefacts
 are built locally under `release/`; they are not published until the owner
-approves the license, repository, contacts, signing, and release.
+approves the repository, contacts, signing, and release.
 
 ---
 

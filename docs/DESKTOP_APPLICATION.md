@@ -106,7 +106,7 @@ shortcut or an empty WebView.
 | Publisher / company | GYTech |
 | Version | 1.0.0 (read from `package.json`; no invented version) |
 | Copyright | Copyright © 2026 GYTech. All Rights Reserved. |
-| License | **PENDING OWNER APPROVAL** — see [LICENSE](../LICENSE) |
+| License | **Apache License 2.0** (`Apache-2.0`) — see [LICENSE](../LICENSE) |
 | Update channel | GitHub Releases, **owner configuration required** |
 
 ---

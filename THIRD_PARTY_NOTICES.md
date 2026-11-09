@@ -76,15 +76,15 @@ depends on the fonts installed on the user's device.
 
 | Asset group | Origin | Ownership / licence status | Usage |
 |---|---|---|---|
-| `assets/icons/gytech-patientsim-mark.svg` | Original GYTech artwork created for this project | Original project material; licensing pending owner approval | Favicon and application mark |
-| `build/icon.ico`, `build/icon.icns`, `build/icon.png`, `build/icons/*.png` | Rendered from the original GYTech application mark | Original project material; licensing pending owner approval | Windows, macOS, and Linux desktop icons |
-| `assets/branding/gytech-logo.svg` | Original GYTech artwork created for this project | Original project material; licensing pending owner approval | Branding |
-| `assets/branding/gytech-banner.svg` | Original GYTech artwork created for this project | Original project material; licensing pending owner approval | README banner |
-| `assets/branding/gytech-banner.png` | Rendered from the original GYTech banner | Original project material; licensing pending owner approval | README banner |
-| `assets/branding/social-preview.png` | Rendered from original GYTech branding | Original project material; licensing pending owner approval | GitHub social preview |
-| `assets/screenshots/*.png` | Captured from the running GYTech PatientSim Pro application | Original GYTech screenshots; licensing pending owner approval | Documentation |
-| Waveforms and chart graphics | Generated live at runtime by project code | Original project code; licensing pending owner approval | Application UI |
-| Alarm tones, metronome, and charge tones | Synthesized at runtime by project code | Original project code; licensing pending owner approval | Application audio |
+| `assets/icons/gytech-patientsim-mark.svg` | Original GYTech artwork created for this project | Original project material; Apache-2.0 | Favicon and application mark |
+| `build/icon.ico`, `build/icon.icns`, `build/icon.png`, `build/icons/*.png` | Rendered from the original GYTech application mark | Original project material; Apache-2.0 | Windows, macOS, and Linux desktop icons |
+| `assets/branding/gytech-logo.svg` | Original GYTech artwork created for this project | Original project material; Apache-2.0 | Branding |
+| `assets/branding/gytech-banner.svg` | Original GYTech artwork created for this project | Original project material; Apache-2.0 | README banner |
+| `assets/branding/gytech-banner.png` | Rendered from the original GYTech banner | Original project material; Apache-2.0 | README banner |
+| `assets/branding/social-preview.png` | Rendered from original GYTech branding | Original project material; Apache-2.0 | GitHub social preview |
+| `assets/screenshots/*.png` | Captured from the running GYTech PatientSim Pro application | Original GYTech screenshots; Apache-2.0 | Documentation |
+| Waveforms and chart graphics | Generated live at runtime by project code | Original project code; Apache-2.0 | Application UI |
+| Alarm tones, metronome, and charge tones | Synthesized at runtime by project code | Original project code; Apache-2.0 | Application audio |
 | Stock photography | None used | Not applicable | Not applicable |
 
 No icons, logos, screenshots, or branding from Philips, GE Healthcare, Mindray,

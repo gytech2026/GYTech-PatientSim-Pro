@@ -88,4 +88,4 @@ Commands and result notes:
 - [ ] I have added appropriate tests or documented why not.
 - [ ] I have updated documentation where behavior changed.
 - [ ] I have preserved the software-only, non-clinical safety boundaries.
-- [ ] I understand licensing is pending owner approval and no contributor metadata may be invented.
+- [ ] I understand the project is licensed under Apache-2.0, that contributions are accepted under that license, and that no contributor metadata may be invented.

@@ -1,6 +1,7 @@
 # Security Policy — GYTech PatientSim Pro
 
-**Project status:** release preparation; licensing pending owner approval.  
+**Project status:** release preparation; open source under the Apache License 2.0
+(`Apache-2.0`).  
 **Security contact:** `[GYTECH_SECURITY_CONTACT]` — configurable placeholder. No
 official security email address has been supplied or invented.
 

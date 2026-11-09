@@ -132,7 +132,7 @@ git push origin v1.0.0
 ```
 
 A tag is an explicit release action. Do not push an authorised tag until the
-license decision, contacts, signing decisions, and release notes are approved.
+contacts, signing decisions, and release notes are approved.
 
 ## Checksums
 

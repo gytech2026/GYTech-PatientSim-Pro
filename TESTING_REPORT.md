@@ -302,9 +302,9 @@ notarisation, live GitHub updates, and the full assisted installer UI remain
 unverified.
 
 The project is **not** ready for a clinically positioned release and is **not yet
-a published open-source release** because the license, repository identity,
-official update repository, and contacts require owner approval. GitHub Actions
-remain unexecuted.
+a published open-source release**. It is licensed under the Apache License 2.0,
+but repository identity, the official update repository, contacts, and release
+authorization remain pending. GitHub Actions remain unexecuted.
 
 No clinical validity is certified.
 

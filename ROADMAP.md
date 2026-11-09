@@ -78,8 +78,8 @@ not imply clinical validation or regulatory approval.
 
 ## In progress / release blockers 🟡
 
-- 🟡 **Owner license approval** — LICENSE remains pending; project must not be
-  described as open source yet.
+- ✅ **Owner license approval** — Apache-2.0 adopted; the repository LICENSE is
+  the canonical Apache License 2.0 text.
 - 🟡 **Official GitHub repository URL and owner identity** — placeholders must be
   replaced before publication.
 - 🟡 **Security/conduct contact details** — placeholders must be confirmed.
@@ -158,7 +158,7 @@ See [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) and
 
 ## Release criteria for v1.0.0
 
-- Owner-approved LICENSE and contribution terms.
+- ✅ Apache License 2.0 LICENSE and contribution terms.
 - Confirmed repository identity and metadata, including the official update
   repository.
 - Green GitHub Actions on the owner's repository, including native Linux and macOS

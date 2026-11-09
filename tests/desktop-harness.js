@@ -155,6 +155,11 @@ async function main() {
   record('Desktop app name and title', base.title.includes('GYTech PatientSim Pro') && base.appName === 'GYTECH', JSON.stringify(base));
   record('Simulation engine renders in desktop bridge context', base.heartRate === '74' && base.canvasCount >= 8, JSON.stringify(base));
   record('Desktop app info exposes configured update channel and version', base.aboutVersion === '1.0.0' && base.updateChecksDisabled === false && base.checkButtonDisabled === false, JSON.stringify(base));
+  record('Configured update channel shows no repository-not-configured warning', !/not been configured/i.test(base.updateStatus) && /stable-releases?|check/i.test(base.updateStatus), base.updateStatus);
+
+  await evaluate("document.getElementById('btnOpenReleases').click()");
+  await wait(300);
+  record('Releases button opens only the configured official GitHub Releases page', readActions().includes('open-external\thttps://github.com/fixture-owner/fixture-repo/releases'), readActions().slice(-220));
 
   await evaluate("document.getElementById('btnOpenAbout').click()");
   const about = await evaluate(`(() => ({
@@ -169,11 +174,20 @@ async function main() {
     disclaimer: document.querySelector('.about-disclaimer')?.textContent,
   }))()`);
   record('About dialog opens with version, publisher and runtime', about.visible && about.version === '1.0.0' && about.publisher === 'GYTech' && /Electron/.test(about.runtime), JSON.stringify(about));
-  record('About dialog contains pending license and medical disclaimer', about.license.includes('PENDING') && /not a medical device/i.test(about.disclaimer), about.license);
+  record('About dialog shows Apache-2.0 license and medical disclaimer', about.license === 'Apache-2.0' && /not a medical device/i.test(about.disclaimer), about.license);
   record('About dialog uses standardized copyright', about.copyright === 'Copyright © 2026 GYTech. All Rights Reserved.', about.copyright);
   await evaluate("document.querySelector('#modalAbout [data-close-modal]').click()");
   await wait(250);
 
+  const checksBefore = (readActions().match(/^check-for-updates\t/gm) || []).length;
+  await evaluate(`(() => {
+    const button = document.getElementById('btnCheckUpdates');
+    button.click();
+    button.click();
+  })()`);
+  await wait(400);
+  const checksAfter = (readActions().match(/^check-for-updates\t/gm) || []).length;
+  record('Overlapping manual update checks are de-duplicated', checksAfter - checksBefore === 1, `before=${checksBefore} after=${checksAfter}`);
   await evaluate("document.getElementById('btnCheckUpdates').click()");
   const updateShown = await waitFor("!document.getElementById('modalUpdate').hidden", 5000);
   const update = await evaluate(`(() => ({
@@ -268,6 +282,16 @@ async function main() {
     status: document.getElementById('updateStatusText')?.textContent?.trim(),
   }))()`);
   record('Up-to-date check does not display a false update', current.updateModalHidden && /latest stable/i.test(current.status), JSON.stringify(current));
+
+  await createWindow(port, 'no-release');
+  await evaluate("document.getElementById('btnCheckUpdates').click()");
+  await wait(600);
+  const noRelease = await evaluate(`(() => ({
+    updateModalHidden: document.getElementById('modalUpdate').hidden,
+    status: document.getElementById('updateStatusText')?.textContent?.trim(),
+    heartRate: document.getElementById('vitalHR')?.textContent?.trim(),
+  }))()`);
+  record('Missing stable release is reported without a false update', noRelease.updateModalHidden && /no stable release/i.test(noRelease.status) && noRelease.heartRate !== '--', JSON.stringify(noRelease));
 
   await evaluate("localStorage.setItem('gytech.patientsim.settings.v1', '{corrupted-json'); location.reload(); true");
   await waitFor("document.readyState === 'complete' && Boolean(document.getElementById('vitalHR'))", 10000);

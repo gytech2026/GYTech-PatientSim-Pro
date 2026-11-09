@@ -1,7 +1,7 @@
 {
   "enabled": true,
-  "repository": "",
-  "repositoryNote": "Owner must set this to the official GitHub repository in owner/repository form before publishing a release. An empty value disables live update checks; no fictional repository is configured.",
+  "repository": "gytech2026/GYTech-PatientSim-Pro",
+  "repositoryNote": "Official GitHub Releases update source. The application queries https://api.github.com/repos/gytech2026/GYTech-PatientSim-Pro/releases/latest, accepts only non-draft stable semver releases, and opens only the validated official GitHub release page. Public release checks require no token.",
   "checkIntervalHours": 6,
   "remindLaterHours": 24,
   "releaseNotesMaxLength": 2400

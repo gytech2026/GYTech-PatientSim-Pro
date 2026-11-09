@@ -15,7 +15,7 @@
 
 **Channel:** release candidate / publication pending  
 **Release date:** not scheduled  
-**License:** pending owner approval — not open source yet  
+**License:** Apache License 2.0 (`Apache-2.0`) — adopted after this release candidate was prepared; see [LICENSE](../LICENSE)  
 **Medical status:** educational simulation only; not a medical device  
 **Primary build verified:** Windows 11 x64 (Electron 34.1.1)
 
@@ -158,10 +158,13 @@ must never connect to or control real medical equipment. See
 
 ## License
 
-**PENDING OWNER APPROVAL.** No open-source license is currently effective. See
-[LICENSE](../LICENSE), [LICENSE-FAQ.md](../LICENSE-FAQ.md), and the proposed
-non-effective draft at
-[legal/LICENSE-APACHE-2.0-PROPOSED.txt](../legal/LICENSE-APACHE-2.0-PROPOSED.txt).
+**Apache License 2.0 (`Apache-2.0`).** The project is open source under the
+Apache License, Version 2.0. The license was adopted after this release candidate
+was prepared, replacing the earlier "pending owner approval" notice. See
+[LICENSE](../LICENSE), [NOTICE](../NOTICE), and [LICENSE-FAQ.md](../LICENSE-FAQ.md).
+The previous draft at
+[legal/LICENSE-APACHE-2.0-PROPOSED.txt](../legal/LICENSE-APACHE-2.0-PROPOSED.txt)
+is superseded and retained for history only.
 
 ---
 

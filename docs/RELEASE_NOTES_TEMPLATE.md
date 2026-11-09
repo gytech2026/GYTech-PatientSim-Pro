@@ -10,7 +10,7 @@ authorized. Delete every placeholder before publishing.
 
 **Release date:** YYYY-MM-DD
 **Channel:** stable / release candidate
-**License:** approved license identifier or “proprietary — all rights reserved”
+**License:** Apache License 2.0 (`Apache-2.0`)
 **Medical status:** educational simulation only; not a medical device
 
 ## Summary
@@ -54,6 +54,7 @@ response, or clinical decision-making. It delivers no electrical output and must
 not connect to or control real medical equipment.
 
 ## License and copyright
-State the approved license. Include:
+GYTech PatientSim Pro is licensed under the Apache License, Version 2.0
+(SPDX: `Apache-2.0`). Include:
 Copyright © 2026 GYTech. All Rights Reserved.
 ```

@@ -7,16 +7,21 @@ GYTech PatientSim Pro is an educational software simulation project. It is not a
 medical device and is not intended for clinical diagnosis, treatment, patient
 monitoring, or emergency decision-making.
 
-The project is currently released for repository review and release preparation.
-No open-source license has been approved. See LICENSE and LICENSE-FAQ.md.
+GYTech PatientSim Pro is released under the Apache License, Version 2.0. The full
+license text is in LICENSE. SPDX identifier: Apache-2.0.
 
 GYTech claims copyright ownership only in original project materials it has
 created. GYTech does not claim ownership of third-party software, tools,
 trademarks, standards, names, or resources referenced by or used in development.
 Third-party notices are provided in THIRD_PARTY_NOTICES.md.
 
-All rights are reserved except for permissions expressly granted under the
-applicable approved LICENSE, once published, or separate written authorization.
+Except for the permissions expressly granted under the Apache License, Version
+2.0, or separate written authorization, all rights are reserved.
+
+The Apache License, Version 2.0 grants no trademark or branding rights and does
+not replace or weaken any medical, clinical, or regulatory disclaimer in
+DISCLAIMER.md. The software is not a medical device and is not clinically
+validated.
 
 Branding, screenshots, diagrams, documentation, and source code in this
 repository are original GYTech project materials unless otherwise identified.

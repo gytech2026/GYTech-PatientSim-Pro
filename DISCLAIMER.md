@@ -72,8 +72,9 @@ on this simulator.
   storage behavior can vary by platform.
 - Simulated data may be lost when browser/desktop storage is cleared or the
   user-data directory is removed.
-- The project is not open source until the owner approves a license; no warranty
-  of fitness or availability is made.
+- The project is open source under the Apache License 2.0, which provides the
+  software on an "AS IS" basis without warranties of fitness or availability; no
+  warranty of fitness or availability is made.
 - Windows installers may be unsigned and trigger SmartScreen; macOS packages are
   unsigned and not notarised.
 - Linux and macOS packages are configured but not built or tested on the current

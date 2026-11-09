@@ -10,6 +10,14 @@
 > This audit is not legal advice, a clinical validation, a security certification,
 > or a regulatory review. No clinical validity is certified.
 
+> **Post-audit status update (2026-11-09):** the licensing finding AUD-001 has
+> been resolved after this audit. The owner approved the Apache License 2.0, the
+> canonical text is now in `LICENSE`, `package.json` and `CITATION.cff` declare
+> `Apache-2.0`, and the documentation no longer describes the project as
+> "pending". The findings below are preserved as the original audit snapshot;
+> other publication blockers (repository identity, update channel, CI execution,
+> signing, and native platform validation) remain open.
+
 ---
 
 ## 1. Executive assessment
@@ -29,6 +37,7 @@ also passed. No public binaries have been published.
 Publication is blocked by owner-level decisions and external validation:
 
 1. No license has been approved. The repository is not yet open source.
+   *(Resolved post-audit: Apache-2.0 was adopted; see the status update above.)*
 2. The official GitHub organization/repository URL and contact channels are
    unconfirmed placeholders.
 3. The official desktop update repository is not configured; live update checks
@@ -62,10 +71,10 @@ limitations.
 - **Recommended correction:** Owner must approve a license and publish canonical
   text. Apache-2.0 is recommended for patent clarity, subject to owner/legal
   approval and medical/reputational review.
-- **Verification status:** **PARTIALLY FIXED / OWNER DECISION PENDING.** A clearly
-  marked pending LICENSE, comparison, and non-effective Apache-2.0 draft now
-  exist. The project is explicitly marked “not yet open source.” No rights were
-  invented.
+- **Verification status:** **FIXED (post-audit).** Apache-2.0 was adopted on
+  2026-11-09; the canonical LICENSE text, SPDX metadata in `package.json` and
+  `CITATION.cff`, and updated documentation now exist. The statements above
+  describe the state at audit time and are preserved as a historical record.
 
 ### AUD-002 — No initialized Git repository, remote, or confirmed GitHub account
 
@@ -317,8 +326,10 @@ limitations.
 - **Recommended correction:** Owner decides license, release version/date,
   publication destination, and whether to make npm-publishable. Update all metadata
   consistently.
-- **Verification status:** **OPEN — OWNER DECISION REQUIRED.** No invented dates,
-  DOI, license, or release claims.
+- **Verification status:** **PARTIALLY RESOLVED (post-audit).** The license was
+  decided (Apache-2.0) and metadata now declares it; release date, repository
+  URL, DOI, and npm publishability remain owner decisions. No dates, DOIs, or
+  release claims were invented.
 
 ### AUD-019 — Language localization is partial
 
@@ -537,7 +548,7 @@ limitations.
 | Acoustic/print/speech | NOT EXECUTED end-to-end |
 | Accessibility | NOT FORMALLY AUDITED |
 | Clinical validation | NOT APPLICABLE / NOT CLAIMED |
-| License approval | PENDING OWNER |
+| License approval | RESOLVED post-audit — Apache-2.0 adopted |
 | Repository publication | NOT PERFORMED |
 
 ---
@@ -555,14 +566,14 @@ limitations.
 | Source completeness | Ready |
 | Local test status | Ready, Chromium/Electron + desktop integration tested |
 | Documentation completeness | Prepared, pending owner review/contact details |
-| Legal licensing | Not ready — owner approval required |
+| Legal licensing | Ready — Apache-2.0 adopted (post-audit) |
 | GitHub publication | Not ready — repository/account/CI validation required |
 | Clinical use | **Not permitted / not validated** |
-| Public open-source claim | **Not ready until LICENSE is approved** |
+| Public open-source claim | Supported — Apache-2.0 LICENSE effective (post-audit) |
 
-**Final recommendation:** proceed with owner review, license decision, contact
-details, repository creation, and GitHub Actions validation. Do not publish a
-release or call the project open source yet.
+**Final recommendation:** proceed with owner review, contact details, repository
+creation, and GitHub Actions validation. The license decision is complete
+(Apache-2.0). Do not publish a release until the remaining criteria are met.
 
 ---
 

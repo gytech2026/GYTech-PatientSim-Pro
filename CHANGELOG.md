@@ -12,9 +12,17 @@ Copyright © 2026 GYTech. All Rights Reserved.
 
 ## [Unreleased]
 
+### Changed
+
+- Relicensed GYTech PatientSim Pro under the **Apache License, Version 2.0**
+  (SPDX: `Apache-2.0`). `LICENSE` now contains the canonical Apache-2.0 text,
+  `package.json` and `CITATION.cff` declare `Apache-2.0`, and README, NOTICE,
+  LICENSE-FAQ, CONTRIBUTING and release documentation were updated. The former
+  "PENDING OWNER APPROVAL" notice and the non-effective Apache-2.0 draft are
+  superseded.
+
 ### Planned
 
-- Owner-approved license and contribution policy.
 - Confirmed GitHub organization/repository URL and homepage.
 - Official GitHub repository configured for live update checks.
 - Windows code signing and macOS Developer ID signing/notarisation.
@@ -28,8 +36,9 @@ Copyright © 2026 GYTech. All Rights Reserved.
 
 ## [1.0.0] — UNRELEASED RELEASE CANDIDATE
 
-**Status:** publication blocked pending owner approval of license, repository
-identity, and deployment destination. No release date has been assigned.
+**Status:** publication blocked pending owner approval of repository identity
+and deployment destination. The license was adopted as Apache-2.0 after this
+release candidate was prepared. No release date has been assigned.
 
 ### Added
 

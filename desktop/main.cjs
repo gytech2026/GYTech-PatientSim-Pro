@@ -192,6 +192,7 @@ function getUpdateConfig() {
     enabled: true,
     repository: '',
     configured: false,
+    releasesUrl: '',
     checkIntervalHours: 6,
     remindLaterHours: 24,
     releaseNotesMaxLength: 2400,
@@ -200,10 +201,12 @@ function getUpdateConfig() {
   try {
     const parsed = JSON.parse(fs.readFileSync(UPDATE_CONFIG_PATH, 'utf8'));
     const repository = typeof parsed.repository === 'string' ? parsed.repository.trim() : '';
+    const configured = isOfficialRepository(repository);
     updateConfigCache = {
       enabled: parsed.enabled !== false,
       repository,
-      configured: isOfficialRepository(repository),
+      configured,
+      releasesUrl: configured ? `https://github.com/${repository}/releases` : '',
       checkIntervalHours: Number.isFinite(parsed.checkIntervalHours) && parsed.checkIntervalHours >= 1
         ? Math.min(parsed.checkIntervalHours, 168)
         : 6,
@@ -252,6 +255,13 @@ async function fetchLatestRelease() {
     });
     if (!response.ok) {
       appendLog('warn', `Update API returned HTTP ${response.status}`);
+      if (response.status === 404) {
+        return {
+          status: 'no-release',
+          currentVersion: CURRENT_VERSION,
+          message: 'No stable release has been published for GYTech PatientSim Pro yet. You can check the official Releases page manually.',
+        };
+      }
       return {
         status: 'error',
         currentVersion: CURRENT_VERSION,
@@ -603,7 +613,7 @@ function registerIpcHandlers() {
       version: CURRENT_VERSION,
       publisher: 'GYTech',
       copyright: COPYRIGHT,
-      licenseStatus: 'PENDING OWNER APPROVAL',
+      licenseStatus: 'Apache-2.0',
       platform: process.platform,
       arch: process.arch,
       packaged: app.isPackaged,
@@ -618,14 +628,26 @@ function registerIpcHandlers() {
         configured: updateConfig.configured,
         checkIntervalHours: updateConfig.checkIntervalHours,
         remindLaterHours: updateConfig.remindLaterHours,
+        releasesUrl: updateConfig.releasesUrl,
       },
     };
   });
 
+  // Single-flight guard: renderer controls and the menu item can request a
+  // check concurrently, but only one GitHub API request may run at a time.
+  let updateCheckInFlight = null;
   ipcMain.handle('gytech:check-updates', async () => {
-    const result = await fetchLatestRelease();
-    appendLog('info', `Update check completed with status: ${result.status}`);
-    return result;
+    if (updateCheckInFlight) return updateCheckInFlight;
+    updateCheckInFlight = (async () => {
+      const result = await fetchLatestRelease();
+      appendLog('info', `Update check completed with status: ${result.status}`);
+      return result;
+    })();
+    try {
+      return await updateCheckInFlight;
+    } finally {
+      updateCheckInFlight = null;
+    }
   });
 
   ipcMain.handle('gytech:open-external', async (event, url) => {

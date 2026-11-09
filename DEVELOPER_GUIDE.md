@@ -265,7 +265,8 @@ profile.
 
 Read [CONTRIBUTING.md](CONTRIBUTING.md) before starting. Keep pull requests focused,
 update documentation and tests, and avoid medical claims beyond the simulator's
-scope. Licensing remains pending owner approval.
+scope. The project is open source under the Apache License 2.0 (`Apache-2.0`);
+contributions are accepted under that license.
 
 ---
 
