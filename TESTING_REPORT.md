@@ -1,6 +1,6 @@
 # Testing and Validation Report — GYTech PatientSim Pro
 
-**Version:** 1.0.0 repository release candidate  
+**Version:** 1.0.1 (release verification; the packaged-artefact table below records the earlier 1.0.0 build evidence)  
 **Test date:** 2026-11-09  
 **Environment:** Windows 11 x64; Electron 34.1.1 (Chromium 132); electron-builder 26.18.1; Node.js development environment; NSIS/WiX tooling downloaded by electron-builder  
 **Copyright © 2026 GYTech. All Rights Reserved.**
@@ -151,8 +151,10 @@ files.
 | Windows code signing | **NOT CONFIGURED** — unsigned; SmartScreen warning possible |
 | macOS DMG / Linux AppImage/DEB/RPM | **NOT BUILT OR TESTED** on this Windows host |
 
-The synthetic 1.0.1 upgrade build was created solely for installer testing and
-was **not released**; it was removed afterward. No public 1.0.1 exists.
+The synthetic 1.0.1 upgrade build used for installer testing was **not the
+published release** and was removed afterward. The public v1.0.1 release was
+published later; its packages were not part of the original 1.0.0 test run
+recorded above.
 
 ### Offline-like startup
 

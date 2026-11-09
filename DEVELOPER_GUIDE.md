@@ -1,6 +1,6 @@
 # Developer Guide — GYTech PatientSim Pro
 
-**Version:** 1.0.0 repository release candidate  
+**Version:** 1.0.1 (current stable release)  
 **Copyright © 2026 GYTech. All Rights Reserved.**
 
 > Educational simulation software only. See [DISCLAIMER.md](DISCLAIMER.md).

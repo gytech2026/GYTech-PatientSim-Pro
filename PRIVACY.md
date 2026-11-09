@@ -1,6 +1,6 @@
 # Privacy Statement — GYTech PatientSim Pro
 
-**Effective for repository release candidate 1.0.0.**  
+**Effective for GYTech PatientSim Pro 1.0.1.**  
 **Copyright 2026 GYTech All Right Reserved.**
 
 This privacy statement describes the browser application and the Electron desktop

@@ -47,7 +47,7 @@ action has been taken.
 The README uses only badges and statements that can be supported from this
 repository:
 
-- Version: 1.0.0 release candidate.
+- Version: 1.0.1 (current stable release).
 - License: Apache License 2.0 (`Apache-2.0`).
 - Documentation: present.
 - Test status: descriptive local results only; no remote CI badge until the
@@ -158,19 +158,22 @@ No push, release, or deployment has been performed by this preparation process.
 
 ## 7. Release preparation
 
-A candidate release note is provided at
-[docs/RELEASE_NOTES_v1.0.0.md](RELEASE_NOTES_v1.0.0.md). It is marked draft and
-must not be published until:
+Release notes are provided at
+[docs/RELEASE_NOTES_v1.0.1.md](RELEASE_NOTES_v1.0.1.md) for the published stable
+release; the earlier [v1.0.0 notes](RELEASE_NOTES_v1.0.0.md) are retained as
+history. Both tags and releases already exist and must not be moved or recreated.
 
-- the license is approved (Apache-2.0, effective),
-- the repository URL is registered,
-- CI and the native desktop release jobs have run successfully,
-- the update repository is configured or live updates remain explicitly disabled,
-- signing/notarisation decisions are recorded,
-- the owner has approved the release.
+Before any future authorised release:
 
-Suggested first tag once approved: `v1.0.0` only if the declared release criteria
-are satisfied; otherwise use a pre-release tag such as `v0.1.0` or `v1.0.0-rc.1`.
+- confirm the license remains Apache-2.0,
+- update the version in `package.json`, `js/state.js`, and the docs,
+- run the full test suite and repository validation,
+- verify the update repository is configured,
+- record signing/notarisation decisions,
+- obtain owner approval.
+
+Use a new semantic version tag only after the release criteria are satisfied; do
+not reuse `v1.0.0` or `v1.0.1`.
 
 ---
 
@@ -194,8 +197,8 @@ are satisfied; otherwise use a pre-release tag such as `v0.1.0` or `v1.0.0-rc.1`
 | Decision | Status |
 |---|---|
 | Permanent license | Apache License 2.0 (`Apache-2.0`) — adopted |
-| GitHub organization/repository URL | Pending |
-| Official update repository | Configured — `gytech2026/GYTech-PatientSim-Pro`; no stable release yet |
+| GitHub organization/repository URL | Configured — `https://github.com/gytech2026/GYTech-PatientSim-Pro` |
+| Official update repository | Configured — `gytech2026/GYTech-PatientSim-Pro`; v1.0.1 published |
 | Official contact channels | Pending |
 | Open-source vs source-available positioning | Open source under Apache-2.0 |
 | Release version/date | Pending |

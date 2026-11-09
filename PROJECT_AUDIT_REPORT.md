@@ -14,18 +14,19 @@
 > update-channel finding AUD-026 have been addressed after this audit. The owner
 > approved the Apache License 2.0, the canonical text is now in `LICENSE`,
 > `package.json` and `CITATION.cff` declare `Apache-2.0`, and the documentation no
-> longer describes the project as "pending". `desktop/update-config.json` now
-> configures the official repository `gytech2026/GYTech-PatientSim-Pro`; no stable
-> release has been published yet, so the live update flow remains unexercised. The
-> findings below are preserved as the original audit snapshot; other publication
-> blockers (release publication, CI execution, signing, and native platform
-> validation) remain open.
+> longer describes the project as "pending". `desktop/update-config.json` configures
+> the official repository `gytech2026/GYTech-PatientSim-Pro`, and **v1.0.1** is
+> published as the current stable GitHub Release. The live in-app update flow has
+> not been exercised end-to-end here. The findings below are preserved as the
+> original audit snapshot; remaining blockers are CI execution, signing, and
+> native platform validation.
 
 ---
 
 ## 1. Executive assessment
 
 **Current state: READY FOR OWNER REVIEW — NOT READY FOR PUBLIC PUBLICATION.**
+*(Historical assessment; v1.0.1 is now published — see the post-audit update above.)*
 
 The application is functional in the tested Chromium/Electron environment, and
 the repository has been expanded into a professional release candidate with

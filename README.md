@@ -8,7 +8,7 @@
 
 _Bringing Advanced Patient Monitoring and Emergency Response Simulation to the Browser._
 
-[![Version](https://img.shields.io/badge/version-1.0.0%20release%20candidate-00d9ff?style=flat-square)](#repository-status)
+[![Version](https://img.shields.io/badge/version-1.0.1%20stable-00d9ff?style=flat-square)](#repository-status)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue?style=flat-square)](LICENSE)
 [![Documentation](https://img.shields.io/badge/documentation-complete-00d878?style=flat-square)](docs/ARCHITECTURE.md)
 [![Platform](https://img.shields.io/badge/platform-browser-5bc0eb?style=flat-square)](#technology-stack)
@@ -24,12 +24,11 @@ _Bringing Advanced Patient Monitoring and Emergency Response Simulation to the B
 > **This application is an educational software simulation only. It is not a medical device, is not clinically validated, does not replace professional training, and must not be used for patient diagnosis, treatment, or actual emergency medical decisions.**
 
 > [!NOTE]
-> GitHub-native badges for CI, issues, pull requests, contributors, repository
-> size, and last commit are intentionally omitted until the official GYTech
-> repository is created and the prepared workflows have run on GitHub. Adding
-> them before that would fabricate repository state. See
-> [Repository status](#repository-status) and
-> [docs/GITHUB_REPOSITORY_SETUP.md](docs/GITHUB_REPOSITORY_SETUP.md).
+> GitHub-native CI, issue, pull request, contributor, and repository-size badges
+> are intentionally omitted until the prepared workflows have a verified green
+> run. The repository and its releases exist; adding unverified status badges
+> would fabricate repository state. See [Repository status](#repository-status)
+> and [docs/GITHUB_REPOSITORY_SETUP.md](docs/GITHUB_REPOSITORY_SETUP.md).
 
 ---
 
@@ -65,26 +64,27 @@ _Bringing Advanced Patient Monitoring and Emergency Response Simulation to the B
 |---|---|
 | Project | GYTech PatientSim Pro |
 | Full title | Advanced Patient Vital Signs Monitor & Defibrillator Simulator |
-| Version | 1.0.0 release candidate |
+| Version | **1.0.1** (current stable release) |
 | Owner / copyright holder | **GYTech** |
 | Recommended repository | `GYTech-PatientSim-Pro` |
-| GitHub organization URL | **Pending owner confirmation** |
+| GitHub organization URL | `https://github.com/gytech2026` |
 | Homepage | **No verified deployment URL yet** |
 | License | **Apache License 2.0** (`Apache-2.0`) — see [LICENSE](LICENSE) |
 | Open-source status | **Open source** under the Apache License 2.0 |
-| Release | Prepared, **not published** |
+| Release | **v1.0.1 published** — Windows x64 (2026-11-09) |
+| Latest download | [GitHub Releases — v1.0.1](https://github.com/gytech2026/GYTech-PatientSim-Pro/releases/tag/v1.0.1) |
 | GitHub Actions | Configured, **not yet run on GitHub** |
 | Desktop framework | **Electron 34.1.1** (documented Tauri fallback decision) |
-| Windows desktop build | **BUILT** — EXE, MSI, Portable ZIP; install/uninstall smoke-tested |
+| Windows desktop build | **PUBLISHED v1.0.1** — EXE, MSI, Portable ZIP; Windows 11 x64 tested |
 | Linux desktop build | **CONFIGURED** — not built or tested on Windows host |
 | macOS desktop build | **CONFIGURED** — not built or tested on Windows host |
 | Code signing / notarisation | **NOT CONFIGURED / NOT CLAIMED** |
-| Desktop live update channel | **CONFIGURED** — `gytech2026/GYTech-PatientSim-Pro`; no stable release published yet |
+| Desktop live update channel | **CONFIGURED** — `gytech2026/GYTech-PatientSim-Pro`; **v1.0.1** is the latest stable release |
 | Browser verification | Chromium/Electron local automation completed |
 | Cross-browser verification | Pending |
 | Testing report | [TESTING_REPORT.md](TESTING_REPORT.md) |
 | Independent audit | [PROJECT_AUDIT_REPORT.md](PROJECT_AUDIT_REPORT.md) |
-| Release notes | [Draft v1.0.0 release notes](docs/RELEASE_NOTES_v1.0.0.md) — not published |
+| Release notes | [v1.0.1 release notes](docs/RELEASE_NOTES_v1.0.1.md) — published |
 | Medical/regulatory status | Not a medical device; no certification claimed |
 
 **Repository description:** A professional browser-based patient vital signs
@@ -579,7 +579,8 @@ Electron/Chromium runtime and include its third-party notices.
 
 ### Desktop runtime
 
-- Windows 10/11 x64 — verified build and launch on Windows 11 x64.
+- Windows 11 x64 — published build and launch verified. Windows 10 x64 is **not
+  verified**.
 - Linux x64 — AppImage/DEB/RPM configured; not verified on this host.
 - macOS x64/ARM64 — DMG configured; not verified on this host.
 - The desktop package bundles Electron; Node.js is **not** required by end users.
@@ -601,7 +602,7 @@ The full assessment and security architecture are in
 
 | Platform | Target | Current status |
 |---|---|---|
-| Windows 10/11 x64 | EXE, MSI, Portable ZIP | **BUILT** and **TESTED** on Windows 11 x64 |
+| Windows 11 x64 | EXE, MSI, Portable ZIP | **PUBLISHED v1.0.1** and tested on Windows 11 x64; Windows 10 not verified |
 | Linux x64 | AppImage, DEB, RPM | **CONFIGURED**; not built or tested on this host |
 | macOS x64 / ARM64 | DMG | **CONFIGURED**; not built or tested on this host |
 
@@ -610,27 +611,26 @@ Only the Windows artefacts listed below were actually produced and launched.
 
 ### Download
 
-> **No public download URL or GitHub Release currently exists.** These files are
-> produced locally by the build and are not published. The owner must approve the
-> repository URL, contacts, signing, and release before any public
-> download link is added.
+**v1.0.1 is the current stable release.** Windows x64 packages are published on
+GitHub Releases:
 
-Locally built Windows artefacts, when present, are in `release/`:
+<https://github.com/gytech2026/GYTech-PatientSim-Pro/releases/tag/v1.0.1>
 
-| Package | Expected file | Status |
+| Package | Published file | SHA-256 (GitHub asset digest) |
 |---|---|---|
-| Assisted EXE installer | `GYTech-PatientSim-Pro-Setup-v1.0.0.exe` | **BUILT** |
-| MSI package | `GYTech-PatientSim-Pro-x64-v1.0.0.msi` | **BUILT** |
-| Portable ZIP | `GYTech-PatientSim-Pro-Portable-v1.0.0.zip` | **BUILT** |
-| Checksums | `SHA256SUMS.txt` | Generated by `npm run desktop:checksums` |
+| Assisted EXE installer | `GYTech-PatientSim-Pro-Setup-v1.0.1.exe` | `ae451053da157b7bfba005aa0cb473d1227307d0d642d979bfe71550aba63fd0` |
+| MSI package | `GYTech-PatientSim-Pro-x64-v1.0.1.msi` | `56aa802d13bba451b51c0ec3e1531807e543f83905042588b608c36b6d624b6c` |
+| Portable ZIP | `GYTech-PatientSim-Pro-Portable-v1.0.1.zip` | `8530b1683f22bfbde2331d07a9afdcafca1d38353782d216fdb260a1ed199a42` |
+
+Linux and macOS packages are **not published or verified**. Verify the downloaded
+file against the SHA-256 digest shown on the release page before installing.
 
 The installers are **unsigned**. Windows SmartScreen may warn. No code-signing
 certificate or Apple notarisation is configured or claimed.
 
 ### Install on Windows
 
-1. Run `GYTech-PatientSim-Pro-Setup-v1.0.0.exe` and follow the assisted installer,
-   or install the MSI.
+1. Download `GYTech-PatientSim-Pro-Setup-v1.0.1.exe` and run it, or install the MSI.
 2. Choose the installation directory if using the EXE installer.
 3. The installer creates a Start Menu shortcut and an optional Desktop shortcut.
 4. Launch **GYTech PatientSim Pro** from the Start Menu.
@@ -639,12 +639,13 @@ certificate or Apple notarisation is configured or claimed.
 
 The MSI is intended for standard Windows Installer deployment. MSI and EXE
 clean-install/uninstall operations were smoke-tested. An NSIS 1.0.0 → synthetic
-1.0.1 upgrade was also executed locally and reported version 1.0.1; the synthetic
-test build was not released. MSI cross-version upgrade was not executed.
+1.0.1 upgrade was also executed locally and reported version 1.0.1; the public
+v1.0.1 release is now published, but a public 1.0.0 → 1.0.1 upgrade was not
+separately executed. MSI cross-version upgrade was not executed.
 
 ### Portable version
 
-1. Extract the complete `GYTech-PatientSim-Pro-Portable-v1.0.0.zip` to a folder.
+1. Extract the complete `GYTech-PatientSim-Pro-Portable-v1.0.1.zip` to a folder.
 2. Run `GYTech PatientSim Pro.exe` from the extracted folder.
 3. No installer or administrator permission is required.
 4. Portable mode still stores local data under
@@ -666,10 +667,10 @@ The desktop app implements **Notify Then Download** only:
 - It never downloads, executes, or installs an update silently.
 - Network failure does not prevent the simulator from launching.
 
-**Current limitation:** the official repository is configured, but no stable
-GitHub Release has been published yet, so a check reports that no stable release
-exists. No package format supports automatic installation; updates are manual.
-See [docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
+**Current state:** v1.0.1 is the published stable release, so a successful check
+offers it to older installations. No package format supports automatic
+installation; updates are manual. The live in-app flow was not exercised
+end-to-end in this workspace. See [docs/UPDATE_SYSTEM.md](docs/UPDATE_SYSTEM.md).
 
 ### Offline functionality
 
@@ -859,9 +860,9 @@ blocks therapy. Pads removed during charge disarm the device. Full guide:
 | Release engineering | Docs, governance, templates, workflows, screenshots | ✅ Prepared |
 | Desktop packaging | Electron shell, Windows EXE/MSI/portable, icons, About, logs, local data | ✅ Windows built/tested |
 | Cross-platform desktop | Linux AppImage/DEB/RPM and macOS DMG configuration | 🟡 Configured, not built here |
-| User-controlled updates | Notify-then-download against the configured official repository; no automatic installation | ✅ Implemented/tested with fixtures; no stable release published |
+| User-controlled updates | Notify-then-download against the configured official repository; no automatic installation | ✅ Implemented/tested; v1.0.1 stable release published |
 | Code signing / notarisation | Windows signing and Apple Developer ID/notarisation | 🟡 Pending owner credentials |
-| License and publication | Apache-2.0 adopted; repository URL, CI execution, and release still pending | 🟡 Partially complete |
+| License and publication | Apache-2.0 adopted; v1.0.1 published; CI/contacts still pending | 🟡 Partially complete |
 | R-wave-timed sync and advanced pacing modeling | More realistic timing/capture behavior | ⬜ Planned |
 | Cross-browser automated matrix | Firefox/Safari verification | ⬜ Planned |
 | Full localization | Beyond core navigation labels | ⬜ Planned |
@@ -876,17 +877,18 @@ Full roadmap: [ROADMAP.md](ROADMAP.md).
   medical certification is claimed.
 - **No physical output.** The application cannot defibrillate, pace, monitor a
   real patient, or communicate with real medical equipment.
-- **Windows only verified for desktop packaging.** Linux and macOS are configured
-  for native builds but were not built or launched on this Windows host.
+- **Windows 11 x64 only is verified.** Windows 10 compatibility is not verified.
+  Linux and macOS are configured for native builds but were not built or launched
+  here.
 - **Unsigned builds.** Windows SmartScreen may warn. macOS signing/notarisation
   is not configured.
-- **Live update channel configured, not yet exercised against a release.** The
-  official repository is `gytech2026/GYTech-PatientSim-Pro`, but no stable release
-  has been published, so a live check reports "no stable release". Synthetic
-  fixtures are test data, not a release. No format auto-installs.
+- **Live update channel configured; in-app flow not exercised end-to-end.** The
+  official repository is `gytech2026/GYTech-PatientSim-Pro` and **v1.0.1** is the
+  published stable release. No format auto-installs; updates are manual.
 - **Cross-version upgrade tested only for NSIS using a synthetic 1.0.1 build.**
-  Installing 1.0.1 over 1.0.0 succeeded and reported the new version. No public
-  1.0.1 release exists, and an MSI cross-version upgrade was not executed.
+  Installing that build over 1.0.0 succeeded and reported 1.0.1. The public
+  v1.0.1 release exists, but a public 1.0.0 → 1.0.1 upgrade and an MSI
+  cross-version upgrade were not executed.
 - Synchronized cardioversion is not real R-wave-timed hardware output.
 - Pacing failure-to-capture is simplified.
 - 3-/5-lead simultaneous monitor strips are partial; the 12-lead educational view
@@ -894,8 +896,8 @@ Full roadmap: [ROADMAP.md](ROADMAP.md).
 - Language localization is partial.
 - Acoustic alarms, speech synthesis, native print dialogs, accessibility, and
   cross-browser behavior are not fully covered by automation.
-- GitHub Actions desktop workflows have not been executed because no official
-  repository exists yet.
+- GitHub Actions desktop release workflows are configured; their execution state
+  is not claimed here without a verified run.
 - Local storage is not secure clinical-record storage and should not contain real
   patient data.
 
@@ -909,9 +911,11 @@ Local automated verification has been executed in Chromium/Electron:
 - **Required functional suite:** 21 / 21 checks passed.
 - **Deep scenario/device suite:** 12 / 12 checks passed.
 - **UI and responsive suite:** 18 / 18 checks passed.
-- **Desktop integration suite:** 19 / 19 checks passed using a synthetic update
-  bridge (About, update notification/dismiss/snooze/download, offline error,
-  local-data validation, resize, fullscreen, reload persistence).
+- **Desktop integration suite:** 24 / 24 checks passed using a synthetic update
+  bridge (About, update notification/repeated-notification visibility,
+  dismiss/snooze/download, offline error, local-data validation, resize,
+  fullscreen, reload persistence). The released build reported **75 checks** in
+  total (21 + 12 + 18 + 24).
 - **Packaged desktop smoke:** passed from `win-unpacked`, the portable ZIP, the
   NSIS-installed app, and the MSI-installed app.
 - **Windows installers:** EXE and MSI clean install/uninstall tested; portable ZIP
@@ -923,10 +927,10 @@ Local automated verification has been executed in Chromium/Electron:
 - **Secret scan:** basic local signature scan via `npm run check:secrets`.
 - **Genuine screenshots:** 16 application screenshots captured and verified.
 
-The live update channel, Linux/macOS builds, Windows code signing, macOS
-notarisation, public cross-version upgrades, and MSI cross-version upgrades are
-**not** verified. GitHub Actions desktop workflows are configured but have not
-been run on GitHub.
+The live update flow against the published v1.0.1 release, Linux/macOS builds,
+Windows code signing, macOS notarisation, public cross-version upgrades, and MSI
+cross-version upgrades are **not** verified. GitHub Actions desktop workflows are
+configured; do not claim their result without a verified run.
 
 These results do **not** constitute clinical validation, a security
 certification, cross-browser certification, or proof that every control is free

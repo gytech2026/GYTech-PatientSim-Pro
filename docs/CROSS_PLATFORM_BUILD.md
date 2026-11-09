@@ -41,9 +41,9 @@ Outputs in `release/`:
 
 | Format | Expected name |
 |---|---|
-| Assisted NSIS installer | `GYTech-PatientSim-Pro-Setup-v1.0.0.exe` |
-| MSI | `GYTech-PatientSim-Pro-x64-v1.0.0.msi` |
-| Portable ZIP | `GYTech-PatientSim-Pro-Portable-v1.0.0.zip` |
+| Assisted NSIS installer | `GYTech-PatientSim-Pro-Setup-v1.0.1.exe` |
+| MSI | `GYTech-PatientSim-Pro-x64-v1.0.1.msi` |
+| Portable ZIP | `GYTech-PatientSim-Pro-Portable-v1.0.1.zip` |
 | Checksums | `SHA256SUMS.txt` |
 
 The installers are unsigned unless the owner configures a code-signing
@@ -123,12 +123,13 @@ The workflow has **not been executed on GitHub** from this workstation. Check th
 Actions run for the authoritative result after pushing; do not claim a build
 passed without a green workflow run.
 
-Tagging convention:
+Tagging convention for a future authorised release (`v1.0.0` and `v1.0.1`
+already exist; do not move or recreate them):
 
 ```bash
-# Only after owner approval and repository setup
-git tag v1.0.0
-git push origin v1.0.0
+# Only after owner approval, with the release commit reviewed
+git tag <vX.Y.Z>
+git push origin <vX.Y.Z>
 ```
 
 A tag is an explicit release action. Do not push an authorised tag until the
@@ -142,7 +143,7 @@ missing. It does not create placeholder entries.
 
 ## Versioning
 
-Version `1.0.0` is read from `package.json` and used by Electron, the application
+Version `1.0.1` is read from `package.json` and used by Electron, the application
 About panel, and installer names. A future release must update:
 
 1. `package.json` version

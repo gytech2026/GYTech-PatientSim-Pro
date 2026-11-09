@@ -2,7 +2,7 @@
 
 **GYTech PatientSim Pro — Advanced Patient Vital Signs Monitor & Defibrillator Simulator**
 
-**Version:** 1.0.0  
+**Version:** 1.0.1  
 **Copyright © 2026 GYTech. All Rights Reserved.**
 
 > Educational simulation only. This is not a medical device. It delivers no
@@ -104,7 +104,7 @@ shortcut or an empty WebView.
 | Full title | Advanced Patient Vital Signs Monitor & Defibrillator Simulator |
 | Application ID | `com.gytech.patientsimpro` |
 | Publisher / company | GYTech |
-| Version | 1.0.0 (read from `package.json`; no invented version) |
+| Version | 1.0.1 (read from `package.json`; no invented version) |
 | Copyright | Copyright © 2026 GYTech. All Rights Reserved. |
 | License | **Apache License 2.0** (`Apache-2.0`) — see [LICENSE](../LICENSE) |
 | Update channel | GitHub Releases — `gytech2026/GYTech-PatientSim-Pro` (notify then manual download; no automatic installation) |
