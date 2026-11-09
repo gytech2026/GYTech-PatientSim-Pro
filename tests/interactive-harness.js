@@ -21,7 +21,6 @@ let server;
 let win;
 
 app.commandLine.appendSwitch('disable-gpu');
-app.commandLine.appendSwitch('no-sandbox');
 app.commandLine.appendSwitch('background-throttling-disabled');
 
 function startServer() {

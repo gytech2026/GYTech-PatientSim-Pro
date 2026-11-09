@@ -282,6 +282,34 @@ reads a JSON result from the packaged application. If it times out, check the
 application log and ensure no stale installed instance is holding the
 single-instance lock.
 
+### Electron fails on Linux with "The SUID sandbox helper binary was found"
+
+This is a Chromium sandbox bootstrap failure, not an application or Node.js
+problem. Electron aborts with SIGTRAP before the harness runs because
+`node_modules/electron/dist/chrome-sandbox` is not owned by root with mode `4755`.
+GitHub-hosted runners install dependencies as an unprivileged user, so that helper
+cannot be configured there. Do not `chmod 4755` blindly, and do not add
+`--no-sandbox` to the desktop application.
+
+The test scripts solve it in `scripts/run-electron-test.mjs`: on Linux that
+launcher starts the **test process** with `--no-sandbox` when `CI=true` or
+`GITHUB_ACTIONS=true`, or when you explicitly set `ELECTRON_TEST_NO_SANDBOX=1`.
+Production startup is untouched and keeps `sandbox: true`.
+
+Run the Linux test under a virtual display:
+
+```bash
+xvfb-run -a --server-args="-screen 0 1920x1080x24" npm run test:load
+```
+
+On a local Linux machine without a configured SUID sandbox:
+
+```bash
+ELECTRON_TEST_NO_SANDBOX=1 xvfb-run -a npm run test:interactive
+```
+
+Do not export `ELECTRON_TEST_NO_SANDBOX` in production launch scripts.
+
 ### Electron window/capture failure on Linux
 
 Use a virtual display:

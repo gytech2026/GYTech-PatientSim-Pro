@@ -27,7 +27,6 @@ const MIME = {
 };
 
 app.commandLine.appendSwitch('disable-gpu');
-app.commandLine.appendSwitch('no-sandbox');
 app.commandLine.appendSwitch('background-throttling-disabled');
 app.commandLine.appendSwitch('force-device-scale-factor', '1');
 

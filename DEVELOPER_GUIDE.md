@@ -29,7 +29,10 @@ npm run desktop:dev
 npm run desktop:build:win
 ```
 
-On Linux CI, use `xvfb-run -a npm run test`.
+On Linux CI, use `xvfb-run -a npm run test`. The test scripts launch Electron
+through `scripts/run-electron-test.mjs`, which adds `--no-sandbox` for the test
+process only on Linux CI (see
+[Test harnesses](#test-harnesses) and [tests/README.md](tests/README.md)).
 
 ---
 
@@ -202,9 +205,16 @@ Tests require Electron:
 
 ```powershell
 npm install
-$env:ELECTRON_RUN_AS_NODE=$null
 npm test
 ```
+
+Each harness runs through `scripts/run-electron-test.mjs`, which starts the real
+Electron binary, clears `ELECTRON_RUN_AS_NODE`, forwards signals, and exits with
+the harness's own status. On Linux CI the launcher adds `--no-sandbox` because
+GitHub-hosted runners cannot provide Chromium's root-owned `chrome-sandbox`
+helper; the flag is limited to that test process and platform. Production is
+unchanged: `desktop/main.cjs` keeps `sandbox: true`, and `desktop:dev` and
+packaged builds never receive the flag.
 
 State mutation: tests write localStorage and may leave sample data in the test
 profile.
