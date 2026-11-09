@@ -11,18 +11,22 @@ on:
 permissions:
   contents: read
 
+env:
+  NODE_VERSION: "24"
+
 jobs:
   dependency-and-secret-review:
     name: Dependency audit and secret review
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
+          node-version: ${{ env.NODE_VERSION }}
           cache: npm
+          cache-dependency-path: package-lock.json
       - name: Install declared dependencies
         run: npm ci
       - name: Audit runtime dependencies

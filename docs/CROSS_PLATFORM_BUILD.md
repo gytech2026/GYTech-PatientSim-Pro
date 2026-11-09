@@ -13,7 +13,7 @@ Electron 34.1.1, packaged with electron-builder 26.18.1. See
 
 ## Prerequisites
 
-- Node.js 18+ (Node.js 22 LTS recommended for CI)
+- Node.js 24 LTS for CI and release builds (Node.js 18+ remains the minimum for local tooling)
 - npm
 - Windows 10/11 x64 for the Windows builds
 - Ubuntu/Debian-compatible Linux for AppImage/DEB/RPM
@@ -110,17 +110,18 @@ The workflow is [.github/workflows/desktop-release.yml](../.github/workflows/des
 
 It runs three native build jobs:
 
-- `windows-latest` → EXE, MSI, portable ZIP
-- `ubuntu-latest` → AppImage, DEB, RPM
-- `macos-latest` → x64 and ARM64 DMG
+- `windows-2025` → EXE, MSI, portable ZIP
+- `ubuntu-24.04` → AppImage, DEB, RPM
+- `macos-15` → x64 and ARM64 DMG
 
 Each job installs, validates, builds, and uploads artefacts. The release job
 combines artefacts, generates a single `SHA256SUMS.txt`, and can create a GitHub
 Release for an authorised tag. The publish job uses the `release` environment;
 configure required reviewers in GitHub for additional approval control.
 
-The workflow has **not been executed on GitHub** in this repository because no
-remote GitHub repository exists yet. Configure and review it before publishing.
+The workflow has **not been executed on GitHub** from this workstation. Check the
+Actions run for the authoritative result after pushing; do not claim a build
+passed without a green workflow run.
 
 Tagging convention:
 
